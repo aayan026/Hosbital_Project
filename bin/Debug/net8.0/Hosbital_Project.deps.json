@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Hosbital_Project/1.0.0": {
+        "dependencies": {
+          "libphonenumber-csharp": "9.0.7"
+        },
+        "runtime": {
+          "Hosbital_Project.dll": {}
+        }
+      },
+      "libphonenumber-csharp/9.0.7": {
+        "runtime": {
+          "lib/net8.0/PhoneNumbers.dll": {
+            "assemblyVersion": "9.0.7.0",
+            "fileVersion": "9.0.7.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Hosbital_Project/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "libphonenumber-csharp/9.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jZbZfK+RSTqFtrmegW0HvAtph1R47CC5zYptzNgrs9hkjnfm8A5LJED+ybqJMyFGYdaYkRaQlaZCreJYVJCs6A==",
+      "path": "libphonenumber-csharp/9.0.7",
+      "hashPath": "libphonenumber-csharp.9.0.7.nupkg.sha512"
+    }
+  }
+}

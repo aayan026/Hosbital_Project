@@ -1,0 +1,17 @@
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.AssemblyInfoInputs.cache
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.AssemblyInfo.cs
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.csproj.CoreCompileInputs.cache
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Hosbital_Project.exe
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Hosbital_Project.deps.json
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Hosbital_Project.runtimeconfig.json
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Hosbital_Project.dll
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Hosbital_Project.pdb
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\PhoneNumbers.dll
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.csproj.AssemblyReference.cache
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital.800F9574.Up2Date
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.dll
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\refint\Hosbital_Project.dll
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.pdb
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.genruntimeconfig.cache
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\ref\Hosbital_Project.dll
