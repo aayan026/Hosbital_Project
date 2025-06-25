@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_homework.Models
+namespace Hosbital_Project.Models
 {
     internal class Doctor : Person
     {
@@ -15,7 +15,7 @@ namespace Hosbital_homework.Models
         public Department department { get; set; }
         public List<ReceptionDay> receptionDays { get; set; }
 
-        public Doctor(string name, string surname, string email, string phoneNumber, int workExperienceYear, Department department) : base( name, surname, email, phoneNumber)
+        public Doctor(string name, string surname, string email,string password, string phoneNumber, int workExperienceYear, Department department) : base( name, surname,password, email, phoneNumber)
         {
             this.workExperienceYear = workExperienceYear;
             this.department = department;
@@ -32,6 +32,23 @@ namespace Hosbital_homework.Models
             var reserved = receptionDays[Dayindex].TimeSlots[slotIndex];
             reserved.isReserved = true;
         }
+        public void CancelHour(int Dayindex, int slotIndex)
+        {
+            var reserved = receptionDays[Dayindex].TimeSlots[slotIndex];
+            reserved.isReserved = false;
+        }
+        public void ViewProfile()
+        {
+            Console.WriteLine("\t\t\t\t\t~ Profile ~\n");
+            Console.WriteLine($" Name: {name}");
+            Console.WriteLine($" Surname: {surname}");
+            Console.WriteLine($" Email: {email}");
+            Console.WriteLine($" Phone number: {phoneNumber}");
+            Console.WriteLine($" Work Experience Year: {workExperienceYear} years");
+            Console.WriteLine($" Department: {department.departmentName}");
+            Console.WriteLine("");
+        }
+
 
         public override string ToString() => $@"Name: {name}
  | Surname: {surname}

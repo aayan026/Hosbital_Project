@@ -1,7 +1,9 @@
 ﻿
-using Hosbital_homework.Models;
+namespace Hosbital_Project.Models;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 
 class Program
 {
@@ -82,6 +84,141 @@ class Program
 
         }
     }
+    static void ChangeProfile(Hosbital hosbital, User user)
+    {
+        List<string> changeOptions = new List<string> { "Change Username", "Change Email", "Change Phone Number" };
+        while (true)
+        {
+            Console.Clear();
+            int changeIndex = NavigateMenu(changeOptions, "\n ~ Change Profile Options", true);
+            if (changeIndex == -1)
+                break;
+            switch (changeIndex)
+            {
+                case 0:
+                    Console.Clear();
+                    Console.Write("\n  Enter your new username: ");
+                    string newUsername = Console.ReadLine();
+                    bool find3 = hosbital.SearchUser(newUsername);
+
+                    if (newUsername == user.username)
+                    {
+                        Console.WriteLine(" New username cannot be the same as old username.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if (string.IsNullOrWhiteSpace(newUsername) || newUsername.Length < 6)
+                    {
+                        Console.WriteLine("Username must be at least 6 characters.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if (!Regex.IsMatch(newUsername, @"^[a-zA-Z0-9_]+$"))
+                    {
+                        Console.WriteLine("Username can only contain letters, numbers, and underscores.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if (find3)
+                    {
+                        Console.WriteLine("Username already exists.");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    user.username = newUsername;
+                    //user faylina yaz
+                    Console.WriteLine("Your username has been updated successfully.");
+                    Console.ReadKey();
+                    break;
+
+                case 1:
+                    Console.Clear();
+                    Console.Write("\n  Enter current email: ");
+                    string oldEmail = Console.ReadLine();
+                    Console.Write("  Enter your new email: ");
+                    string email = Console.ReadLine();
+                    bool find4 = hosbital.SearchEmail(email);
+                    if (email == user.email)
+                    {
+                        Console.WriteLine(" New email cannot be the same as old email");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if (string.IsNullOrWhiteSpace(email) || !email.EndsWith("@gmail.com") && !email.EndsWith("@yahoo.com") && !email.EndsWith("@outlook.com") && !email.EndsWith("@hotmail.com") && !email.EndsWith("@mail.ru") && !email.EndsWith("@icloud.com"))
+                    {
+                        Console.WriteLine(" ~ Email is wrong.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    string first = email.Split('@').First();
+                    string firstPartPattern = @"^[a-zA-Z0-9._-]+$";
+                    if (!Regex.IsMatch(first, firstPartPattern))
+                    {
+                        Console.WriteLine(" ~ Email cannot be changed");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if (find4)
+                    {
+                        Console.WriteLine(" ~ An account with this email already exists ");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    var newEmail = user.email = email;
+                    //user faylina yaz
+                    Console.WriteLine(" ~ Your email has been updated successfully.");
+                    Console.ReadKey();
+                    break;
+                case 2:
+                    List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
+                    int choiceIndex = NavigateMenu(regionCodes, "\n ~ Select your region code: ");
+                    if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
+                    {
+                        user.regionCode = regionCodes[choiceIndex];
+                        Console.Write("  Enter your new phone number: ");
+                        string rawPhone = Console.ReadLine();
+                        bool find = hosbital.SearchPhone(rawPhone);
+                        if (user.phoneNumber == rawPhone)
+                        {
+                            Console.WriteLine(" New phone number cannot be the same as old phone number");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        else if (find)
+                        {
+                            Console.WriteLine(" This number belongs to an existing user"); Console.ReadKey();
+                        }
+
+                        var phoneUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
+                        try
+                        {
+                            var parsedNumber = phoneUtil.Parse(rawPhone, regionCodes[changeIndex]);
+                            if (!phoneUtil.IsValidNumber(parsedNumber))
+                            {
+                                Console.WriteLine(" Invalid phone number.");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            string formattedPhone = phoneUtil.Format(parsedNumber, PhoneNumbers.PhoneNumberFormat.E164);
+                            user.phoneNumber = formattedPhone;
+                            //user faylina yaz
+                            Console.WriteLine("Your phone number has been updated successfully.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        catch (PhoneNumbers.NumberParseException)
+                        {
+                            Console.WriteLine(" Phone number format is invalid.");
+                            Console.ReadKey();
+                            continue;
+                        }
+                    }
+                    break;
+            }
+            break;
+        }
+    }
     static void ReserveDay(Doctor doctor, User user)
     {
         while (true)
@@ -101,7 +238,7 @@ class Program
         }
 
     }
-    static void UserMainMenu(List<Department> departments, User user, Hosbital hosbital)
+    static void UserMainMenu(Authentication auth, List<Department> departments, User user, Hosbital hosbital)
     {
         while (true)
         {
@@ -123,122 +260,7 @@ class Program
                     Console.ReadKey();
                     break;
                 case 2:
-                    List<string> changeOptions = new List<string> { "Change Username", "Change Email", "Change Phone Number" };
-                    while (true)
-                    {
-                        Console.Clear();
-                        int changeIndex = NavigateMenu(changeOptions, "\n ~ Change Profile Options", true);
-                        if (changeIndex == -1)
-                            break;
-                        switch (changeIndex)
-                        {
-                            case 0:
-                                Console.Clear();
-                                Console.Write("\n  Enter your new username: ");
-                                string newUsername = Console.ReadLine();
-                                bool find3 = hosbital.SearchUser(newUsername);
-
-                                if (newUsername == user.Username)
-                                {
-                                    Console.WriteLine(" New username cannot be the same as old username.");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-                                else if (find3)
-                                {
-                                    Console.WriteLine(" This username already exists.");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-                                else
-                                {
-                                    user.Username = newUsername;
-                                    //user faylina yaz
-                                    if (user.Username == null)
-                                    {
-                                        Console.WriteLine("Invalid username.");
-                                        Console.ReadKey();
-                                        continue;
-                                    }
-                                    //fayla yaz
-                                    Console.WriteLine("Your username has been updated successfully.");
-                                    Console.ReadKey();
-                                }
-                                break;
-
-                            case 1:
-                                Console.Clear();
-                                Console.Write("\n  Enter current email: ");
-                                string oldEmail = Console.ReadLine();
-                                Console.Write("  Enter your new email: ");
-                                string email = Console.ReadLine();
-                                //bool find = 
-                                if (email == user.Email)
-                                {
-                                    Console.WriteLine(" New email cannot be the same as old email");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-                                else
-                                {
-                                    var newEmail = user.Email = email;
-                                    //user faylina yaz
-                                    if (newEmail == null)
-                                    {
-                                        Console.WriteLine("Invalid email.");
-                                        Console.ReadKey();
-                                    }
-                                    else
-                                    {
-                                        //fayla yaz
-                                        Console.WriteLine("Your email has been updated successfully.");
-                                    }
-                                    Console.ReadKey();
-                                }
-                                break;
-
-                            case 2:
-                                List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                                int choiceIndex = NavigateMenu(regionCodes, "\n ~ Select your region code: ");
-                                if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
-                                {
-                                    user.regionCode = regionCodes[choiceIndex];
-                                    Console.Write("  Enter your new phone number: ");
-                                    string azPhone = Console.ReadLine();
-                                    bool find = hosbital.SearchPhone(azPhone);
-                                    if (user.PhoneNumber == azPhone)
-                                    {
-                                        Console.WriteLine(" New email cannot be the same as old email");
-                                        Console.ReadKey();
-                                        continue;
-                                    }
-                                    else if (find)
-                                    {
-                                        Console.WriteLine(" This number belongs to an existing user"); Console.ReadKey();
-                                    }
-
-                                    else
-                                    {
-                                        user.PhoneNumber = azPhone;
-                                        //user faylina yaz
-                                        if (user.PhoneNumber == null)
-                                        {
-                                            Console.WriteLine("Invalid phone number.");
-                                            Console.ReadKey();
-                                            continue;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Your phone number has been updated successfully.");
-                                            Console.ReadKey();
-                                            break;
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                        break;
-                    }
+                    ChangeProfile(hosbital, user);
                     break;
                 case 3:
                     Console.Clear();
@@ -305,90 +327,128 @@ class Program
         }
     }
 
-    public static void AdminPage()
+    public static void AdminSignIn(Authentication auth)
     {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("\n\t\t\t\t\t~ Admin Sign In ~\n");
+            Console.Write(" email: ");
+            string email = Console.ReadLine();
+            Console.Write(" Password: ");
+            string password = Console.ReadLine();
+            if (auth.AdminSignIn(email, password))
+            {
+                Console.WriteLine("Successfully signed in as admin!");
+                Console.ReadKey();
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid admin credentials. Please try again.");
+                Console.ReadKey();
+                continue;
+            }
+        }
+    }
+    public static void AdminPage(Authentication auth, Hosbital hosbital, Admin admin)
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("\n\t\t\t\t\t~ Admin Page ~\n");
+            List<string> adminOptions = new List<string> { "View Users", "View Departments", "Add Department", "Remove Department" };
+            int selectedIndex = NavigateMenu(adminOptions, "\n ~ Admin Options", true, "~ Logout ");
+            if (selectedIndex == -1)
+            {
+                return;
+            }
+            switch (selectedIndex)
+            {
+                case 0:
+                    Console.Clear();
+                    admin.ViewUsers(auth.users);
+                    Console.ReadKey();
+                    continue;
+                case 1:
+                    Console.Clear();
+                    admin.ViewDepartments(hosbital.departments);
+                    Console.ReadKey();
+                    break;
+                case 2:
+                    Console.Clear();
+                    admin.AddDepartment(hosbital);
+                    Console.WriteLine(" ~ Department added successfully.");
+                    Console.ReadKey();
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
     static void Main(string[] args)
     {
         List<User> users = new List<User> { };
         Authentication auth = new Authentication(users);
-        Department department1 = new Department("Pediatriya");
-        Department department2 = new Department("Travmatologiya");
-        Department department3 = new Department("Stamotologiya");
-        List<Department> departments = new List<Department> { department1, department2, department3 };
+        // Reception saatları
+        var rh1 = new ReceptionHour("09:00", "11:00");
+        var rh2 = new ReceptionHour("12:00", "14:00");
+        var rh3 = new ReceptionHour("15:00", "17:00");
 
-        var receptionHour1 = new ReceptionHour("09:00", "11:00");
-        var receptionHour2 = new ReceptionHour("12:00", "14:00");
-        var receptionHour3 = new ReceptionHour("15:00", "17:00");
+        ReceptionDay CreateReceptionDay(DayOfWeek day, params ReceptionHour[] hours)
+        {
+            var rd = new ReceptionDay(day);
+            foreach (var h in hours)
+                rd.AddTimeSlot(h.start.ToString("hh\\:mm"), h.end.ToString("hh\\:mm"));
+            return rd;
+        }
 
-        var monday = new ReceptionDay(DayOfWeek.Monday);
-        monday.AddTimeSlot(receptionHour1.start.ToString("hh\\:mm"), receptionHour1.end.ToString("hh\\:mm"));
-        monday.AddTimeSlot(receptionHour2.start.ToString("hh\\:mm"), receptionHour2.end.ToString("hh\\:mm"));
+        // Department-lar
+        var cardiology = new Department("Cardiology");
+        var neurology = new Department("Neurology");
+        var surgery = new Department("Surgery");
+        List<Department> departments = new List<Department> { cardiology, neurology, surgery };
 
-        var mon1 = new ReceptionDay(DayOfWeek.Monday);
-        mon1.AddTimeSlot(receptionHour1.start.ToString("hh\\:mm"), receptionHour1.end.ToString("hh\\:mm"));
+        // Doctor 1
+        var doc1 = new Doctor("John", "Smith", "john@example.com", "1234", "0501234567", 8, cardiology);
+        doc1.AddReceptionDay(CreateReceptionDay(DayOfWeek.Monday, rh1, rh2));
+        doc1.AddReceptionDay(CreateReceptionDay(DayOfWeek.Tuesday, rh3));
 
-        var tue1 = new ReceptionDay(DayOfWeek.Tuesday);
-        tue1.AddTimeSlot(receptionHour2.start.ToString("hh\\:mm"), receptionHour2.end.ToString("hh\\:mm"));
+        // Doctor 2
+        var doc2 = new Doctor("Emily", "Johnson", "emily@example.com", "1234", "0502345678", 5, neurology);
+        doc2.AddReceptionDay(CreateReceptionDay(DayOfWeek.Thursday, rh1));
+        doc2.AddReceptionDay(CreateReceptionDay(DayOfWeek.Friday, rh3));
 
-        var wed1 = new ReceptionDay(DayOfWeek.Wednesday);
-        wed1.AddTimeSlot(receptionHour3.start.ToString("hh\\:mm"), receptionHour3.end.ToString("hh\\:mm"));
+        // Doctor 3
+        var doc3 = new Doctor("Michael", "Brown", "michael@example.com", "1234", "0503456789", 7, surgery);
+        doc3.AddReceptionDay(CreateReceptionDay(DayOfWeek.Wednesday, rh2));
 
-        var doctor1 = new Doctor("John", "Smith", 8, department1);
-        doctor1.AddReceptionDay(mon1);
-        doctor1.AddReceptionDay(tue1);
-        doctor1.AddReceptionDay(wed1);
+        // Doctor 4
+        var doc4 = new Doctor("Sarah", "Davis", "sarah@example.com", "1234", "0504567890", 6, cardiology);
+        doc4.AddReceptionDay(CreateReceptionDay(DayOfWeek.Monday, rh3));
 
-        var mon2 = new ReceptionDay(DayOfWeek.Monday);
-        mon2.AddTimeSlot(receptionHour2.start.ToString("hh\\:mm"), receptionHour2.end.ToString("hh\\:mm"));
+        // Doctor 5
+        var doc5 = new Doctor("David", "Wilson", "david@example.com", "1234", "0505678901", 9, neurology);
+        doc5.AddReceptionDay(CreateReceptionDay(DayOfWeek.Friday, rh1, rh2));
 
-        var thu2 = new ReceptionDay(DayOfWeek.Thursday);
-        thu2.AddTimeSlot(receptionHour1.start.ToString("hh\\:mm"), receptionHour1.end.ToString("hh\\:mm"));
+        // Doctor 6–10 (ReceptionDay əlavə olunmayıb)
+        var doc6 = new Doctor("Benjamin", "Linus", "ben@example.com", "1234", "0501111111", 6, surgery);
+        var doc7 = new Doctor("John", "Carter", "carter@example.com", "1234", "0502222222", 9, cardiology);
+        var doc8 = new Doctor("Allison", "Cameron", "cam@example.com", "1234", "0503333333", 5, neurology);
+        var doc9 = new Doctor("Derek", "Shepherd", "derek@example.com", "1234", "0504444444", 11, surgery);
+        var doc10 = new Doctor("Rachel", "Green", "rachel@example.com", "1234", "0505555555", 4, cardiology);
 
-        var fri2 = new ReceptionDay(DayOfWeek.Friday);
-        fri2.AddTimeSlot(receptionHour3.start.ToString("hh\\:mm"), receptionHour3.end.ToString("hh\\:mm"));
-        var doctor2 = new Doctor("Emily", "Johnson", 5, department2);
-        doctor2.AddReceptionDay(mon2);
-        doctor2.AddReceptionDay(thu2);
-        doctor2.AddReceptionDay(fri2);
+        // (İstəklə) toplu siyahı
+        List<Doctor> doctors = new()
+{
+    doc1, doc2, doc3, doc4, doc5, doc6, doc7, doc8, doc9, doc10
+};
 
-
-        var mon3 = new ReceptionDay(DayOfWeek.Monday);
-        mon3.AddTimeSlot(receptionHour3.start.ToString("hh\\:mm"), receptionHour3.end.ToString("hh\\:mm"));
-
-        var wed3 = new ReceptionDay(DayOfWeek.Wednesday);
-        wed3.AddTimeSlot(receptionHour1.start.ToString("hh\\:mm"), receptionHour1.end.ToString("hh\\:mm"));
-
-        var fri3 = new ReceptionDay(DayOfWeek.Friday);
-        fri3.AddTimeSlot(receptionHour2.start.ToString("hh\\:mm"), receptionHour2.end.ToString("hh\\:mm"));
-
-        var doctor3 = new Doctor("Michael", "Brown", 7, department3);
-        doctor3.AddReceptionDay(mon3);
-        doctor3.AddReceptionDay(wed3);
-        doctor3.AddReceptionDay(fri3);
-
-        var doctor4 = new Doctor("Sarah", "Davis", 6, department1);
-        doctor4.AddReceptionDay(mon1);
-        doctor4.AddReceptionDay(thu2);
-
-        var doctor5 = new Doctor("David", "Wilson", 9, department2);
-        doctor5.AddReceptionDay(tue1);
-        doctor5.AddReceptionDay(fri3);
-
-
-
-        Doctor doctor6 = new Doctor("Benjamin", "Linus", 6, department3);
-        Doctor doctor7 = new Doctor("John", "Carter", 9, department1);
-        Doctor doctor8 = new Doctor("Allison", "Cameron", 5, department2);
-        Doctor doctor9 = new Doctor("Derek", "Shepherd", 11, department3);
-        Doctor doctor10 = new Doctor("Rachel", "Green", 4, department1);
-        Doctor doctor11 = new Doctor("Steve", "Dent", 3, department2);
-
-        User? user1 = new User("aya_aliye283", "ayan", "aliyeva", "ayan@gmail.com", "0707897878");
+        User? user1 = new User("aya_aliye283", "ayan1986", "ayan", "aliyeva", "ayan@gmail.com", "0707897878");
         users.Add(user1);
-        Hosbital hosbital = new Hosbital(departments, users);
-
+        Hosbital hosbital = new Hosbital(departments, doctors, users);
+        Admin admin = new Admin();
 
         while (true)
         {
@@ -396,7 +456,7 @@ class Program
 
             Console.WriteLine("\n\t\t\t\t ~ Hosbital ~ \n\n");
 
-            List<string> roles = new List<string> { "Admin", "User", "Doctor" };
+            List<string> roles = new List<string> { "Admin", "User", "Doctor", "Candidate" };
             string title = $"\t\t\t\t\t   Welcome to the Hospital\n * Select your role to log in:\n";
             int choiceIndex = NavigateMenu(roles, title, true, "~ Exit");
             {
@@ -404,7 +464,8 @@ class Program
                     break;
                 if (choiceIndex == 0)
                 {
-                    //adminpage
+                    AdminSignIn(auth);
+                    AdminPage(auth, hosbital, admin);
                 }
                 else if (choiceIndex == 1)
                 {
@@ -428,14 +489,14 @@ class Program
                                 {
                                     Console.WriteLine("Successfully signed in!");
                                     Console.ReadKey();
-                                    UserMainMenu(departments, user, hosbital);
+                                    UserMainMenu(auth, departments, user, hosbital);
                                 }
                             }
                             else if (ansIndex == 1)
                             {
                                 User? user = Methods.RegistrUser(auth, departments, hosbital);
                                 users.Add(user);
-                                UserMainMenu(departments, user, hosbital);
+                                UserMainMenu(auth, departments, user, hosbital);
                             }
                         }
                     }
@@ -445,7 +506,37 @@ class Program
                 {
                     //doctor page
                 }
-
+                else if (choiceIndex == 3)
+                {
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\n\t\t\t\t\t~ Doctor Candidate Page ~\n");
+                        int index = NavigateMenu(departments, " ~ Please choose your department:", false);
+                        if (index == -1) break;
+                        var candidatesDepartment = departments[index];
+                        Console.Write(" | Please Enter your name: ");
+                        string name = Console.ReadLine();
+                        Console.Write(" | surname: ");
+                        string surname = Console.ReadLine();
+                        Console.Write(" | email: ");
+                        string email = Console.ReadLine();
+                        Console.Write(" | Enter your password: ");
+                        string password = Console.ReadLine();
+                        int regionIndex = NavigateMenu(new List<string> { "AZ", "US", "TR", "RU" }, " ~ Select your region code: ", false);
+                        if (regionIndex == -1) break;
+                        string regionCode = new List<string> { "AZ", "US", "TR", "RU" }[regionIndex];
+                        Console.Write(" | Enter your phone number: ");
+                        string phone = Console.ReadLine();
+                        Console.Write(" | Enter your experience year: ");
+                        int experienceYear = int.Parse(Console.ReadLine());
+                        Department department = candidatesDepartment;
+                        auth.DoctorCandidateRegistration(hosbital, name, surname, email, password, phone, regionCode, experienceYear, department);
+                        //cadidate faylina yaz
+                        Console.WriteLine("✅ Your application has been received. We will contact you shortly regarding the next steps.n");
+                        Console.ReadKey();
+                    }
+                }
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Hosbital_homework.Models
+namespace Hosbital_Project.Models
 {
     internal static class Methods
     {
@@ -50,16 +50,14 @@ namespace Hosbital_homework.Models
                     {
                         Console.Write("Enter your preferred username: ");
                         final = Console.ReadLine();
-                        bool find3=hosbital.SearchUser(final);
-                        if (find3)
-                        {
-                            Console.WriteLine(" this username already exist");
-                            Console.ReadKey();
-                            continue;
-                        }
+                        bool find3 = hosbital.SearchUser(final);
+
                     }
+                    Console.Write(" Password: ");
+                    string password = Console.ReadLine();
+
                     List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                    string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Select your country."; ;
+                    string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country."; ;
                     int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
                     {
                         if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
@@ -72,28 +70,33 @@ namespace Hosbital_homework.Models
                                 Console.WriteLine(" This phone number belongs to an existing user");
                                 continue;
                             }
+
+                            List<string> errors = new List<string>();
+                            User? user = auth.Registration(final, password, name, surname, email, phone, regionCodes[choiceIndex], out errors);
+                            //user faylina yaz
+
+                            if (errors.Count > 0)
+                            {
+                                Console.WriteLine("Errors:");
+                                foreach (var error in errors)
+                                {
+                                    Console.WriteLine($"- {error}");
+                                }
+                                Console.ReadKey();
+                                continue;
+                            }
                             else
                             {
-                                User? user = auth.Registration(final, name, surname, email, phone, regionCodes[choiceIndex]);
-                                //user faylina yaz
-                                if (user == null)
-                                {
-                                    Console.WriteLine("\nInvalid input detected. Please check your information.");
-                                    Console.ReadKey();
-                                    continue;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\n~ Registration completed successfully.");
-                                    Console.ReadKey();
-                                    return user;
-                                }
+                                Console.WriteLine("\n~ Registration completed successfully.");
+                                Console.ReadKey();
+                                return user;
                             }
                         }
                     }
                 }
             }
         }
+        
 
         public static User SignInUser(Authentication auth)
         {
@@ -104,7 +107,9 @@ namespace Hosbital_homework.Models
             {
                 Console.WriteLine("Enter your username: ");
                 string username = Console.ReadLine().Trim();
-                User user = auth.SignInUser(username);
+                Console.WriteLine("Enter your password: ");
+                string password = Console.ReadLine().Trim();
+                User user = auth.SignInUser(username, password);
                 return user;
             }
 

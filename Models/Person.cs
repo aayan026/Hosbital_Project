@@ -9,45 +9,15 @@ namespace Hosbital_Project.Models
 {
     internal class Person
     {
-        private string _email;
-        private string username;
-        private string phoneNumber;
-        public string regionCode;
         public string name { get; set; }
         public string surname { get; set; }
-        public string Username
+        public string password { get; set; }
+        public string email { get; set; }
+        public string regionCode { get; set; }
+        private string phone1;
+        public string phoneNumber
         {
-            get { return username; }
-            set
-            {
-                if (value.Length < 6)
-                {
-                    Console.WriteLine(" ~ username cannot be less than 6");
-                }
-                else
-                {
-                    username = value;
-                }
-            }
-        }
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                if (value.EndsWith("@gmail.com"))
-                {
-                    _email = value;
-                }
-                else
-                {
-                    Console.WriteLine(" ~ Email is wrong");
-                }
-            }
-        }
-        public string PhoneNumber
-        {
-            get { return phoneNumber; }
+            get { return phone1; }
             set
             {
                 var phoneUtil = PhoneNumberUtil.GetInstance();
@@ -58,25 +28,26 @@ namespace Hosbital_Project.Models
 
                     if (phoneUtil.IsValidNumber(number))
                     {
-                        phoneNumber = phoneUtil.Format(number, PhoneNumberFormat.E164);
+                        phone1 = phoneUtil.Format(number, PhoneNumberFormat.E164);
                     }
                     else
                     {
-                        phoneNumber = null;
+                        phone1 = null;
                     }
                 }
                 catch (NumberParseException)
                 {
-                    phoneNumber = null;
+                    phone1 = null;
                 }
             }
         }
-        public Person(string name, string surname, string email, string phoneNumber)
+        public Person(string name, string surname, string password, string email, string phoneNumber)
         {
             this.name = name;
             this.surname = surname;
-            Email = email;
+            this.email = email;
             this.phoneNumber = phoneNumber;
+            this.password = password;
         }
     }
 }

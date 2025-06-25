@@ -9,12 +9,13 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_homework.Models
+namespace Hosbital_Project.Models
 {
     internal class User:Person
     {
         public string username { get; set; }
-        public User(string username, string name, string surname, string email, string phoneNumber) : base( name, surname, email, phoneNumber)
+        public List<(Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
+        public User(string username, string password, string name, string surname, string email, string phoneNumber) : base( name, surname,password, email, phoneNumber)
         {
             this.username = username;
         }
@@ -23,10 +24,10 @@ namespace Hosbital_homework.Models
         public void ViewProfile()
         {
             Console.WriteLine("\t\t\t\t\t~ Profile ~\n");
-            Console.WriteLine($" Username: {Username}");
+            Console.WriteLine($" Username: {username}");
             Console.WriteLine($" Name: {name}");
             Console.WriteLine($" Surname: {surname}");
-            Console.WriteLine($" Email: {Email}");
+            Console.WriteLine($" Email: {email}");
             Console.WriteLine($" Phone number: {phoneNumber}");
             Console.WriteLine("");
         }
@@ -51,7 +52,7 @@ namespace Hosbital_homework.Models
         public override string ToString() => $@"
 Name: {name}
 Surname: {surname}
-Email: {Email}
+Email: {email}
 Phone number: {phoneNumber}";
 
     }

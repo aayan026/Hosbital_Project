@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_homework.Models
+namespace Hosbital_Project.Models
 {
     internal class ReceptionHour
     {
