@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 class Program
 {
     public static int NavigateMenu<T>(List<T> options, string title, bool showBack = false, string lastOptionLabel = "<-back")
     {
         int selectedIndex = 0;
-        showBack = true;
         while (true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.WriteLine($"{title}\n");
 
@@ -20,9 +22,9 @@ class Program
             {
                 if (i == selectedIndex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine($" | {options[i]}");
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
                 else
                     Console.WriteLine($" | {options[i]}");
@@ -32,9 +34,9 @@ class Program
             {
                 if (selectedIndex >= options.Count)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine($"\n {lastOptionLabel}");
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
                 else
                     Console.WriteLine($"\n {lastOptionLabel}");
@@ -43,9 +45,15 @@ class Program
             var key = Console.ReadKey(true).Key;
 
             if (key == ConsoleKey.UpArrow)
-                selectedIndex = (selectedIndex == 0) ? options.Count : selectedIndex - 1;
+            {
+                int maxIndex = showBack ? options.Count : options.Count - 1;
+                selectedIndex = (selectedIndex - 1) < 0 ? maxIndex : selectedIndex - 1;
+                    }
             else if (key == ConsoleKey.DownArrow)
-                selectedIndex = (selectedIndex + 1) % (options.Count + 1);
+            {
+                int maxIndex = showBack ? options.Count : options.Count - 1;
+                selectedIndex = (selectedIndex + 1) > maxIndex ? 0 : selectedIndex + 1;
+            }
             else if (key == ConsoleKey.Enter)
             {
                 if (selectedIndex == options.Count)
@@ -54,8 +62,33 @@ class Program
             }
         }
     }
+    static void ReserveDay(Doctor doctor, User user)
+    {
+        while (true)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+            var ReceptionDays = doctor.receptionDays;
+            int choiceIndex = NavigateMenu(ReceptionDays, $"\n ~ Dr.{doctor.name}'s reception hours:\n", true);
+
+
+            if (choiceIndex == -1)
+                return;
+            if (choiceIndex >= 0 && choiceIndex <= ReceptionDays.Count)
+            {
+                ReserveHour(doctor, user, choiceIndex, ReceptionDays);
+                Console.ReadKey();
+                return;
+            }
+        }
+
+    }
     static void ReserveHour(Doctor doctor, User user, int dayIndex, List<ReceptionDay> receptionDays)
     {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Clear();
         var ReceptionHourlist = doctor.receptionDays[dayIndex].TimeSlots;
 
         string title = $"\n ~ These are the office hours of Dr.{doctor.name}.\n  Please select the days you would like to schedule an appointment.\n";
@@ -84,13 +117,16 @@ class Program
 
         }
     }
+
     static void ChangeProfile(Hosbital hosbital, User user)
     {
-        List<string> changeOptions = new List<string> { "Change Username", "Change Email", "Change Phone Number" };
+
+        List<string> changeOptions = new List<string> { "Change Username", "Change Email", "ChangePassord", "Change Phone Number" };
         while (true)
         {
-            Console.Clear();
-            int changeIndex = NavigateMenu(changeOptions, "\n ~ Change Profile Options", true);
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear(); int changeIndex = NavigateMenu(changeOptions, "\n ~ Change Profile Options", true);
             if (changeIndex == -1)
                 break;
             switch (changeIndex)
@@ -133,115 +169,25 @@ class Program
                     break;
 
                 case 1:
-                    Console.Clear();
-                    Console.Write("\n  Enter current email: ");
-                    string oldEmail = Console.ReadLine();
-                    Console.Write("  Enter your new email: ");
-                    string email = Console.ReadLine();
-                    bool find4 = hosbital.SearchEmail(email);
-                    if (email == user.email)
-                    {
-                        Console.WriteLine(" New email cannot be the same as old email");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    if (string.IsNullOrWhiteSpace(email) || !email.EndsWith("@gmail.com") && !email.EndsWith("@yahoo.com") && !email.EndsWith("@outlook.com") && !email.EndsWith("@hotmail.com") && !email.EndsWith("@mail.ru") && !email.EndsWith("@icloud.com"))
-                    {
-                        Console.WriteLine(" ~ Email is wrong.");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    string first = email.Split('@').First();
-                    string firstPartPattern = @"^[a-zA-Z0-9._-]+$";
-                    if (!Regex.IsMatch(first, firstPartPattern))
-                    {
-                        Console.WriteLine(" ~ Email cannot be changed");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    if (find4)
-                    {
-                        Console.WriteLine(" ~ An account with this email already exists ");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    var newEmail = user.email = email;
-                    //user faylina yaz
-                    Console.WriteLine(" ~ Your email has been updated successfully.");
-                    Console.ReadKey();
+                    ChangeInformations.ChangeEmail(user, hosbital);
                     break;
                 case 2:
-                    List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                    int choiceIndex = NavigateMenu(regionCodes, "\n ~ Select your region code: ");
-                    if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
-                    {
-                        user.regionCode = regionCodes[choiceIndex];
-                        Console.Write("  Enter your new phone number: ");
-                        string rawPhone = Console.ReadLine();
-                        bool find = hosbital.SearchPhone(rawPhone);
-                        if (user.phoneNumber == rawPhone)
-                        {
-                            Console.WriteLine(" New phone number cannot be the same as old phone number");
-                            Console.ReadKey();
-                            continue;
-                        }
-                        else if (find)
-                        {
-                            Console.WriteLine(" This number belongs to an existing user"); Console.ReadKey();
-                        }
-
-                        var phoneUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
-                        try
-                        {
-                            var parsedNumber = phoneUtil.Parse(rawPhone, regionCodes[changeIndex]);
-                            if (!phoneUtil.IsValidNumber(parsedNumber))
-                            {
-                                Console.WriteLine(" Invalid phone number.");
-                                Console.ReadKey();
-                                continue;
-                            }
-                            string formattedPhone = phoneUtil.Format(parsedNumber, PhoneNumbers.PhoneNumberFormat.E164);
-                            user.phoneNumber = formattedPhone;
-                            //user faylina yaz
-                            Console.WriteLine("Your phone number has been updated successfully.");
-                            Console.ReadKey();
-                            break;
-                        }
-                        catch (PhoneNumbers.NumberParseException)
-                        {
-                            Console.WriteLine(" Phone number format is invalid.");
-                            Console.ReadKey();
-                            continue;
-                        }
-                    }
+                    ChangeInformations.ChangePassword(user);
+                    break;
+                case 3:
+                    ChangeInformations.ChangePhone(user, hosbital);
                     break;
             }
             break;
         }
     }
-    static void ReserveDay(Doctor doctor, User user)
-    {
-        while (true)
-        {
-            var ReceptionDays = doctor.receptionDays;
-            int choiceIndex = NavigateMenu(ReceptionDays, $"\n ~ Dr.{doctor.name}'s reception hours:\n", true);
-
-
-            if (choiceIndex == -1)
-                return;
-            if (choiceIndex >= 0 && choiceIndex <= ReceptionDays.Count)
-            {
-                ReserveHour(doctor, user, choiceIndex, ReceptionDays);
-                Console.ReadKey();
-                return;
-            }
-        }
-
-    }
     static void UserMainMenu(Authentication auth, List<Department> departments, User user, Hosbital hosbital)
     {
         while (true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
             List<string> options = new List<string> { "View Departments", "View Profile", "Change Profile", "View Appointments", "Cancel Appointment" };
             int selectedIndex = NavigateMenu(options, $"\n ~ Welcome {user.name} {user.surname}\n", true, "~ Logout ");
             if (selectedIndex == -1)
@@ -302,6 +248,8 @@ class Program
     {
         while (true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             int choiceIndex = NavigateMenu(department.doctors, "\n Doctors", true);
             if (choiceIndex == -1)
                 return;
@@ -311,10 +259,13 @@ class Program
             }
         }
     }
+
     public static void Departments(List<Department> departments, User user)
     {
         while (true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             int navigator = NavigateMenu(departments, "\n  Departments", true);
             if (navigator == -1)
             {
@@ -331,8 +282,10 @@ class Program
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("\n\t\t\t\t\t~ Admin Sign In ~\n");
+
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear(); Console.WriteLine("\n\t\t\t\t\t~ Admin Sign In ~\n");
             Console.Write(" email: ");
             string email = Console.ReadLine();
             Console.Write(" Password: ");
@@ -355,9 +308,10 @@ class Program
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("\n\t\t\t\t\t~ Admin Page ~\n");
-            List<string> adminOptions = new List<string> { "View Users", "View Departments", "Add Department", "Remove Department" };
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear(); Console.WriteLine("\n\t\t\t\t\t~ Admin Page ~\n");
+            List<string> adminOptions = new List<string> { "View Users", "View Departments", "Add Department", "Remove Department","View Doctors","View Candidates", };
             int selectedIndex = NavigateMenu(adminOptions, "\n ~ Admin Options", true, "~ Logout ");
             if (selectedIndex == -1)
             {
@@ -378,14 +332,193 @@ class Program
                 case 2:
                     Console.Clear();
                     admin.AddDepartment(hosbital);
-                    Console.WriteLine(" ~ Department added successfully.");
-                    Console.ReadKey();
+                    break;
+                case 3:
+                    Console.Clear();
+                    admin.RemoveDepartment(hosbital);
+
+                    break;
+                case 4:
+                    while (true)
+                    {
+                        int index = NavigateMenu(hosbital.doctors, "\n\t\t\t\t\t --- Doctors --- \n\n", true);
+                        if (index == -1)
+                            break;
+                        if (index >= 0 || index <= hosbital.doctors.Count())
+                        {
+                            Console.Clear();
+                            hosbital.doctors[index].ViewProfile("~ Doctor Information ~");
+                            Console.ReadKey();
+                            continue;
+                        }
+                    }
+
+                    break;
+                case 5:
+                    while(true)
+                    {
+                        Console.Clear();
+                        int index = NavigateMenu(hosbital.doctorCandidates, "\n\t\t\t\t\t --- Candidates ---\n",true);
+                        if (hosbital.doctorCandidates.Count() == 0)
+                        {
+                            Console.WriteLine(" There are no candidates.");
+                        }
+                        if (index==-1)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (index <= hosbital.doctorCandidates.Count() || index >= 0)
+                            {
+                                var candidate = hosbital.doctorCandidates[index];
+                                string title = $"\n Name: {candidate.name}\n" +
+                $" Surname: {candidate.surname}\n" +
+                $" Department: {candidate.department}\n" +
+                $" Experience year: {candidate.experienceYear}\n" +
+                $" Phone number: {candidate.phoneNumber}\n"+
+                $" Reason: {candidate.reason}"+
+                $"____________________________________________________\n";
+                                List<string> list = new List<string> {"Accept","Reject"};
+                                int index2 = NavigateMenu(list,title,true);
+                                if (index2 == 0)
+                                {
+                                    admin.AcceptedDoctor(hosbital, candidate);
+                                    //emailine getsinki qebul olundu bildirim
+                                }
+                                else if (index2 == 1)
+                                {
+                                    admin.RejectDoctor(hosbital, candidate);
+                                    //levg olundu istek
+                                }
+
+                            }
+                        }
+                    }
                     break;
                 default:
                     break;
             }
         }
+    }
+    static void DoctorCandidate(string email, List<Department> departments, Hosbital hosbital, Authentication auth)
+    {
+        while (true)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+            string title = "\n\t\t\t\t\t --- Doctor Application Form --- \n\n";
+            int index = NavigateMenu(departments, $"{title} ~ Please choose your department:", false);
+            if (index == -1) break;
+            var candidatesDepartment = departments[index];
+            Console.Write(" | Please Enter your name: ");
 
+            string name = Console.ReadLine();
+            Console.Write(" | Surname: ");
+            string surname = Console.ReadLine();
+
+            Console.Write(" | Enter your password: ");
+            string password = Console.ReadLine();
+
+            int regionIndex = NavigateMenu(new List<string> { "AZ", "US", "TR", "RU" }, " ~ Select your region code: ", false);
+            if (regionIndex == -1) break;
+            string regionCode = new List<string> { "AZ", "US", "TR", "RU" }[regionIndex];
+            Console.Write(" | Enter your phone number: ");
+            string phone = Console.ReadLine();
+            Console.Write(" | Enter your experience year: ");
+            string experienceYear = Console.ReadLine();
+            int experienceYearInt = int.TryParse(experienceYear, out int year) ? year : 0;
+            Department department = candidatesDepartment;
+            Console.WriteLine(" why do you want to be a doctor?");
+            string reason = Console.ReadLine();
+            auth.DoctorCandidateRegistration(hosbital, password, name, surname, email, phone, regionCode, experienceYearInt, candidatesDepartment, reason);
+            //cadidate faylina yaz
+            Console.ReadKey();
+            return;
+        }
+    }
+    static void CandidatePage(Hosbital hosbital, Authentication auth, List<Department> departments)
+    {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Clear(); while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("\n\t\t\t\t\t--- Candidate Page ---\n");
+            Console.Write(" - Enter email: ");
+            string email = Console.ReadLine();
+            DoctorCandidate find = hosbital.FindCandidate(email);
+            if (find != null)
+            {
+                while (true) { 
+                string title2 = $"\n\t\t\t\t\t=== Doctor Candidate Status ===\r\n\n{find} ~ Your application is being reviewed. Please wait patiently.\n";
+                List<string> choices = new List<string> { "Edit Application ", "Cancel Application " };
+                int choiceIndex = NavigateMenu(choices, title2, true, " Exit");
+                    while (true)
+                    {
+                        if (choiceIndex == -1)
+                        {
+                            return;
+                        }
+                        if (choiceIndex == 0)
+                        {
+                            Console.Clear();
+                            string title = $"\n\t\t\t\t\t --- Edit Application Form --- \n";
+                            List<string> changeOptions = new List<string> { "Change Email", "Change Phone Number", "Change Experience Year", "Change Password", "Change Reason" };
+                            int choiceInx = NavigateMenu(changeOptions, title, true);
+                            if (choiceInx == -1)
+                                break;
+                            else if (choiceInx == 0)
+                            {
+                                ChangeInformations.ChangeEmail(find, hosbital);
+                            }
+                            else if (choiceInx == 1)
+                            {
+                                ChangeInformations.ChangePhone(find, hosbital);
+                            }
+                            else if (choiceInx == 2)
+                            {
+                                Console.Write(" | Enter your experience year: ");
+                                string experienceYear = Console.ReadLine();
+                                int experienceYearInt = int.TryParse(experienceYear, out int year) ? year : 0;
+                                find.experienceYear = experienceYearInt;
+                                Console.WriteLine(" Experience year updated succefully");
+                                Console.ReadKey();
+                            }
+                            else if (choiceInx == 3)
+                            {
+                                ChangeInformations.ChangePassword(find);
+                            }
+                            else if (choiceInx == 4)
+                            {
+                                Console.WriteLine(" why do you want to be a doctor?");
+                                string reason = Console.ReadLine();
+                                int wordCount = reason
+        .Split(new char[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+        .Length;
+                                if (string.IsNullOrWhiteSpace(reason))
+                                    Console.WriteLine("Reason cannot be empty.");
+                                else if (string.IsNullOrWhiteSpace(reason) || wordCount < 15)
+                                {
+                                    Console.WriteLine("Reason must be at least 15 words.");
+                                    continue;
+
+                                }
+                                else { find.reason = reason; }
+
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                DoctorCandidate(email, departments, hosbital, auth);
+                break;
+
+            }
+        }
     }
     static void Main(string[] args)
     {
@@ -411,53 +544,55 @@ class Program
         List<Department> departments = new List<Department> { cardiology, neurology, surgery };
 
         // Doctor 1
-        var doc1 = new Doctor("John", "Smith", "john@example.com", "1234", "0501234567", 8, cardiology);
+        var doc1 = new Doctor("John", "Smith", "john@example.com", "1234", "0501234567", 8, cardiology, "AZ");
         doc1.AddReceptionDay(CreateReceptionDay(DayOfWeek.Monday, rh1, rh2));
         doc1.AddReceptionDay(CreateReceptionDay(DayOfWeek.Tuesday, rh3));
 
         // Doctor 2
-        var doc2 = new Doctor("Emily", "Johnson", "emily@example.com", "1234", "0502345678", 5, neurology);
+        var doc2 = new Doctor("Emily", "Johnson", "emily@example.com", "1234", "0502345678", 5, neurology, "AZ");
         doc2.AddReceptionDay(CreateReceptionDay(DayOfWeek.Thursday, rh1));
         doc2.AddReceptionDay(CreateReceptionDay(DayOfWeek.Friday, rh3));
 
         // Doctor 3
-        var doc3 = new Doctor("Michael", "Brown", "michael@example.com", "1234", "0503456789", 7, surgery);
+        var doc3 = new Doctor("Michael", "Brown", "michael@example.com", "1234", "0503456789", 7, surgery, "AZ");
         doc3.AddReceptionDay(CreateReceptionDay(DayOfWeek.Wednesday, rh2));
 
         // Doctor 4
-        var doc4 = new Doctor("Sarah", "Davis", "sarah@example.com", "1234", "0504567890", 6, cardiology);
+        var doc4 = new Doctor("Sarah", "Davis", "sarah@example.com", "1234", "0504567890", 6, cardiology, "AZ");
         doc4.AddReceptionDay(CreateReceptionDay(DayOfWeek.Monday, rh3));
 
         // Doctor 5
-        var doc5 = new Doctor("David", "Wilson", "david@example.com", "1234", "0505678901", 9, neurology);
+        var doc5 = new Doctor("David", "Wilson", "david@example.com", "1234", "0505678901", 9, neurology, "AZ");
         doc5.AddReceptionDay(CreateReceptionDay(DayOfWeek.Friday, rh1, rh2));
 
         // Doctor 6–10 (ReceptionDay əlavə olunmayıb)
-        var doc6 = new Doctor("Benjamin", "Linus", "ben@example.com", "1234", "0501111111", 6, surgery);
-        var doc7 = new Doctor("John", "Carter", "carter@example.com", "1234", "0502222222", 9, cardiology);
-        var doc8 = new Doctor("Allison", "Cameron", "cam@example.com", "1234", "0503333333", 5, neurology);
-        var doc9 = new Doctor("Derek", "Shepherd", "derek@example.com", "1234", "0504444444", 11, surgery);
-        var doc10 = new Doctor("Rachel", "Green", "rachel@example.com", "1234", "0505555555", 4, cardiology);
-
+        var doc6 = new Doctor("Benjamin", "Linus", "ben@example.com", "1234", "0501111111", 6, surgery, "AZ");
+        var doc7 = new Doctor("John", "Carter", "carter@example.com", "1234", "0502222222", 9, cardiology, "AZ");
+        var doc8 = new Doctor("Allison", "Cameron", "cam@example.com", "1234", "0503333333", 5, neurology, "AZ");
+        var doc9 = new Doctor("Derek", "Shepherd", "derek@example.com", "1234", "0504444444", 11, surgery, "AZ");
+        var doc10 = new Doctor("Rachel", "Green", "rachel@example.com", "1234", "0505555555", 4, cardiology, "AZ");
         // (İstəklə) toplu siyahı
         List<Doctor> doctors = new()
 {
     doc1, doc2, doc3, doc4, doc5, doc6, doc7, doc8, doc9, doc10
 };
 
-        User? user1 = new User("aya_aliye283", "ayan1986", "ayan", "aliyeva", "ayan@gmail.com", "0707897878");
+        User? user1 = new User("aya_aliye283", "ayan1986", "ayan", "aliyeva", "ayan@gmail.com", "0707897878", "AZ");
         users.Add(user1);
         Hosbital hosbital = new Hosbital(departments, doctors, users);
         Admin admin = new Admin();
+        DoctorCandidate dc = new DoctorCandidate(hosbital, "omer", "Aliyev", "omer@gmail.com", "omer123","0776787676", 3, cardiology, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum","AZ");
+        hosbital.doctorCandidates.Add(dc);
 
         while (true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
 
-            Console.WriteLine("\n\t\t\t\t ~ Hosbital ~ \n\n");
-
             List<string> roles = new List<string> { "Admin", "User", "Doctor", "Candidate" };
-            string title = $"\t\t\t\t\t   Welcome to the Hospital\n * Select your role to log in:\n";
+
+            string title = $"\n\t\t\t\t\t\t  --- Hospital --- \n\n - Select your role to log in:";
             int choiceIndex = NavigateMenu(roles, title, true, "~ Exit");
             {
                 if (choiceIndex == -1)
@@ -501,43 +636,16 @@ class Program
                         }
                     }
                 }
-
                 else if (choiceIndex == 2)
                 {
                     //doctor page
                 }
                 else if (choiceIndex == 3)
                 {
-                    while (true)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n\t\t\t\t\t~ Doctor Candidate Page ~\n");
-                        int index = NavigateMenu(departments, " ~ Please choose your department:", false);
-                        if (index == -1) break;
-                        var candidatesDepartment = departments[index];
-                        Console.Write(" | Please Enter your name: ");
-                        string name = Console.ReadLine();
-                        Console.Write(" | surname: ");
-                        string surname = Console.ReadLine();
-                        Console.Write(" | email: ");
-                        string email = Console.ReadLine();
-                        Console.Write(" | Enter your password: ");
-                        string password = Console.ReadLine();
-                        int regionIndex = NavigateMenu(new List<string> { "AZ", "US", "TR", "RU" }, " ~ Select your region code: ", false);
-                        if (regionIndex == -1) break;
-                        string regionCode = new List<string> { "AZ", "US", "TR", "RU" }[regionIndex];
-                        Console.Write(" | Enter your phone number: ");
-                        string phone = Console.ReadLine();
-                        Console.Write(" | Enter your experience year: ");
-                        int experienceYear = int.Parse(Console.ReadLine());
-                        Department department = candidatesDepartment;
-                        auth.DoctorCandidateRegistration(hosbital, name, surname, email, password, phone, regionCode, experienceYear, department);
-                        //cadidate faylina yaz
-                        Console.WriteLine("✅ Your application has been received. We will contact you shortly regarding the next steps.n");
-                        Console.ReadKey();
-                    }
+                    CandidatePage(hosbital, auth, departments);
                 }
             }
         }
     }
 }
+

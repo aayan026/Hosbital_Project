@@ -14,8 +14,8 @@ namespace Hosbital_Project.Models
         public int workExperienceYear { get; set; }
         public Department department { get; set; }
         public List<ReceptionDay> receptionDays { get; set; }
-
-        public Doctor(string name, string surname, string email,string password, string phoneNumber, int workExperienceYear, Department department) : base( name, surname,password, email, phoneNumber)
+        public Doctor() { }
+        public Doctor(string name, string surname, string email,string password, string phoneNumber, int workExperienceYear, Department department,string regionCode) : base( name, surname,password, email, phoneNumber,regionCode)
         {
             this.workExperienceYear = workExperienceYear;
             this.department = department;
@@ -37,9 +37,9 @@ namespace Hosbital_Project.Models
             var reserved = receptionDays[Dayindex].TimeSlots[slotIndex];
             reserved.isReserved = false;
         }
-        public void ViewProfile()
+        public void ViewProfile(string title)
         {
-            Console.WriteLine("\t\t\t\t\t~ Profile ~\n");
+            Console.WriteLine($"\t\t\t\t\t{title}\n");
             Console.WriteLine($" Name: {name}");
             Console.WriteLine($" Surname: {surname}");
             Console.WriteLine($" Email: {email}");

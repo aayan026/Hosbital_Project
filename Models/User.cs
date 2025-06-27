@@ -15,7 +15,7 @@ namespace Hosbital_Project.Models
     {
         public string username { get; set; }
         public List<(Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
-        public User(string username, string password, string name, string surname, string email, string phoneNumber) : base( name, surname,password, email, phoneNumber)
+        public User(string username, string password, string name, string surname, string email, string phoneNumber, string regionCode) : base( name, surname,password, email, phoneNumber, regionCode)
         {
             this.username = username;
         }

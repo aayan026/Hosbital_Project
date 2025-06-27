@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,28 +11,30 @@ namespace Hosbital_Project.Models
     {
         public int experienceYear { get; set; }
         public Department department { get; set; }
+        public enum ApplicationStatus
+        {
+            Pending,
+            Accepted,
+            Rejected
+        }
+        public ApplicationStatus status { get; set; }
+        public string reason { get; set; }
 
 
-        public DoctorCandidate(Hosbital hosbital,string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department) : base(name, surname, password, email, phoneNumber)
+        public DoctorCandidate(Hosbital hosbital, string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department, string reason,string regionCode) : base(name, surname, password, email, phoneNumber,regionCode)
         {
             this.experienceYear = experienceYear;
             this.department = department;
-            hosbital.doctorCandidates.Add(this);
+            var status = ApplicationStatus.Pending;
+            this.reason = reason;
         }
-        public void ViewProfile()
-        {
-            Console.WriteLine("\t\t\t\t\t~ Profile ~\n");
-            Console.WriteLine($" Name: {name}");
-            Console.WriteLine($" Surname: {surname}");
-            Console.WriteLine($" Email: {email}");
-            Console.WriteLine($" Phone number: {phoneNumber}");
-            Console.WriteLine($" Experience Year: {experienceYear} years");
-            Console.WriteLine($" Department: {department.departmentName}");
-            Console.WriteLine("");
-        }
-        public override string ToString() => $@"
-Name: {name} Surname: {surname}
-Experience Year: {experienceYear} years Department: {department.departmentName}
+    
+
+        public override string ToString() => $@"Name: {name} {surname}
+ | {experienceYear} years in {department.departmentName}
+ | Status: {status}
+
+
 ";
     }
 }

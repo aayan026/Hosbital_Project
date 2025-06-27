@@ -41,11 +41,13 @@ namespace Hosbital_Project.Models
                 }
             }
         }
-        public Person(string name, string surname, string password, string email, string phoneNumber)
+        public Person() { }
+        public Person(string name, string surname, string password, string email, string phoneNumber,string regionCode)
         {
             this.name = name;
             this.surname = surname;
             this.email = email;
+            this.regionCode = regionCode;
             this.phoneNumber = phoneNumber;
             this.password = password;
         }

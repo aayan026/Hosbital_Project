@@ -13,7 +13,9 @@ internal class Authentication
 
     public void ValidateCommonFields(string password, string name, string surname, string email, string phone, string regionCode, ref List<string> errors, out string formattedPhone)
     {
-        if (string.IsNullOrWhiteSpace(password) || password.Length < 8 || !password.Any(char.IsDigit))
+        if (string.IsNullOrEmpty(password))
+            errors.Add("Password cannot be empty.");
+        else if (password.Length < 8 || !password.Any(char.IsDigit))
             errors.Add("Password must be at least 8 chars and contain digits.");
 
         if (string.IsNullOrWhiteSpace(name))
@@ -21,9 +23,12 @@ internal class Authentication
 
         if (string.IsNullOrWhiteSpace(surname))
             errors.Add("Surname cannot be empty.");
+        if (string.IsNullOrWhiteSpace(email))
 
-        if (!email.EndsWith("@gmail.com"))
+            errors.Add("Email cannot be empty.");
+        else if (!email.EndsWith("@gmail.com"))
             errors.Add("Email is wrong.");
+  
 
         formattedPhone = "";
         var phoneUtil = PhoneNumberUtil.GetInstance();
@@ -42,14 +47,17 @@ internal class Authentication
     }
 
 
-      public bool ValidateRegistration(string username, string password, string name, string surname, string email, string phone, string regionCode, out List<string> errors, out string formattedPhone)
+    public bool ValidateRegistration(string username, string password, string name, string surname, string email, string phone, string regionCode, out List<string> errors, out string formattedPhone)
     {
         errors = new List<string>();
 
-        if (string.IsNullOrWhiteSpace(username) || username.Length < 6)
+        if (string.IsNullOrWhiteSpace(username))
+            errors.Add("Username cannot be empty.");
+       else if (string.IsNullOrWhiteSpace(username) || username.Length < 6)
             errors.Add("Username must be at least 6 characters.");
-        if (users.Any(u => u.username == username))
+        else if (users.Any(u => u.username == username))
             errors.Add("Username already exists.");
+       
 
         ValidateCommonFields(password, name, surname, email, phone, regionCode, ref errors, out formattedPhone);
 
@@ -59,21 +67,34 @@ internal class Authentication
 
 
 
-    public bool ValidateDoctorCandidateRegistration(string password, string name, string surname, string email, string phone, string regionCode, out List<string> errors, out string formattedPhone)
+    public bool ValidateDoctorCandidateRegistration(string password, string name, string surname, string email, string phone, string regionCode, string reason, out List<string> errors, out string formattedPhone)
     {
         errors = new List<string>();
 
+        int wordCount = reason
+  .Split(new char[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+  .Length;
+        if (string.IsNullOrWhiteSpace(reason))
+            errors.Add("Reason cannot be empty.");
+       else if (string.IsNullOrWhiteSpace(reason) || wordCount < 15)
+            errors.Add("Reason must be at least 15 words.");
+        
         ValidateCommonFields(password, name, surname, email, phone, regionCode, ref errors, out formattedPhone);
 
         return errors.Count == 0;
     }
 
 
-    public void DoctorCandidateRegistration(Hosbital hosbital, string password, string name, string surname, string email, string phone, string regionCode,int experienceYear,Department department)
+    public void DoctorCandidateRegistration(Hosbital hosbital, string password, string name, string surname, string email, string phone, string regionCode, int experienceYear, Department department, string reason)
     {
+        password = password.Trim();
+        name = name.Trim();
+        surname = surname.Trim();
+        email = email.Trim();
+        phone = phone.Replace(" ", "").Replace("-", "");
         var errors = new List<string>();
         string formattedPhone;
-        if (!ValidateDoctorCandidateRegistration(password, name, surname, email, phone, regionCode, out errors, out formattedPhone))
+        if (!ValidateDoctorCandidateRegistration(password, name, surname, email, phone, regionCode, reason, out errors, out formattedPhone))
         {
             Console.WriteLine("Registration failed with the following errors:");
             foreach (var error in errors)
@@ -82,8 +103,10 @@ internal class Authentication
             }
             return;
         }
-        var doctorCandidate = new DoctorCandidate(hosbital,name,surname,email ,password,phone,experienceYear,department);
+        var doctorCandidate = new DoctorCandidate(hosbital, name, surname, email, password, phone, experienceYear, department, reason,regionCode);
         hosbital.doctorCandidates.Add(doctorCandidate);
+        Console.WriteLine($"\n ~ Thank you, Dr. {doctorCandidate.name}!\r\n\r\n Your application has been received and is currently under review.\r\n You will be contacted via email or phone after the review is complete.\r\n\r\n[Press any key to return to main menu...]\r\n");
+
 
     }
     public User? Registration(string username, string password, string name, string surname, string email, string phone, string regionCode, out List<string> errors)
@@ -101,11 +124,11 @@ internal class Authentication
         if (!ValidateRegistration(username, password, name, surname, email, phone, regionCode, out errors, out formattedPhone))
             return null;
 
-        var newUser = new User(username, password, name, surname, email, formattedPhone);
+        var newUser = new User(username, password, name, surname, email, formattedPhone, regionCode);
         users.Add(newUser);
         return newUser;
     }
-    
+
     public User? SignInUser(string username, string password)
     {
         foreach (var user in users)
@@ -116,9 +139,9 @@ internal class Authentication
         return null;
     }
 
-    public bool AdminSignIn( string email, string password)
+    public bool AdminSignIn(string email, string password)
     {
-            if (password == "admin123" && email == "admin@gmail.com")
+        if (password == "admin123" && email == "admin@gmail.com")
             return true;
 
         return false;
