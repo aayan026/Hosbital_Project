@@ -105,6 +105,7 @@ internal class Authentication
         }
         var doctorCandidate = new DoctorCandidate(hosbital, name, surname, email, password, phone, experienceYear, department, reason,regionCode);
         hosbital.doctorCandidates.Add(doctorCandidate);
+        //fayla yaz
         Console.WriteLine($"\n ~ Thank you, Dr. {doctorCandidate.name}!\r\n\r\n Your application has been received and is currently under review.\r\n You will be contacted via email or phone after the review is complete.\r\n\r\n[Press any key to return to main menu...]\r\n");
 
 
@@ -126,11 +127,13 @@ internal class Authentication
 
         var newUser = new User(username, password, name, surname, email, formattedPhone, regionCode);
         users.Add(newUser);
+        //fayla yaz
         return newUser;
     }
 
     public User? SignInUser(string username, string password)
     {
+        //fayldan oxu
         foreach (var user in users)
         {
             if (user.username == username && user.password == password)
@@ -138,7 +141,16 @@ internal class Authentication
         }
         return null;
     }
-
+    public Doctor DoctorSignIn(Hosbital hosbital,string email, string password)
+    {
+        //fayldan oxu
+        foreach (var doctor in hosbital.doctors)
+        {
+            if (doctor.email == email && doctor.password == password)
+                return doctor;
+        }
+        return null;
+    }
     public bool AdminSignIn(string email, string password)
     {
         if (password == "admin123" && email == "admin@gmail.com")

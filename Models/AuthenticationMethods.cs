@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Hosbital_Project.Models
 {
-    internal static class Methods
+    internal static class AuthenticationMethods
     {
 
         public static User RegistrUser(Authentication auth, List<Department> departments, Hosbital hosbital)
@@ -96,8 +96,29 @@ namespace Hosbital_Project.Models
                 }
             }
         }
-        
 
+        public static void DoctorSignIn(Doctor doctor, Hosbital hosbital, Authentication auth)
+        {
+            while (true)
+            {
+                Console.Write(" | Enter email: ");
+                string email = Console.ReadLine();
+                Console.Write(" | Enter password: ");
+                string password = Console.ReadLine();
+                doctor = auth.DoctorSignIn(hosbital, email, password);
+                if (doctor != null)
+                {
+                    Console.WriteLine("Successfully signed in as doctor!");
+                    Console.ReadKey();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid doctor credentials. Please try again.");
+                    Console.ReadKey();
+                }
+            }
+        }
         public static User SignInUser(Authentication auth)
         {
             //fayldan oxu

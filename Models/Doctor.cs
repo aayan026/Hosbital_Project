@@ -9,33 +9,22 @@ using System.Threading.Tasks;
 
 namespace Hosbital_Project.Models
 {
-    internal class Doctor : Person
+    internal class Doctor : Person,IViewAppointmets
     {
         public int workExperienceYear { get; set; }
         public Department department { get; set; }
         public List<ReceptionDay> receptionDays { get; set; }
+        public ReceptionScheduleManager receptionSchedule { get; set; }
+        public List<(User user, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
+
         public Doctor() { }
         public Doctor(string name, string surname, string email,string password, string phoneNumber, int workExperienceYear, Department department,string regionCode) : base( name, surname,password, email, phoneNumber,regionCode)
         {
             this.workExperienceYear = workExperienceYear;
             this.department = department;
             receptionDays = new List<ReceptionDay> { };
-
+            receptionSchedule = new ReceptionScheduleManager { doctor = this };
             department.doctors.Add(this);
-        }
-        public void AddReceptionDay(ReceptionDay day)
-        {
-            receptionDays.Add(day);
-        }
-        public void ReserveHour(int Dayindex, int slotIndex)
-        {
-            var reserved = receptionDays[Dayindex].TimeSlots[slotIndex];
-            reserved.isReserved = true;
-        }
-        public void CancelHour(int Dayindex, int slotIndex)
-        {
-            var reserved = receptionDays[Dayindex].TimeSlots[slotIndex];
-            reserved.isReserved = false;
         }
         public void ViewProfile(string title)
         {
@@ -46,9 +35,27 @@ namespace Hosbital_Project.Models
             Console.WriteLine($" Phone number: {phoneNumber}");
             Console.WriteLine($" Work Experience Year: {workExperienceYear} years");
             Console.WriteLine($" Department: {department.departmentName}");
+
             Console.WriteLine("");
         }
 
+        public void ViewAppointments()
+        {
+            if (Appointments.Count == 0)
+            {
+                Console.WriteLine("You have no appointments.");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine("\t\t\t\t\t~ Appointments ~\n");
+            foreach (var appointment in Appointments)
+            {
+                Console.WriteLine($"Doctor: {appointment.user.name} {appointment.user.surname}");
+                Console.WriteLine($"Date: {appointment.receptionDay}");
+                Console.WriteLine($"Time: {appointment.receptionHour}");
+                Console.WriteLine("---------------------------------------------------------------");
+            }
+        }
 
         public override string ToString() => $@"Name: {name}
  | Surname: {surname}

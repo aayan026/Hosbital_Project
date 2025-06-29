@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Hosbital_Project.Models
 {
-    internal class User:Person
+    internal class User:Person ,IProfile, IViewAppointmets
     {
         public string username { get; set; }
         public List<(Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
@@ -21,9 +21,9 @@ namespace Hosbital_Project.Models
         }
 
         //methods
-        public void ViewProfile()
+        public void ViewProfile(string title)
         {
-            Console.WriteLine("\t\t\t\t\t~ Profile ~\n");
+            Console.WriteLine($"\t\t\t\t\t~ {title} ~\n");
             Console.WriteLine($" Username: {username}");
             Console.WriteLine($" Name: {name}");
             Console.WriteLine($" Surname: {surname}");

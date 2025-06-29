@@ -1,10 +1,12 @@
 ﻿
+using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Hosbital_Project.Models
 {
@@ -19,6 +21,18 @@ namespace Hosbital_Project.Models
             this.departments = departments;
             this.doctors = doctors;
             this.Users = users;
+        }
+        public void ProfileInfo(string title,Doctor doctor)
+        {
+            Console.WriteLine($"\t\t\t\t\t{title}\n");
+            Console.WriteLine($" Name: {doctor.name}");
+            Console.WriteLine($" Surname: {doctor.surname}");
+            Console.WriteLine($" Phone number: {doctor.phoneNumber}");
+            Console.WriteLine($" Email: {doctor.email}");
+            Console.WriteLine($" Password: {doctor.password}");
+            Console.WriteLine($" Work Experience Year: {doctor.workExperienceYear} years");
+            Console.WriteLine($" Department: {doctor.department.departmentName}");
+            Console.WriteLine("");
         }
 
         public bool SearchUser(string username) //tapildisa true
