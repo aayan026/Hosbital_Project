@@ -14,4 +14,8 @@ namespace Hosbital_Project.Models
     {
         void ViewAppointments();
     }
+    internal interface INotification
+    {
+        void ViewNotifications();
+    }
 }

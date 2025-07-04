@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Hosbital_Project.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hosbital_Project.Pages
 {
     public class ChangeInformations
     {
@@ -82,7 +83,7 @@ namespace Hosbital_Project.Models
                     continue;
                 }
                 string first = email.Split('@').First();
-                string firstPartPattern = @"^[a-zA-Z0-9._-]+$";
+                string firstPartPattern = @"^[a-zA-Z0-9_-]+$";
                 if (!Regex.IsMatch(first, firstPartPattern))
                 {
                     Console.WriteLine(" ~ Email cannot be changed");

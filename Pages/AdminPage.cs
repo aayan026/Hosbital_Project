@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Hosbital_Project.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hosbital_Project.Pages
 {
     internal class AdminPage
     {
-        public static void AdminSignIn(Authentication auth)
+        public static void AdminSignIn(Admin admin, Hosbital hosbital, Authentication auth)
         {
             while (true)
             {
@@ -24,13 +25,13 @@ namespace Hosbital_Project.Models
                 {
                     Console.WriteLine("Successfully signed in as admin!");
                     Console.ReadKey();
-                    break;
+                    AdminPaGe(auth, hosbital, admin);
                 }
                 else
                 {
                     Console.WriteLine("Invalid admin credentials. Please try again.");
                     Console.ReadKey();
-                    continue;
+                    break;
                 }
             }
         }
@@ -42,7 +43,7 @@ namespace Hosbital_Project.Models
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Clear(); Console.WriteLine("\n\t\t\t\t\t~ Admin Page ~\n");
                 List<string> adminOptions = new List<string> { "View Users", "View Departments", "Add Department", "Remove Department", "View Doctors", "View Candidates", };
-                int selectedIndex =Program. NavigateMenu(adminOptions, "\n ~ Admin Options", true, "~ Logout ");
+                int selectedIndex = Program.NavigateMenu(adminOptions, "\n ~ Admin Options", true, "~ Logout ");
                 if (selectedIndex == -1)
                 {
                     return;
@@ -51,27 +52,27 @@ namespace Hosbital_Project.Models
                 {
                     case 0:
                         Console.Clear();
-                        admin.ViewUsers(auth.users);
+                        hosbital.ViewUsers();
                         Console.ReadKey();
                         continue;
                     case 1:
                         Console.Clear();
-                        admin.ViewDepartments(hosbital.departments);
+                        hosbital.ViewDepartments();
                         Console.ReadKey();
                         break;
                     case 2:
                         Console.Clear();
-                        admin.AddDepartment(hosbital);
+                        hosbital.AddDepartment();
                         break;
                     case 3:
                         Console.Clear();
-                        admin.RemoveDepartment(hosbital);
+                        hosbital.RemoveDepartment();
 
                         break;
                     case 4:
                         while (true)
                         {
-                            int index =Program. NavigateMenu(hosbital.doctors, "\n\t\t\t\t\t --- Doctors --- \n\n", true);
+                            int index = Program.NavigateMenu(hosbital.doctors, "\n\t\t\t\t\t --- Doctors --- \n\n", true);
                             if (index == -1)
                                 break;
                             if (index >= 0 || index <= hosbital.doctors.Count())
@@ -88,7 +89,7 @@ namespace Hosbital_Project.Models
                         while (true)
                         {
                             Console.Clear();
-                            int index =Program. NavigateMenu(hosbital.doctorCandidates, "\n\t\t\t\t\t --- Candidates ---\n", true);
+                            int index = Program.NavigateMenu(hosbital.doctorCandidates, "\n\t\t\t\t\t --- Candidates ---\n", true);
                             if (hosbital.doctorCandidates.Count() == 0)
                             {
                                 Console.WriteLine(" There are no candidates.");
@@ -108,18 +109,36 @@ namespace Hosbital_Project.Models
                     $" Experience year: {candidate.experienceYear}\n" +
                     $" Phone number: {candidate.phoneNumber}\n" +
                     $" Reason: {candidate.reason}" +
-                    $"____________________________________________________\n";
+                    $"\n______________________________________________________________________________\n";
                                     List<string> list = new List<string> { "Accept", "Reject" };
                                     int index2 = Program.NavigateMenu(list, title, true);
                                     if (index2 == 0)
                                     {
-                                        admin.AcceptedDoctor(hosbital, candidate);
-                                        //emailine getsinki qebul olundu bildirim
+                                        hosbital.AcceptedDoctor(candidate);
+                                        string subject = "Application Accepted – Hope Medical Center";
+
+                                        string body = $"Dear Dr.{candidate.name} {candidate.surname},\n\n" +
+                                                      "We are pleased to inform you that your application for the doctor position at Hope Medical Center has been approved.\n\n" +
+                                                      "Your profile met our selection criteria and we are happy to welcome you to our medical team.\n\n" +
+                                                      "Further instructions regarding your onboarding, access credentials, and responsibilities will be sent to you shortly.\n\n" +
+                                                      "Congratulations and welcome aboard!\n\n" +
+                                                      "Warm regards,\nHope Medical Center Team";
+                                        NotificationService.SendEmail(subject, body, candidate.email);
                                     }
                                     else if (index2 == 1)
                                     {
-                                        admin.RejectDoctor(hosbital, candidate);
-                                        //levg olundu istek
+                                        hosbital.RejectDoctor(candidate);
+                                        string subject = "Application Cancellation – Hope Medical Center";
+
+                                        string body = $"Dear {candidate.name},\n\n" +
+                                                      "We regret to inform you that your application for the doctor position at Hope Medical Center has been cancelled.\n\n" +
+                                                      "This may be due to incomplete information, missing documents, or a decision by the hospital board.\n\n" +
+                                                      "If you believe this was a mistake or you wish to apply again, please feel free to reach out or submit a new application.\n\n" +
+                                                      "We appreciate your interest in joining our team.\n\n" +
+                                                      "Kind regards,\nHope Medical Center Team";
+
+                                        NotificationService.SendEmail(subject, body, candidate.email);
+
                                     }
 
                                 }

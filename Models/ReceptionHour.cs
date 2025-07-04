@@ -19,5 +19,6 @@ namespace Hosbital_Project.Models
             this.isReserved = false;
         }
         public override string ToString() => $@"{start.ToString("hh\\:mm")} - {end.ToString("hh\\:mm")} - {(isReserved? "reserved" : "")}";
+        public string ToString(bool isShort) => isShort ? $"{start.ToString("hh\\:mm")} - {end.ToString("hh\\:mm")}" : ToString();
     }
 }

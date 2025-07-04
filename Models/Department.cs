@@ -19,7 +19,9 @@ namespace Hosbital_Project.Models
             this.departmentName = departmentName;
             doctors = new List<Doctor> { };
         }
-
+        public Department()
+        {
+        }
         public override string ToString() => $@"{departmentName}";
     }
 }

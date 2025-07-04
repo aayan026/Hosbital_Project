@@ -1,10 +1,10 @@
-﻿
+﻿using Hosbital_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Hosbital_Project.Models
+namespace Hosbital_Project.Pages
 {
     internal static class AuthenticationMethods
     {
@@ -97,25 +97,27 @@ namespace Hosbital_Project.Models
             }
         }
 
-        public static void DoctorSignIn(Doctor doctor, Hosbital hosbital, Authentication auth)
+        public static Doctor DoctorSignIn(Hosbital hosbital, Authentication auth)
         {
             while (true)
             {
-                Console.Write(" | Enter email: ");
+                Console.Write("\n | Enter email: ");
                 string email = Console.ReadLine();
                 Console.Write(" | Enter password: ");
                 string password = Console.ReadLine();
-                doctor = auth.DoctorSignIn(hosbital, email, password);
+                Doctor doctor = auth.DoctorSignIn(hosbital, email, password);
                 if (doctor != null)
                 {
-                    Console.WriteLine("Successfully signed in as doctor!");
+                    Console.WriteLine(" ~ Successfully signed in as doctor!");
                     Console.ReadKey();
+                    return doctor;
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid doctor credentials. Please try again.");
+                    Console.WriteLine(" ! Invalid doctor credentials. Please try again.");
                     Console.ReadKey();
+                    return null;
                 }
             }
         }
@@ -126,9 +128,9 @@ namespace Hosbital_Project.Models
             Console.WriteLine("\t\t\t\t~ Sign In Page ~\n");
             while (true)
             {
-                Console.WriteLine("Enter your username: ");
+                Console.Write(" | Enter your username: ");
                 string username = Console.ReadLine().Trim();
-                Console.WriteLine("Enter your password: ");
+                Console.Write(" | Enter your password: ");
                 string password = Console.ReadLine().Trim();
                 User user = auth.SignInUser(username, password);
                 return user;

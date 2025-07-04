@@ -24,8 +24,6 @@ namespace Hosbital_Project.Models
             };
             }
         }
-
-
         public void AddTimeSlot(string start, string end)
         {
             bool exist = TimeSlots.Any(slot => slot.start.ToString(@"hh\\:mm") == start && slot.end.ToString(@"hh\\:mm") == end);

@@ -1,8 +1,11 @@
 ﻿
 namespace Hosbital_Project.Models;
 
+using Hosbital_Project.FileHelpers;
+using Hosbital_Project.Pages;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
@@ -46,14 +49,14 @@ class Program
 
             var key = Console.ReadKey(true).Key;
 
+            int maxIndex = showBack ? options.Count : options.Count - 1;
+
             if (key == ConsoleKey.UpArrow)
             {
-                int maxIndex = showBack ? options.Count : options.Count - 1;
                 selectedIndex = (selectedIndex - 1) < 0 ? maxIndex : selectedIndex - 1;
             }
             else if (key == ConsoleKey.DownArrow)
             {
-                int maxIndex = showBack ? options.Count : options.Count - 1;
                 selectedIndex = (selectedIndex + 1) > maxIndex ? 0 : selectedIndex + 1;
             }
             else if (key == ConsoleKey.Enter)
@@ -81,7 +84,7 @@ class Program
                 case 0:
                     Console.Clear();
                     Console.Write("\n  Enter your new username: ");
-                    string newUsername = Console.ReadLine();
+                    string? newUsername = Console.ReadLine();
                     bool find3 = hosbital.SearchUser(newUsername);
 
                     if (newUsername == user.username)
@@ -135,7 +138,7 @@ class Program
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
-            List<string> options = new List<string> { "View Departments", "View Profile", "Change Profile", "View Appointments", "Cancel Appointment" };
+            List<string> options = new List<string> { "View Departments", "View Profile", "Notifications", "Change Profile", "View Appointments", "Cancel Appointment" };
             int selectedIndex = NavigateMenu(options, $"\n ~ Welcome {user.name} {user.surname}\n", true, "~ Logout ");
             if (selectedIndex == -1)
             {
@@ -153,16 +156,30 @@ class Program
                     Console.ReadKey();
                     break;
                 case 2:
+                    Console.Clear();
+                    if (user.userNotifications.Count == 0)
+                    {
+                        Console.WriteLine("\n You don't have any notifications.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        user.ViewNotifications();
+                        Console.ReadKey();
+                        break;
+                    }
+                case 3:
                     ChangeProfile(hosbital, user);
                     break;
-                case 3:
+                case 4:
                     Console.Clear();
                     user.ViewAppointments();
                     Console.WriteLine("\nPress any key to return to the main menu.");
                     Console.ReadKey();
                     break;
 
-                case 4:
+                case 5:
                     Console.Clear();
                     if (user.Appointments.Count == 0)
                     {
@@ -175,82 +192,53 @@ class Program
                         int cancelIndex = NavigateMenu(user.Appointments.Select(ds => $" Dr.{ds.doctor.name} - {ds.receptionDay} - {ds.receptionHour.start.ToString("hh\\:mm")} - {ds.receptionHour.end.ToString("hh\\:mm")} ").ToList(), "Select an appointment to cancel", true);
                         if (cancelIndex == -1)
                             break;
+
+                        var doctor = user.Appointments[cancelIndex].doctor;
+
+                        string messageUser = $"You cancelled your meeting with Dr.{doctor.name}";
+                        Console.WriteLine("\n ~ Appointment cancelled successfully.");
+                        Console.WriteLine("\n ~ Please wait for the email to be sent...");
+                        string subject = "Appointment Cancellation Confirmation – Hope Medical Center";
+
+                        var day = user.Appointments[cancelIndex].receptionDay;
+                        var time = user.Appointments[cancelIndex].receptionHour.ToString(true);
+                        string body = $"Dear {user.name},\n\n" +
+                                      $"This is to confirm that your appointment with Dr.{doctor.name} on {day} at {time} has been successfully cancelled as per your request.\n\n" +
+                                      "If you wish to reschedule, please use your patient panel or contact us directly.\n\n" +
+                                      "Thank you for keeping us informed.\n\n" +
+                                      "Best regards,\nHope Medical Center Team";
+
+                        Notification notification = new Notification(subject, messageUser, body, user.email);
+                        user.userNotifications.Add(notification);
+                        //fayla yaz
+                        string messageDoctor = $"Patient {user.name} has cancelled an appointment with you.";
+
+                        string subjectdoctor = "Appointment Cancellation Notice – Hope Medical Center";
+
+                        string bodydoctor = $"Dear Dr.{doctor.name},\n\n" +
+                                      $"The appointment with patient {user.name}, scheduled on {day} at {time} has been cancelled by the patient.\n\n" +
+                                      "Please update your schedule accordingly.\n\n" +
+                                      "Regards,\nHope Medical Center Team";
+
+                        Notification notification2 = new Notification(subjectdoctor, messageDoctor, bodydoctor, doctor.email);
+                        user.Appointments[cancelIndex].doctor.doctorsNotifications.Add(notification2);
+
+                        user.Appointments[cancelIndex].doctor.Appointments.RemoveAt(cancelIndex);
                         user.Appointments.RemoveAt(cancelIndex);
-                        Console.WriteLine("Appointment cancelled successfully.");// appointment faylina yaz
+                        //fayla yaz
                         Console.ReadKey();
                         break;
                     }
-
-                case 5:
-                    Console.WriteLine("Logging out...");
-                    Thread.Sleep(1000);
-                    break;
                 default:
-                    Console.WriteLine("Invalid selection. Please try again.");
                     break;
             }
         }
     }
-
-
-    static void DoctorPage(Hosbital hosbital, Authentication auth, Doctor doctor)
+    static void MainMenu()
     {
-        string title = $"\n\t\t\t\t\t --- W E L C O M E ---";
-        int choiceIndex = NavigateMenu(new List<string> { "View Appointments", "View Profile", "Change Profile" }, title, true, "~ Logout");
-        if (choiceIndex == -1)
-        {
-            return;
-        }
-        switch (choiceIndex)
-        {
-            case 0:
-                Console.Clear();
-                doctor.ViewAppointments();
-                Console.ReadKey();
-                break;
-            case 1:
-                Console.Clear();
-                hosbital.ProfileInfo("Doctor Profile", doctor);
-                Console.ReadKey();
-                break;
-            case 2:
-                Console.Clear();
-                List<string> changeOptions = new List<string> { "Change Email", "Change Password", "Change Phone Number" };
-                int selectedIndex = NavigateMenu(changeOptions, title);
-                while (true)
-                {
-                    if (selectedIndex == -1)
-                        return;
-                    if(selectedIndex==0)
-                    ChangeInformations.ChangeEmail(doctor, hosbital);
-                    else if(selectedIndex == 1)
-                    {
-                        ChangeInformations.ChangePassword(doctor);
-                    }
-                    else if (selectedIndex == 2)
-                    {
-                        ChangeInformations.ChangePhone(doctor, hosbital);
-                    }
-                }
-                break;
-            case 3:
-                Console.WriteLine("Logging out...");
-                Thread.Sleep(1000);
-                break;
-        }
-    }
-
-    static void Main(string[] args)
-    {
-        List<User> users = new List<User> { };
+        List<User> users = FileHelper.ReadUsersFromFile();
         Authentication auth = new Authentication(users);
-
-        var neurology = new Department("Neurology");
-        var surgery = new Department("Surgery");
-        var psychiatry = new Department("Psychiatry");
-        var obgyn = new Department("Obstetrics and Gynecology");
-
-        List<Department> departments = new List<Department> { surgery, neurology, psychiatry, obgyn };
+        List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
 
         Doctor CreateDoctor(string name, string surname, string email, string password, string phone, int id, Department dept, string country, params DayOfWeek[] days)
         {
@@ -261,6 +249,28 @@ class Program
             }
             return doc;
         }
+
+        var neurology = new Department("Neurology");
+        var surgery = new Department("Surgery");
+        var psychiatry = new Department("Psychiatry");
+        var obgyn = new Department("Obstetrics and Gynecology");
+        List<Department> departments = FileHelper.ReadDepartmentsFromFile() ;
+        if (departments.Count == 0)
+        {
+            departments.Add(neurology);
+            departments.Add(surgery);
+            departments.Add(psychiatry);
+            departments.Add(obgyn);
+            FileHelper.WriteDepartmentsToFile(departments);
+        }
+
+        List<DoctorCandidate> candidates = FileHelper.ReadCandidatesFromFile();
+        Hosbital.LinkDepartmentsToDoctors(doctors, departments);
+        Hosbital.LinkDoctorsToDepartments(doctors, departments);
+        Hosbital.LinkDepartmentsToCandidates(candidates, departments);
+
+        if (doctors.Count == 0)
+        {
         var doc1 = CreateDoctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
         var doc11 = CreateDoctor("Juliet", "Burke", "juliet@gmail.com", "1234", "0506787676", 4, obgyn, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Friday);
         var docHurley = CreateDoctor("Hugo", "Reyes", "hurley@gmail.com", "1234", "0501234567", 5, psychiatry, "US", DayOfWeek.Monday, DayOfWeek.Thursday);
@@ -275,17 +285,26 @@ class Program
         var doc8 = CreateDoctor("Allison", "Cameron", "cam@gmail.com", "1234", "0503333333", 5, obgyn, "AZ", DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
         var doc9 = CreateDoctor("Michael", "Brown", "michael@gmail.com", "1234", "0504444444", 11, neurology, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
         var doc10 = CreateDoctor("Rachel", "Green", "rachel@gmail.com", "1234", "0505555555", 4, neurology, "AZ", DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
-        List<Doctor> doctors = new()
-{
-    doc1, doc2, doc3, doc4, doc5, doc6, doc7, doc8, doc9, doc10, doc11, docHurley, docLibby, docLenny,
-};
+        doctors.Add(doc1);
+        doctors.Add(doc2);
+        doctors.Add(doc3);
+        doctors.Add(doc4);
+        doctors.Add(doc5);
+        doctors.Add(doc6);
+        doctors.Add(doc7);
+        doctors.Add(doc8);
+        doctors.Add(doc9);
+        doctors.Add(doc10);
+        doctors.Add(doc11);
+        doctors.Add(docHurley);
+        doctors.Add(docLibby);
+        doctors.Add(docLenny);
+            FileHelper.WriteDoctorsToFile(doctors);
+        }
 
-        User? user1 = new User("aya_aliye283", "ayan1986", "ayan", "aliyeva", "ayan@gmail.com", "0707897878", "AZ");
-        users.Add(user1);
-        Hosbital hosbital = new Hosbital(departments, doctors, users);
+        User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
+        Hosbital hosbital = new Hosbital(departments, doctors, users, candidates);
         Admin admin = new Admin();
-        DoctorCandidate dc = new DoctorCandidate(hosbital, "omer", "Aliyev", "omer@gmail.com", "omer123", "0776787676", 3, neurology, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum", "AZ");
-        hosbital.doctorCandidates.Add(dc);
 
         while (true)
         {
@@ -302,8 +321,7 @@ class Program
                     break;
                 if (choiceIndex == 0)
                 {
-                    AdminPage.AdminSignIn(auth);
-                    AdminPage.AdminPaGe(auth, hosbital, admin);
+                    AdminPage.AdminSignIn(admin, hosbital, auth);
                 }
                 else if (choiceIndex == 1)
                 {
@@ -333,15 +351,25 @@ class Program
                             else if (ansIndex == 1)
                             {
                                 User? user = AuthenticationMethods.RegistrUser(auth, departments, hosbital);
-                                users.Add(user);
-                                UserMainMenu(auth, departments, user, hosbital);
+
+                                if (user != null)
+                                {
+                                    users.Add(user);
+                                    FileHelper.WriteUsersToFile(users);
+                                    UserMainMenu(auth, departments, user, hosbital);
+                                }
                             }
                         }
                     }
                 }
                 else if (choiceIndex == 2)
                 {
-                    //doctor page
+                    Console.Clear();
+                    var doctor = AuthenticationMethods.DoctorSignIn(hosbital, auth);
+                    if (doctor != null)
+                    {
+                        DoctorPage.DoctorPaGe(hosbital, auth, doctor);
+                    }
                 }
                 else if (choiceIndex == 3)
                 {
@@ -349,6 +377,17 @@ class Program
                 }
             }
         }
+
     }
+
+    static void Main(string[] args)
+    {
+        MainMenu();
+    }
+
+
+
+
 }
+
 

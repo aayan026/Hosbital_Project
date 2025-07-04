@@ -1,0 +1,166 @@
+[
+  {
+    "departmentName": "Surgery",
+    "doctors": [
+      {
+        "workExperienceYear": 8,
+        "DepartmentName": "Surgery",
+        "name": "Jack",
+        "surname": "Shephard",
+        "password": "1234",
+        "email": "jack@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994501234567"
+      },
+      {
+        "workExperienceYear": 7,
+        "DepartmentName": "Surgery",
+        "name": "Ethan",
+        "surname": "Rom",
+        "password": "1234",
+        "email": "ethan@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994503456789"
+      },
+      {
+        "workExperienceYear": 6,
+        "DepartmentName": "Surgery",
+        "name": "Christian",
+        "surname": "Shephard",
+        "password": "1234",
+        "email": "christian@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994504567890"
+      },
+      {
+        "workExperienceYear": 6,
+        "DepartmentName": "Surgery",
+        "name": "Benjamin",
+        "surname": "Linus",
+        "password": "1234",
+        "email": "ben@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994501111111"
+      },
+      {
+        "workExperienceYear": 9,
+        "DepartmentName": "Surgery",
+        "name": "John",
+        "surname": "Carter",
+        "password": "1234",
+        "email": "carter@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994502222222"
+      }
+    ]
+  },
+  {
+    "departmentName": "Neurology",
+    "doctors": [
+      {
+        "workExperienceYear": 9,
+        "DepartmentName": "Neurology",
+        "name": "David",
+        "surname": "Wilson",
+        "password": "1234",
+        "email": "david@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994505678901"
+      },
+      {
+        "workExperienceYear": 11,
+        "DepartmentName": "Neurology",
+        "name": "Michael",
+        "surname": "Brown",
+        "password": "1234",
+        "email": "michael@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994504444444"
+      },
+      {
+        "workExperienceYear": 4,
+        "DepartmentName": "Neurology",
+        "name": "Rachel",
+        "surname": "Green",
+        "password": "1234",
+        "email": "rachel@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994505555555"
+      }
+    ]
+  },
+  {
+    "departmentName": "Psychiatry",
+    "doctors": [
+      {
+        "workExperienceYear": 5,
+        "DepartmentName": "Psychiatry",
+        "name": "Hugo",
+        "surname": "Reyes",
+        "password": "1234",
+        "email": "hurley@gmail.com",
+        "regionCode": "US",
+        "phoneNumber": null
+      },
+      {
+        "workExperienceYear": 6,
+        "DepartmentName": "Psychiatry",
+        "name": "Libby",
+        "surname": "Smith",
+        "password": "5678",
+        "email": "libby@gmail.com",
+        "regionCode": "US",
+        "phoneNumber": null
+      },
+      {
+        "workExperienceYear": 7,
+        "DepartmentName": "Psychiatry",
+        "name": "Leonard",
+        "surname": "Simms",
+        "password": "9999",
+        "email": "lenny@gmail.com",
+        "regionCode": "US",
+        "phoneNumber": null
+      }
+    ]
+  },
+  {
+    "departmentName": "Obstetrics and Gynecology",
+    "doctors": [
+      {
+        "workExperienceYear": 5,
+        "DepartmentName": "Obstetrics and Gynecology",
+        "name": "Emily",
+        "surname": "Johnson",
+        "password": "1234",
+        "email": "emily@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994502345678"
+      },
+      {
+        "workExperienceYear": 5,
+        "DepartmentName": "Obstetrics and Gynecology",
+        "name": "Allison",
+        "surname": "Cameron",
+        "password": "1234",
+        "email": "cam@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994503333333"
+      },
+      {
+        "workExperienceYear": 4,
+        "DepartmentName": "Obstetrics and Gynecology",
+        "name": "Juliet",
+        "surname": "Burke",
+        "password": "1234",
+        "email": "juliet@gmail.com",
+        "regionCode": "AZ",
+        "phoneNumber": "\u002B994506787676"
+      }
+    ]
+  },
+  {
+    "departmentName": "cardiology",
+    "doctors": []
+  }
+]

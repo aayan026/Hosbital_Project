@@ -1,10 +1,11 @@
-﻿using Hosbital_Project.Models;
+﻿using Hosbital_Project.FileHelpers;
+using Hosbital_Project.Models;
 using PhoneNumbers;
+using System.Text.RegularExpressions;
 
 internal class Authentication
 {
-    public List<User> users { get; set; }
-
+    public List<User> users = FileHelper.ReadUsersFromFile();
     public Authentication(List<User> users)
     {
         this.users = users;
@@ -15,8 +16,8 @@ internal class Authentication
     {
         if (string.IsNullOrEmpty(password))
             errors.Add("Password cannot be empty.");
-        else if (password.Length < 8 || !password.Any(char.IsDigit))
-            errors.Add("Password must be at least 8 chars and contain digits.");
+        else if (password.Length < 6 || !password.Any(char.IsDigit))
+            errors.Add("Password must be at least 6 chars and contain digits.");
 
         if (string.IsNullOrWhiteSpace(name))
             errors.Add("Name cannot be empty.");
@@ -26,9 +27,15 @@ internal class Authentication
         if (string.IsNullOrWhiteSpace(email))
 
             errors.Add("Email cannot be empty.");
-        else if (!email.EndsWith("@gmail.com"))
+        else if (!email.EndsWith("@gmail.com") && !email.EndsWith("@yahoo.com") && !email.EndsWith("@outlook.com") && !email.EndsWith("@hotmail.com") && !email.EndsWith("@mail.ru") && !email.EndsWith("@icloud.com"))
             errors.Add("Email is wrong.");
-  
+
+        string first = email.Split('@').First();
+        string firstPartPattern = @"^[a-zA-Z0-9_-]+$";
+
+        if (!Regex.IsMatch(first, firstPartPattern))
+            errors.Add(" Email cannot contain special characters in the first part.");
+
 
         formattedPhone = "";
         var phoneUtil = PhoneNumberUtil.GetInstance();
@@ -53,11 +60,11 @@ internal class Authentication
 
         if (string.IsNullOrWhiteSpace(username))
             errors.Add("Username cannot be empty.");
-       else if (string.IsNullOrWhiteSpace(username) || username.Length < 6)
+        else if (string.IsNullOrWhiteSpace(username) || username.Length < 6)
             errors.Add("Username must be at least 6 characters.");
         else if (users.Any(u => u.username == username))
             errors.Add("Username already exists.");
-       
+
 
         ValidateCommonFields(password, name, surname, email, phone, regionCode, ref errors, out formattedPhone);
 
@@ -76,9 +83,9 @@ internal class Authentication
   .Length;
         if (string.IsNullOrWhiteSpace(reason))
             errors.Add("Reason cannot be empty.");
-       else if (string.IsNullOrWhiteSpace(reason) || wordCount < 15)
-            errors.Add("Reason must be at least 15 words.");
-        
+        else if (string.IsNullOrWhiteSpace(reason) || wordCount < 10)
+            errors.Add("Reason must be at least 10 words.");
+
         ValidateCommonFields(password, name, surname, email, phone, regionCode, ref errors, out formattedPhone);
 
         return errors.Count == 0;
@@ -103,9 +110,11 @@ internal class Authentication
             }
             return;
         }
-        var doctorCandidate = new DoctorCandidate(hosbital, name, surname, email, password, phone, experienceYear, department, reason,regionCode);
+
+        var doctorCandidate = new DoctorCandidate(hosbital, name, surname, email, password, phone, experienceYear, department, reason, regionCode);
         hosbital.doctorCandidates.Add(doctorCandidate);
-        //fayla yaz
+        FileHelper.WriteCandidateToFile(hosbital.doctorCandidates);
+
         Console.WriteLine($"\n ~ Thank you, Dr. {doctorCandidate.name}!\r\n\r\n Your application has been received and is currently under review.\r\n You will be contacted via email or phone after the review is complete.\r\n\r\n[Press any key to return to main menu...]\r\n");
 
 
@@ -127,7 +136,6 @@ internal class Authentication
 
         var newUser = new User(username, password, name, surname, email, formattedPhone, regionCode);
         users.Add(newUser);
-        //fayla yaz
         return newUser;
     }
 
@@ -141,7 +149,7 @@ internal class Authentication
         }
         return null;
     }
-    public Doctor DoctorSignIn(Hosbital hosbital,string email, string password)
+    public Doctor DoctorSignIn(Hosbital hosbital, string email, string password)
     {
         //fayldan oxu
         foreach (var doctor in hosbital.doctors)
