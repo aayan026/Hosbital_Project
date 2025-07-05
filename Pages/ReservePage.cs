@@ -1,4 +1,5 @@
-﻿using Hosbital_Project.Models;
+﻿using Hosbital_Project.FileHelpers;
+using Hosbital_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,8 @@ namespace Hosbital_Project.Pages
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Clear();
-                var ReceptionDays = doctor.receptionDays;
-                int choiceIndex = Program.NavigateMenu(ReceptionDays, $"\n ~ Dr.{doctor.surname}'s reception hours:\n", true);
-
-
+                var ReceptionDays = FileHelper.ReadReceptionDaysFromFile(doctor.email);
+                int choiceIndex = Program.NavigateMenu(ReceptionDays, $"\n ~ Dr.{doctor.surname}'s reception Days:\n", true);
                 if (choiceIndex == -1)
                     return;
                 if (choiceIndex >= 0 && choiceIndex <= ReceptionDays.Count)
@@ -51,13 +50,13 @@ namespace Hosbital_Project.Pages
                 {
                     doctor.receptionSchedule.ReserveHour(dayIndex, choiceIndex);
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.WriteLine($"\n ~ Thank you, {user.name} {user.surname}.~\n ! You have successfully booked an appointment with Dr.{doctor.surname} at {receptionDays[dayIndex]} - {receptionDays[dayIndex].TimeSlots[choiceIndex].start.ToString("hh\\:mm")} - {receptionDays[dayIndex].TimeSlots[choiceIndex].end.ToString("hh\\:mm")}");
-                   
+                    Console.WriteLine($"\n ~ Thank you, {user.name} {user.surname}.~\n ! You have successfully booked an appointment with Dr.{doctor.surname} at {receptionDays[dayIndex]} - {receptionDays[dayIndex].TimeSlots[choiceIndex].start} - {receptionDays[dayIndex].TimeSlots[choiceIndex].end}");
+
                     var selectedDay = receptionDays[dayIndex];
                     var selectedSlot = selectedDay.TimeSlots[choiceIndex];
 
                     user.Appointments.Add((doctor, selectedDay, selectedSlot));
-                    doctor.Appointments.Add((user, selectedDay,selectedSlot));
+                    doctor.Appointments.Add((user, selectedDay, selectedSlot));
 
                     //user notification
                     string ShortmessageUser = $"You have scheduled an appointment with Dr.{doctor.name}";
@@ -74,7 +73,7 @@ namespace Hosbital_Project.Pages
                                        "Hope Medical Center Team";
 
                     Console.WriteLine("\n ~ Please wait for the email to be sent... Check your email after the operation is completed.");
-                    Notification notification = new Notification(emailSubject, ShortmessageUser,emailBody, user.email);
+                    Notification notification = new Notification(emailSubject, ShortmessageUser, emailBody, user.email);
                     user.userNotifications.Add(notification);
                     //fayla yaz
 
@@ -89,7 +88,7 @@ namespace Hosbital_Project.Pages
                                   "Regards,\nHope Medical Center Team";
 
                     string messageDoctor = $"Patient {user.name} has booked an appointment with you on {selectedDay}";
-                    Notification notification2 = new Notification(emailSubject, messageDoctor, body,user.email);
+                    Notification notification2 = new Notification(emailSubject, messageDoctor, body, user.email);
                     doctor.doctorsNotifications.Add(notification2);//fayla yaz
 
 

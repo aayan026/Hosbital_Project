@@ -189,7 +189,7 @@ class Program
                     }
                     else
                     {
-                        int cancelIndex = NavigateMenu(user.Appointments.Select(ds => $" Dr.{ds.doctor.name} - {ds.receptionDay} - {ds.receptionHour.start.ToString("hh\\:mm")} - {ds.receptionHour.end.ToString("hh\\:mm")} ").ToList(), "Select an appointment to cancel", true);
+                        int cancelIndex = NavigateMenu(user.Appointments.Select(ds => $" Dr.{ds.doctor.name} - {ds.receptionDay} - {ds.receptionHour.start} - {ds.receptionHour.end} ").ToList(), "Select an appointment to cancel", true);
                         if (cancelIndex == -1)
                             break;
 
@@ -243,18 +243,25 @@ class Program
         Doctor CreateDoctor(string name, string surname, string email, string password, string phone, int id, Department dept, string country, params DayOfWeek[] days)
         {
             var doc = new Doctor(name, surname, email, password, phone, id, dept, country);
+            doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
+            doc.receptionSchedule = new ReceptionScheduleManager { doctor = doc };
+
             foreach (var day in days)
             {
-                doc.receptionSchedule.AddReceptionDay(day);
+                doc.receptionDays.Add(new ReceptionDay(day));
             }
+
+            FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
+
             return doc;
         }
+
 
         var neurology = new Department("Neurology");
         var surgery = new Department("Surgery");
         var psychiatry = new Department("Psychiatry");
         var obgyn = new Department("Obstetrics and Gynecology");
-        List<Department> departments = FileHelper.ReadDepartmentsFromFile() ;
+        List<Department> departments = FileHelper.ReadDepartmentsFromFile();
         if (departments.Count == 0)
         {
             departments.Add(neurology);
@@ -271,34 +278,34 @@ class Program
 
         if (doctors.Count == 0)
         {
-        var doc1 = CreateDoctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
-        var doc11 = CreateDoctor("Juliet", "Burke", "juliet@gmail.com", "1234", "0506787676", 4, obgyn, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Friday);
-        var docHurley = CreateDoctor("Hugo", "Reyes", "hurley@gmail.com", "1234", "0501234567", 5, psychiatry, "US", DayOfWeek.Monday, DayOfWeek.Thursday);
-        var docLibby = CreateDoctor("Libby", "Smith", "libby@gmail.com", "5678", "0502345678", 6, psychiatry, "US", DayOfWeek.Tuesday, DayOfWeek.Friday);
-        var docLenny = CreateDoctor("Leonard", "Simms", "lenny@gmail.com", "9999", "0503456789", 7, psychiatry, "US", DayOfWeek.Wednesday, DayOfWeek.Saturday);
-        var doc2 = CreateDoctor("Emily", "Johnson", "emily@gmail.com", "1234", "0502345678", 5, obgyn, "AZ", DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
-        var doc3 = CreateDoctor("Ethan", "Rom", "ethan@gmail.com", "1234", "0503456789", 7, surgery, "AZ", DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
-        var doc4 = CreateDoctor("Christian", "Shephard", "christian@gmail.com", "1234", "0504567890", 6, surgery, "AZ", DayOfWeek.Monday);
-        var doc5 = CreateDoctor("David", "Wilson", "david@gmail.com", "1234", "0505678901", 9, neurology, "AZ", DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday, DayOfWeek.Monday);
-        var doc6 = CreateDoctor("Benjamin", "Linus", "ben@gmail.com", "1234", "0501111111", 6, surgery, "AZ", DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
-        var doc7 = CreateDoctor("John", "Carter", "carter@gmail.com", "1234", "0502222222", 9, surgery, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday);
-        var doc8 = CreateDoctor("Allison", "Cameron", "cam@gmail.com", "1234", "0503333333", 5, obgyn, "AZ", DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
-        var doc9 = CreateDoctor("Michael", "Brown", "michael@gmail.com", "1234", "0504444444", 11, neurology, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
-        var doc10 = CreateDoctor("Rachel", "Green", "rachel@gmail.com", "1234", "0505555555", 4, neurology, "AZ", DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
-        doctors.Add(doc1);
-        doctors.Add(doc2);
-        doctors.Add(doc3);
-        doctors.Add(doc4);
-        doctors.Add(doc5);
-        doctors.Add(doc6);
-        doctors.Add(doc7);
-        doctors.Add(doc8);
-        doctors.Add(doc9);
-        doctors.Add(doc10);
-        doctors.Add(doc11);
-        doctors.Add(docHurley);
-        doctors.Add(docLibby);
-        doctors.Add(docLenny);
+            var doc1 = CreateDoctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
+            var doc11 = CreateDoctor("Juliet", "Burke", "juliet@gmail.com", "1234", "0506787676", 4, obgyn, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Friday);
+            var docHurley = CreateDoctor("Hugo", "Reyes", "hurley@gmail.com", "1234", "0501234567", 5, psychiatry, "US", DayOfWeek.Monday, DayOfWeek.Thursday);
+            var docLibby = CreateDoctor("Libby", "Smith", "libby@gmail.com", "5678", "0502345678", 6, psychiatry, "US", DayOfWeek.Tuesday, DayOfWeek.Friday);
+            var docLenny = CreateDoctor("Leonard", "Simms", "lenny@gmail.com", "9999", "0503456789", 7, psychiatry, "US", DayOfWeek.Wednesday, DayOfWeek.Saturday);
+            var doc2 = CreateDoctor("Emily", "Johnson", "emily@gmail.com", "1234", "0502345678", 5, obgyn, "AZ", DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
+            var doc3 = CreateDoctor("Ethan", "Rom", "ethan@gmail.com", "1234", "0503456789", 7, surgery, "AZ", DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
+            var doc4 = CreateDoctor("Christian", "Shephard", "christian@gmail.com", "1234", "0504567890", 6, surgery, "AZ", DayOfWeek.Monday);
+            var doc5 = CreateDoctor("David", "Wilson", "david@gmail.com", "1234", "0505678901", 9, neurology, "AZ", DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday, DayOfWeek.Monday);
+            var doc6 = CreateDoctor("Benjamin", "Linus", "ben@gmail.com", "1234", "0501111111", 6, surgery, "AZ", DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday);
+            var doc7 = CreateDoctor("John", "Carter", "carter@gmail.com", "1234", "0502222222", 9, surgery, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday);
+            var doc8 = CreateDoctor("Allison", "Cameron", "cam@gmail.com", "1234", "0503333333", 5, obgyn, "AZ", DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
+            var doc9 = CreateDoctor("Michael", "Brown", "michael@gmail.com", "1234", "0504444444", 11, neurology, "AZ", DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday);
+            var doc10 = CreateDoctor("Rachel", "Green", "rachel@gmail.com", "1234", "0505555555", 4, neurology, "AZ", DayOfWeek.Friday, DayOfWeek.Saturday, DayOfWeek.Sunday);
+            doctors.Add(doc1);
+            doctors.Add(doc2);
+            doctors.Add(doc3);
+            doctors.Add(doc4);
+            doctors.Add(doc5);
+            doctors.Add(doc6);
+            doctors.Add(doc7);
+            doctors.Add(doc8);
+            doctors.Add(doc9);
+            doctors.Add(doc10);
+            doctors.Add(doc11);
+            doctors.Add(docHurley);
+            doctors.Add(docLibby);
+            doctors.Add(docLenny);
             FileHelper.WriteDoctorsToFile(doctors);
         }
 
@@ -383,6 +390,39 @@ class Program
     static void Main(string[] args)
     {
         MainMenu();
+        //List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
+
+        //foreach (var doc in doctors)
+        //{
+        //    Console.WriteLine($"\n--- Test Dr.{doc.name} ({doc.email}) ---");
+
+        //    if (doc.receptionDays == null)
+        //        Console.WriteLine("receptionDays: NULL");
+        //    else
+        //        Console.WriteLine($"receptionDays count: {doc.receptionDays.Count}");
+
+        //    // Yenidən receptionDays fayldan yüklə
+        //    doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
+        //    Console.WriteLine($"[AFTER LOAD] receptionDays count: {doc.receptionDays.Count}");
+
+        //    // Fayla yaz (yoxlamaq üçün)
+        //    FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
+        //    Console.WriteLine($"Yazildi: reception_{doc.email}.json");
+
+        //    // Fayl varmi?
+        //    string path = $"reception_{doc.email}.json";
+        //    if (File.Exists(path))
+        //    {
+        //        Console.WriteLine($"Fayl VAR: {path}");
+        //        Console.WriteLine("Fayl içi:");
+        //        Console.WriteLine(File.ReadAllText(path));
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine($"Fayl YOXDUR: {path}");
+        //    }
+        //}
+
     }
 
 

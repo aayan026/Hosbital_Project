@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Hosbital_Project.Models
 {
-    internal class User:Person ,IProfile, IViewAppointmets, INotification
+    internal class User : Person, IProfile, IViewAppointmets, INotification
     {
         public string username { get; set; }
         public List<(Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
         public List<Notification> userNotifications { get; set; }
-        public User(string username, string password, string name, string surname, string email, string phoneNumber, string regionCode) : base( name, surname,password, email, phoneNumber, regionCode)
+        public User(string username, string password, string name, string surname, string email, string phoneNumber, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)
         {
             this.username = username;
             userNotifications = new List<Notification> { };

@@ -55,7 +55,7 @@ namespace Hosbital_Project.Pages
                         else
                         {
 
-                            int cancelIndex = Program.NavigateMenu(doctor.Appointments.Select(ds => $" {ds.user.name} {ds.user.surname} - {ds.receptionDay} - {ds.receptionHour.start.ToString("hh\\:mm")} - {ds.receptionHour.end.ToString("hh\\:mm")} ").ToList(), "Select an appointment to cancel", true);
+                            int cancelIndex = Program.NavigateMenu(doctor.Appointments.Select(ds => $" {ds.user.name} {ds.user.surname} - {ds.receptionDay} - {ds.receptionHour.start} - {ds.receptionHour.end} ").ToList(), "Select an appointment to cancel", true);
                             if (cancelIndex == -1)
                                 break;
                             Console.Write("\n ~ Appointment cancelled succesfully");

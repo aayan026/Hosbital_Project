@@ -2,6 +2,8 @@
   {
     "workExperienceYear": 8,
     "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Jack",
     "surname": "Shephard",
     "password": "1234",
@@ -12,6 +14,8 @@
   {
     "workExperienceYear": 5,
     "DepartmentName": "Obstetrics and Gynecology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Emily",
     "surname": "Johnson",
     "password": "1234",
@@ -22,6 +26,8 @@
   {
     "workExperienceYear": 7,
     "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Ethan",
     "surname": "Rom",
     "password": "1234",
@@ -32,6 +38,8 @@
   {
     "workExperienceYear": 6,
     "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Christian",
     "surname": "Shephard",
     "password": "1234",
@@ -42,6 +50,8 @@
   {
     "workExperienceYear": 9,
     "DepartmentName": "Neurology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "David",
     "surname": "Wilson",
     "password": "1234",
@@ -52,6 +62,8 @@
   {
     "workExperienceYear": 6,
     "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Benjamin",
     "surname": "Linus",
     "password": "1234",
@@ -62,6 +74,8 @@
   {
     "workExperienceYear": 9,
     "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "John",
     "surname": "Carter",
     "password": "1234",
@@ -72,6 +86,8 @@
   {
     "workExperienceYear": 5,
     "DepartmentName": "Obstetrics and Gynecology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Allison",
     "surname": "Cameron",
     "password": "1234",
@@ -82,6 +98,8 @@
   {
     "workExperienceYear": 11,
     "DepartmentName": "Neurology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Michael",
     "surname": "Brown",
     "password": "1234",
@@ -92,6 +110,8 @@
   {
     "workExperienceYear": 4,
     "DepartmentName": "Neurology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Rachel",
     "surname": "Green",
     "password": "1234",
@@ -102,6 +122,8 @@
   {
     "workExperienceYear": 4,
     "DepartmentName": "Obstetrics and Gynecology",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Juliet",
     "surname": "Burke",
     "password": "1234",
@@ -112,6 +134,8 @@
   {
     "workExperienceYear": 5,
     "DepartmentName": "Psychiatry",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Hugo",
     "surname": "Reyes",
     "password": "1234",
@@ -122,6 +146,8 @@
   {
     "workExperienceYear": 6,
     "DepartmentName": "Psychiatry",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Libby",
     "surname": "Smith",
     "password": "5678",
@@ -132,11 +158,37 @@
   {
     "workExperienceYear": 7,
     "DepartmentName": "Psychiatry",
+    "receptionDays": null,
+    "receptionSchedule": null,
     "name": "Leonard",
     "surname": "Simms",
     "password": "9999",
     "email": "lenny@gmail.com",
     "regionCode": "US",
     "phoneNumber": null
+  },
+  {
+    "workExperienceYear": 3,
+    "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
+    "name": "jkds",
+    "surname": "uhrfodjls",
+    "password": "hkfbrj43ew",
+    "email": "asdejs@gmail.com",
+    "regionCode": null,
+    "phoneNumber": "\u002B994554332323"
+  },
+  {
+    "workExperienceYear": 34,
+    "DepartmentName": "Surgery",
+    "receptionDays": null,
+    "receptionSchedule": null,
+    "name": "ygeidhusij",
+    "surname": "wygeidhusjl",
+    "password": "f834wrei",
+    "email": "ayaya@gmail.com",
+    "regionCode": null,
+    "phoneNumber": "\u002B994556787676"
   }
 ]

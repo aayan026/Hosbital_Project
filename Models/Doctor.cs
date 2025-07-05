@@ -24,10 +24,8 @@ namespace Hosbital_Project.Models
 
         [JsonIgnore]
         public string _departmentNameFromJson;
-        [JsonIgnore]
         public List<ReceptionDay> receptionDays { get; set; }
 
-        [JsonIgnore]
         public ReceptionScheduleManager receptionSchedule { get; set; }
 
         [JsonIgnore]
