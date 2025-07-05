@@ -11,6 +11,7 @@ namespace Hosbital_Project.Models
         public DayOfWeek dayOfWeek { get; set; }
         public List<ReceptionHour> TimeSlots { get; set; }
 
+        public ReceptionDay() { }
         public ReceptionDay(DayOfWeek day)
         {
             dayOfWeek = day;

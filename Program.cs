@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
+using System.IO;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -239,6 +240,34 @@ class Program
         List<User> users = FileHelper.ReadUsersFromFile();
         Authentication auth = new Authentication(users);
         List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
+        foreach (var doc in doctors)
+        {
+            Console.WriteLine($"\nDoctor: {doc.email}");
+
+            doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
+            Console.WriteLine($"ReceptionDays count: {doc.receptionDays?.Count ?? 0}");
+
+            string safeEmail = doc.email.Replace("@", "_at_").Replace(".", "_dot_");
+
+            string path = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName, $"receptionDays_{safeEmail}.json");
+
+            if (File.Exists(path))
+            {
+                Console.WriteLine($"Fayl VAR: {path}");
+                try
+                {
+                    Console.WriteLine("Fayl içi:\n" + File.ReadAllText(path));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Fayl oxunarkən xəta: " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Fayl YOXDUR!");
+            }
+        }
 
         Doctor CreateDoctor(string name, string surname, string email, string password, string phone, int id, Department dept, string country, params DayOfWeek[] days)
         {
@@ -252,10 +281,9 @@ class Program
             }
 
             FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
-
+            Console.WriteLine($"ReceptionDays faylı yazıldı: receptionDays_{doc.email.Replace("@", "_at_").Replace(".", "_dot_")}.json");
             return doc;
         }
-
 
         var neurology = new Department("Neurology");
         var surgery = new Department("Surgery");
@@ -392,36 +420,6 @@ class Program
         MainMenu();
         //List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
 
-        //foreach (var doc in doctors)
-        //{
-        //    Console.WriteLine($"\n--- Test Dr.{doc.name} ({doc.email}) ---");
-
-        //    if (doc.receptionDays == null)
-        //        Console.WriteLine("receptionDays: NULL");
-        //    else
-        //        Console.WriteLine($"receptionDays count: {doc.receptionDays.Count}");
-
-        //    // Yenidən receptionDays fayldan yüklə
-        //    doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
-        //    Console.WriteLine($"[AFTER LOAD] receptionDays count: {doc.receptionDays.Count}");
-
-        //    // Fayla yaz (yoxlamaq üçün)
-        //    FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
-        //    Console.WriteLine($"Yazildi: reception_{doc.email}.json");
-
-        //    // Fayl varmi?
-        //    string path = $"reception_{doc.email}.json";
-        //    if (File.Exists(path))
-        //    {
-        //        Console.WriteLine($"Fayl VAR: {path}");
-        //        Console.WriteLine("Fayl içi:");
-        //        Console.WriteLine(File.ReadAllText(path));
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine($"Fayl YOXDUR: {path}");
-        //    }
-        //}
 
     }
 
@@ -429,5 +427,6 @@ class Program
 
 
 }
+
 
 

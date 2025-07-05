@@ -6,6 +6,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace Hosbital_Project.FileHelpers
 {
@@ -22,6 +24,8 @@ namespace Hosbital_Project.FileHelpers
 
 
         static string filePathReceptionHours = Path.Combine(projectRoot, "receptionHours.json");
+        static string receptionFolder = Path.Combine(projectRoot, "ReceptionDays");
+        //Directory.CreateDirectory(receptionFolder); 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,18 +133,29 @@ namespace Hosbital_Project.FileHelpers
         // write reception daysto file
         public static void WriteReceptionDaysToFile(List<ReceptionDay> receptionDays, string doctorEmail)
         {
-            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{doctorEmail}.json");
+            Console.WriteLine("WriteReceptionDaysToFile çağırıldı");
+
+            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
+
+            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
+            Console.WriteLine("Write fayl yolu: " + filePathReceptionDays); // buraya yapışdır
+
+            Console.WriteLine("Write fayl yolu: " + filePathReceptionDays);
+
 
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize(receptionDays, options);
             File.WriteAllText(filePathReceptionDays, json);
         }
 
-
         // read reception days from file
         public static List<ReceptionDay> ReadReceptionDaysFromFile(string doctorEmail)
         {
-            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{doctorEmail}.json");
+
+            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
+            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
+            Console.WriteLine("Read fayl yolu: " + filePathReceptionDays); // buraya yapışdır
+
             if (!File.Exists(filePathReceptionDays))
                 return new List<ReceptionDay>();
 
@@ -161,6 +176,7 @@ namespace Hosbital_Project.FileHelpers
             File.WriteAllText(filePathReceptionHours, json);
         }
         // read reception hours from file
+
         public static List<ReceptionHour> ReadReceptionHoursFromFile()
         {
             if (!File.Exists(filePathReceptionHours))

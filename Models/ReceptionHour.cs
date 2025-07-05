@@ -12,6 +12,8 @@ namespace Hosbital_Project.Models
         public string start { get; set; }
         public string end { get; set; }
         public bool isReserved { get; set; }
+
+        public ReceptionHour() { }
         public ReceptionHour(string start, string end)
         {
             this.start = start;
