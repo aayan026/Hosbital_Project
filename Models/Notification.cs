@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,18 @@ namespace Hosbital_Project.Models
         public string message { get; set; }
         public string toEmail { get; set; }
         public string LongMessage { get; set; }
-        public Notification(string title,string message,string Longmessage, string toEmail)
+        public Notification(string title, string message, string Longmessage, string toEmail)
         {
             this.title = title;
             this.message = message;
-            this.toEmail = toEmail;   
+            this.toEmail = toEmail;
             this.LongMessage = Longmessage;
-            NotificationService.SendEmail(title,LongMessage, toEmail);
+            NotificationService.SendEmail(title, LongMessage, toEmail);
 
         }
+        public Notification() { }
         public override string ToString() => $" - {message}";
 
     }
-    
+
 }

@@ -1,4 +1,5 @@
-﻿using Hosbital_Project.FileHelpers;
+﻿
+using Hosbital_Project.FileHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Hosbital_Project.Models
 {
     internal class Admin : Person
     {
-        public Admin() : base("Ayan", "Aliyeva", "admin123", "admin@gmail.com", "+994501112233","AZ")
+        public Admin() : base("Ayan", "Aliyeva", "admin123", "admin@gmail.com", "+994501112233", "AZ")
         {
         }
         public void ViewProfile()

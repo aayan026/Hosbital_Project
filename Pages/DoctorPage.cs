@@ -1,4 +1,5 @@
-﻿using Hosbital_Project.Models;
+﻿
+using Hosbital_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Hosbital_Project.Pages
 {
     public class DoctorPage
     {
-      internal  static void DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor)
+        internal static void DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor)
         {
             while (true)
             {

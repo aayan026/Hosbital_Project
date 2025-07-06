@@ -134,7 +134,7 @@ namespace Hosbital_Project.Pages
                 else
                 {
                     Console.WriteLine(" ! You have already registered as a user or doctor. Please use a different email.");
-                    Console.ReadLine(); 
+                    Console.ReadLine();
                     break;
                 }
             }

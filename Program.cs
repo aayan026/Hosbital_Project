@@ -1,4 +1,5 @@
 ﻿
+
 namespace Hosbital_Project.Models;
 
 using Hosbital_Project.FileHelpers;
@@ -418,7 +419,6 @@ class Program
     static void Main(string[] args)
     {
         MainMenu();
-        //List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
 
 
     }
@@ -427,6 +427,3 @@ class Program
 
 
 }
-
-
-

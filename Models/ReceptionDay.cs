@@ -25,7 +25,7 @@ namespace Hosbital_Project.Models
 
         public void AddTimeSlot(string start, string end)
         {
-            bool exist = TimeSlots.Any(slot => slot.start == start && slot.end== end);
+            bool exist = TimeSlots.Any(slot => slot.start == start && slot.end == end);
             if (exist)
             {
                 Console.WriteLine(" this time slot already exist");

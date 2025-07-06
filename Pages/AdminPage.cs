@@ -52,7 +52,7 @@ namespace Hosbital_Project.Pages
                 {
                     case 0:
                         Console.Clear();
-                        hosbital.ViewUsers();
+                      hosbital.ViewUsers();
                         Console.ReadKey();
                         continue;
                     case 1:

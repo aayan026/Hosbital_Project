@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,12 @@ namespace Hosbital_Project.Models
         public ReceptionDay receptionDay { get; set; }
         public ReceptionHour receptionHour { get; set; }
 
-           public Appointment(User user, Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)
-            {
-                this.user = user;
-                this.doctor = doctor;
-                this.receptionDay = receptionDay;
-                this.receptionHour = receptionHour;
-            }
+        public Appointment(User user, Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)
+        {
+            this.user = user;
+            this.doctor = doctor;
+            this.receptionDay = receptionDay;
+            this.receptionHour = receptionHour;
         }
+    }
 }

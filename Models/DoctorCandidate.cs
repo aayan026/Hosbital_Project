@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
@@ -38,14 +39,14 @@ namespace Hosbital_Project.Models
         public DoctorCandidate()
         {
         }
-        public DoctorCandidate(Hosbital hosbital, string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department, string reason,string regionCode) : base(name, surname, password, email, phoneNumber,regionCode)
+        public DoctorCandidate(Hosbital hosbital, string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department, string reason, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)
         {
             this.experienceYear = experienceYear;
             this.department = department;
-            this. status = ApplicationStatus.Pending;
+            this.status = ApplicationStatus.Pending;
             this.reason = reason;
         }
-    
+
 
         public override string ToString() => $@"Name: {name} {surname}
  | {experienceYear} years in {department?.departmentName ?? "Unknown department"}

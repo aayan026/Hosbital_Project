@@ -48,7 +48,8 @@ namespace Hosbital_Project.Pages
             {
                 if (choiceIndex >= 0 && choiceIndex <= ReceptionHourlist.Count)
                 {
-                    doctor.receptionSchedule.ReserveHour(dayIndex, choiceIndex);
+                    var reserved = doctor.receptionDays[dayIndex].TimeSlots[choiceIndex];
+                    reserved.isReserved = true;
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine($"\n ~ Thank you, {user.name} {user.surname}.~\n ! You have successfully booked an appointment with Dr.{doctor.surname} at {receptionDays[dayIndex]} - {receptionDays[dayIndex].TimeSlots[choiceIndex].start} - {receptionDays[dayIndex].TimeSlots[choiceIndex].end}");
 

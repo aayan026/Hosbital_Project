@@ -31,7 +31,6 @@ namespace Hosbital_Project.Models
         [JsonIgnore]
         public List<(User user, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
 
-        [JsonIgnore]
         public List<Notification> doctorsNotifications { get; set; }
 
         public Doctor() { }
