@@ -25,7 +25,7 @@ namespace Hosbital_Project.FileHelpers
 
 
         static string filePathReceptionHours = Path.Combine(projectRoot, "receptionHours.json");
-        static string receptionFolder = Path.Combine(projectRoot, "ReceptionDays");
+        static string receptionDays = Path.Combine(projectRoot, "receptionDays.json");
         static string notificationsFolder = Path.Combine(projectRoot, "notifications.json");
 
         static FileHelper()
@@ -142,15 +142,10 @@ namespace Hosbital_Project.FileHelpers
         // write reception daysto file
         public static void WriteReceptionDaysToFile(List<ReceptionDay> receptionDays, string doctorEmail)
         {
-            Console.WriteLine("WriteReceptionDaysToFile çağırıldı");
 
             string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
 
             string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
-            Console.WriteLine("Write fayl yolu: " + filePathReceptionDays); // buraya yapışdır
-
-            Console.WriteLine("Write fayl yolu: " + filePathReceptionDays);
-
 
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize(receptionDays, options);
@@ -163,7 +158,6 @@ namespace Hosbital_Project.FileHelpers
 
             string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
             string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
-            Console.WriteLine("Read fayl yolu: " + filePathReceptionDays); // buraya yapışdır
 
             if (!File.Exists(filePathReceptionDays))
                 return new List<ReceptionDay>();
@@ -172,30 +166,6 @@ namespace Hosbital_Project.FileHelpers
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             List<ReceptionDay> receptionDays = JsonSerializer.Deserialize<List<ReceptionDay>>(json, options)!;
             return receptionDays ?? new List<ReceptionDay>();
-        }
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // write reception hours to file
-        public static void WriteReceptionHoursToFile(List<ReceptionHour> receptionHours)
-        {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(receptionHours, options);
-            File.WriteAllText(filePathReceptionHours, json);
-        }
-        // read reception hours from file
-
-        public static List<ReceptionHour> ReadReceptionHoursFromFile()
-        {
-            if (!File.Exists(filePathReceptionHours))
-            {
-                return new List<ReceptionHour>();
-            }
-            string json = File.ReadAllText(filePathReceptionHours);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<ReceptionHour> receptionHours = JsonSerializer.Deserialize<List<ReceptionHour>>(json, options)!;
-            return receptionHours ?? new List<ReceptionHour>();
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // write notification to file
@@ -222,5 +192,10 @@ namespace Hosbital_Project.FileHelpers
             List<Notification> notifications = JsonSerializer.Deserialize<List<Notification>>(json, options)!;
             return notifications ?? new List<Notification>();
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       
+       
+
     }
 }

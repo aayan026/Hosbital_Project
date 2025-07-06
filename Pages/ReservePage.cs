@@ -36,7 +36,7 @@ namespace Hosbital_Project.Pages
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             var ReceptionHourlist = doctor.receptionDays[dayIndex].TimeSlots;
-
+            doctor.doctorsNotifications=FileHelper.ReadNotificationsFromFile(doctor.email);
             string title = $"\n ~ These are the office hours of Dr.{doctor.surname}.\n  Please select the days you would like to schedule an appointment.\n";
             var choiceIndex = Program.NavigateMenu(ReceptionHourlist, title, true);
 
@@ -77,7 +77,6 @@ namespace Hosbital_Project.Pages
                     Notification notification = new Notification(emailSubject, ShortmessageUser, emailBody, user.email);
                     user.userNotifications.Add(notification);
                     FileHelper.WriteNotificationsToFile(user.userNotifications, user.email); 
-                    //fayla yaz
 
                     //doctor notification
                     string body = $"Dear {doctor.name},\n\n" +
@@ -91,9 +90,6 @@ namespace Hosbital_Project.Pages
 
                     string messageDoctor = $"Patient {user.name} has booked an appointment with you on {selectedDay}";
                     Notification notification2 = new Notification(emailSubject, messageDoctor, body, user.email);
-                    if (doctor.doctorsNotifications == null)
-                        doctor.doctorsNotifications = new List<Notification>();
-
                     doctor.doctorsNotifications.Add(notification2);
                     FileHelper.WriteNotificationsToFile(doctor.doctorsNotifications, doctor.email);
 

@@ -1,4 +1,5 @@
 ﻿
+using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Hosbital_Project.Pages
     {
         internal static void DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor)
         {
+            doctor.doctorsNotifications = FileHelpers.FileHelper.ReadNotificationsFromFile(doctor.email);
             while (true)
             {
                 string title = $"\n\t\t\t\t\t --- W E L C O M E ---";
@@ -29,7 +31,7 @@ namespace Hosbital_Project.Pages
                         break;
                     case 1:
                         Console.Clear();
-                        if (doctor.doctorsNotifications==null)
+                        if (doctor.doctorsNotifications.Count==0)
                         {
                             Console.WriteLine("\n You don't have any notifications.");
                             Console.ReadKey();
@@ -38,6 +40,18 @@ namespace Hosbital_Project.Pages
                         {
                             doctor.ViewNotifications();
                             Console.ReadKey();
+                            int choiceindex = Program.NavigateMenu(new List<string> { "Delete Notification", "Back" }, "\n ~ Want to clear notifications?s");
+                            if (choiceindex == 0)
+                            {
+                                doctor.doctorsNotifications.Clear();
+                                FileHelper.WriteNotificationsToFile(new List<Notification>(), doctor.email);
+
+                            }
+                            else if (choiceindex == 1)
+                            {
+                            }
+                            Console.ReadKey();
+                            break;
                         }
                         break;
                     case 2:
@@ -55,7 +69,6 @@ namespace Hosbital_Project.Pages
                         }
                         else
                         {
-
                             int cancelIndex = Program.NavigateMenu(doctor.Appointments.Select(ds => $" {ds.user.name} {ds.user.surname} - {ds.receptionDay} - {ds.receptionHour.start} - {ds.receptionHour.end} ").ToList(), "Select an appointment to cancel", true);
                             if (cancelIndex == -1)
                                 break;
@@ -75,11 +88,9 @@ namespace Hosbital_Project.Pages
 
                             Notification notification = new Notification(subject, messagedoctor, emailbody, doctor.email);
                             doctor.doctorsNotifications.Add(notification);
-                            //fayla yaz
+                            FileHelpers.FileHelper.WriteNotificationsToFile(doctor.doctorsNotifications,doctor.email);
+
                             string messageuser = $" Dr.{doctor.name} has cancelled an appointment with you.";
-
-
-
                             string body = $"Dear {doctor.Appointments[cancelIndex].user.name},\n\n" +
                                           $"We would like to inform you that your appointment with Dr.{doctor.name} scheduled on {doctor.Appointments[cancelIndex].receptionDay} at {doctor.Appointments[cancelIndex].receptionHour.ToString(true)} has been cancelled.\n\n" +
                                           "If this cancellation was not intended, please contact us or rebook through your patient panel.\n\n" +
@@ -89,7 +100,7 @@ namespace Hosbital_Project.Pages
                             Notification notification2 = new Notification(subject, messageuser, body, doctor.Appointments[cancelIndex].user.email);
 
                             doctor.Appointments[cancelIndex].user.userNotifications.Add(notification2);
-
+                            FileHelpers.FileHelper.WriteNotificationsToFile(doctor.Appointments[cancelIndex].user.userNotifications, doctor.Appointments[cancelIndex].user.email);
 
                             doctor.Appointments[cancelIndex].user.Appointments.RemoveAt(cancelIndex);
                             doctor.Appointments.RemoveAt(cancelIndex);
