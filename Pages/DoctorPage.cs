@@ -29,7 +29,7 @@ namespace Hosbital_Project.Pages
                         break;
                     case 1:
                         Console.Clear();
-                        if (doctor.doctorsNotifications.Count == 0)
+                        if (doctor.doctorsNotifications==null)
                         {
                             Console.WriteLine("\n You don't have any notifications.");
                             Console.ReadKey();

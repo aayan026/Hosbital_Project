@@ -31,7 +31,7 @@ namespace Hosbital_Project.Models
         [JsonIgnore]
         public List<(User user, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
 
-        public List<Notification> doctorsNotifications { get; set; }
+        public List<Notification> doctorsNotifications { get; set; } = new();
 
         public Doctor() { }
         public Doctor(string name, string surname, string email, string password, string phoneNumber, int workExperienceYear, Department department, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)

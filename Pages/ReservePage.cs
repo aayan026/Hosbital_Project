@@ -76,6 +76,7 @@ namespace Hosbital_Project.Pages
                     Console.WriteLine("\n ~ Please wait for the email to be sent... Check your email after the operation is completed.");
                     Notification notification = new Notification(emailSubject, ShortmessageUser, emailBody, user.email);
                     user.userNotifications.Add(notification);
+                    FileHelper.WriteNotificationsToFile(user.userNotifications, user.email); 
                     //fayla yaz
 
                     //doctor notification
@@ -90,8 +91,11 @@ namespace Hosbital_Project.Pages
 
                     string messageDoctor = $"Patient {user.name} has booked an appointment with you on {selectedDay}";
                     Notification notification2 = new Notification(emailSubject, messageDoctor, body, user.email);
-                    doctor.doctorsNotifications.Add(notification2);//fayla yaz
+                    if (doctor.doctorsNotifications == null)
+                        doctor.doctorsNotifications = new List<Notification>();
 
+                    doctor.doctorsNotifications.Add(notification2);
+                    FileHelper.WriteNotificationsToFile(doctor.doctorsNotifications, doctor.email);
 
                     Console.ResetColor();
                     return;

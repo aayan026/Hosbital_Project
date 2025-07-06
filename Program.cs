@@ -241,33 +241,13 @@ class Program
         List<User> users = FileHelper.ReadUsersFromFile();
         Authentication auth = new Authentication(users);
         List<Doctor> doctors = FileHelper.ReadDoctorsFromFile();
+
         foreach (var doc in doctors)
         {
             Console.WriteLine($"\nDoctor: {doc.email}");
 
             doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
-            Console.WriteLine($"ReceptionDays count: {doc.receptionDays?.Count ?? 0}");
-
-            string safeEmail = doc.email.Replace("@", "_at_").Replace(".", "_dot_");
-
-            string path = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName, $"receptionDays_{safeEmail}.json");
-
-            if (File.Exists(path))
-            {
-                Console.WriteLine($"Fayl VAR: {path}");
-                try
-                {
-                    Console.WriteLine("Fayl içi:\n" + File.ReadAllText(path));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Fayl oxunarkən xəta: " + ex.Message);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Fayl YOXDUR!");
-            }
+  
         }
 
         Doctor CreateDoctor(string name, string surname, string email, string password, string phone, int id, Department dept, string country, params DayOfWeek[] days)
