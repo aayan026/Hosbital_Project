@@ -260,9 +260,11 @@ class Program
             {
                 doc.receptionDays.Add(new ReceptionDay(day));
             }
-
+            foreach(var doctor in doctors)
+            {
+                doctor.doctorsNotifications = FileHelper.ReadNotificationsFromFile(doctor.email);
+            }
             FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
-            Console.WriteLine($"ReceptionDays faylı yazıldı: receptionDays_{doc.email.Replace("@", "_at_").Replace(".", "_dot_")}.json");
             return doc;
         }
 

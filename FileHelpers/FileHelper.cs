@@ -32,7 +32,7 @@ namespace Hosbital_Project.FileHelpers
         {
             if (!Directory.Exists(notificationsFolder))
             {
-                Directory.CreateDirectory(receptionFolder);
+                Directory.CreateDirectory(notificationsFolder);
             }
         }
 
