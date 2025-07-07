@@ -84,8 +84,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Jack",
     "surname": "Shephard",
     "password": "1234",
@@ -158,8 +157,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Emily",
     "surname": "Johnson",
     "password": "1234",
@@ -252,8 +250,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Ethan",
     "surname": "Rom",
     "password": "1234",
@@ -286,8 +283,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Christian",
     "surname": "Shephard",
     "password": "1234",
@@ -380,8 +376,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "David",
     "surname": "Wilson",
     "password": "1234",
@@ -494,8 +489,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Benjamin",
     "surname": "Linus",
     "password": "1234",
@@ -568,8 +562,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "John",
     "surname": "Carter",
     "password": "1234",
@@ -662,8 +655,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Allison",
     "surname": "Cameron",
     "password": "1234",
@@ -756,8 +748,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Michael",
     "surname": "Brown",
     "password": "1234",
@@ -830,8 +821,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Rachel",
     "surname": "Green",
     "password": "1234",
@@ -924,8 +914,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Juliet",
     "surname": "Burke",
     "password": "1234",
@@ -978,8 +967,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Hugo",
     "surname": "Reyes",
     "password": "1234",
@@ -1032,8 +1020,7 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Libby",
     "surname": "Smith",
     "password": "5678",
@@ -1086,52 +1073,12 @@
         ]
       }
     ],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
+    "doctorsNotifications": [],
     "name": "Leonard",
     "surname": "Simms",
     "password": "9999",
     "email": "lenny@gmail.com",
     "regionCode": "US",
     "phoneNumber": null
-  },
-  {
-    "workExperienceYear": 3,
-    "DepartmentName": "Surgery",
-    "receptionDays": [],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
-    "name": "jkds",
-    "surname": "uhrfodjls",
-    "password": "hkfbrj43ew",
-    "email": "asdejs@gmail.com",
-    "regionCode": null,
-    "phoneNumber": "\u002B994554332323"
-  },
-  {
-    "workExperienceYear": 34,
-    "DepartmentName": "Surgery",
-    "receptionDays": [],
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
-    "name": "ygeidhusij",
-    "surname": "wygeidhusjl",
-    "password": "f834wrei",
-    "email": "ayaya@gmail.com",
-    "regionCode": null,
-    "phoneNumber": "\u002B994556787676"
-  },
-  {
-    "workExperienceYear": 2,
-    "DepartmentName": "Surgery",
-    "receptionDays": null,
-    "receptionSchedule": null,
-    "doctorsNotifications": null,
-    "name": "John",
-    "surname": "Locke",
-    "password": "john123",
-    "email": "john@gmail.com",
-    "regionCode": null,
-    "phoneNumber": "\u002B994554565454"
   }
 ]

@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Appointment Confirmed \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Monday ",
+    "toEmail": "emily@gmail.com",
+    "LongMessage": "Dear Emily,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: ayan\n- Date \u0026 Time: Monday  at 09:00 - 10:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  }
+]

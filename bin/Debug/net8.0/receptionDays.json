@@ -1,0 +1,32 @@
+[
+  {
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "10:00",
+        "isReserved": false
+      },
+      {
+        "start": "10:00",
+        "end": "11:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "14:00",
+        "end": "15:00",
+        "isReserved": false
+      }
+    ]
+  }
+]

@@ -4,5 +4,11 @@
     "message": "Patient ayan has booked an appointment with you on Monday ",
     "toEmail": "aliyevanar1986a@gmail.com",
     "LongMessage": "Dear Hugo,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: ayan\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Confirmed \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Monday ",
+    "toEmail": "hurley@gmail.com",
+    "LongMessage": "Dear Hugo,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: ayan\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
   }
 ]

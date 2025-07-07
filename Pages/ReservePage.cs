@@ -17,7 +17,9 @@ namespace Hosbital_Project.Pages
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Clear();
+
                 var ReceptionDays = FileHelper.ReadReceptionDaysFromFile(doctor.email);
+              
                 int choiceIndex = Program.NavigateMenu(ReceptionDays, $"\n ~ Dr.{doctor.surname}'s reception Days:\n", true);
                 if (choiceIndex == -1)
                     return;
@@ -37,6 +39,8 @@ namespace Hosbital_Project.Pages
             Console.Clear();
             var ReceptionHourlist = doctor.receptionDays[dayIndex].TimeSlots;
             doctor.doctorsNotifications=FileHelper.ReadNotificationsFromFile(doctor.email);
+            user.userNotifications = FileHelper.ReadNotificationsFromFile(user.email);
+
             string title = $"\n ~ These are the office hours of Dr.{doctor.surname}.\n  Please select the days you would like to schedule an appointment.\n";
             var choiceIndex = Program.NavigateMenu(ReceptionHourlist, title, true);
 
@@ -60,7 +64,7 @@ namespace Hosbital_Project.Pages
                     doctor.Appointments.Add((user, selectedDay, selectedSlot));
 
                     //user notification
-                    string ShortmessageUser = $"You have scheduled an appointment with Dr.{doctor.name}";
+                    string ShortmessageUser = $"You have scheduled an appointment with Dr.{doctor.name} at {receptionDays[dayIndex]} -  {reserved.ToString(true)}";
                     string emailSubject = "Appointment Confirmed – Hope Medical Center";
 
                     string emailBody = $"Dear, {user.name}\n\n" +
@@ -89,7 +93,7 @@ namespace Hosbital_Project.Pages
                                   "Regards,\nHope Medical Center Team";
 
                     string messageDoctor = $"Patient {user.name} has booked an appointment with you on {selectedDay}";
-                    Notification notification2 = new Notification(emailSubject, messageDoctor, body, user.email);
+                    Notification notification2 = new Notification(emailSubject, messageDoctor, body, doctor.email);
                     doctor.doctorsNotifications.Add(notification2);
                     FileHelper.WriteNotificationsToFile(doctor.doctorsNotifications, doctor.email);
 

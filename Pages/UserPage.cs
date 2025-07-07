@@ -180,6 +180,7 @@ namespace Hosbital_Project.Pages
                             Notification notification2 = new Notification(subjectdoctor, messageDoctor, bodydoctor, doctor.email);
                             user.Appointments[cancelIndex].doctor.doctorsNotifications.Add(notification2);
                             FileHelpers.FileHelper.WriteNotificationsToFile(user.Appointments[cancelIndex].doctor.doctorsNotifications, doctor.email);
+
                             user.Appointments[cancelIndex].doctor.Appointments.RemoveAt(cancelIndex);
                             user.Appointments.RemoveAt(cancelIndex);
                             //fayla yaz

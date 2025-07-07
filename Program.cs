@@ -6,10 +6,11 @@ using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Pages;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Mail;
 using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
-using System.IO;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -18,6 +19,8 @@ class Program
     public static int NavigateMenu<T>(List<T> options, string title, bool showBack = false, string lastOptionLabel = "<-back")
     {
         int selectedIndex = 0;
+        int maxIndex = showBack ? options.Count : options.Count - 1;
+
         while (true)
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -39,19 +42,17 @@ class Program
 
             if (showBack)
             {
-                if (selectedIndex >= options.Count)
+                if (selectedIndex == options.Count)
                 {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine($"\n {lastOptionLabel}");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"\n | {lastOptionLabel}");
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
                 else
-                    Console.WriteLine($"\n {lastOptionLabel}");
+                    Console.WriteLine($"\n | {lastOptionLabel}");
             }
 
             var key = Console.ReadKey(true).Key;
-
-            int maxIndex = showBack ? options.Count : options.Count - 1;
 
             if (key == ConsoleKey.UpArrow)
             {
@@ -63,8 +64,8 @@ class Program
             }
             else if (key == ConsoleKey.Enter)
             {
-                if (selectedIndex == options.Count)
-                    return -1;
+                if (showBack && selectedIndex == options.Count)
+                    return -1; 
                 return selectedIndex;
             }
         }
@@ -78,8 +79,6 @@ class Program
 
         foreach (var doc in doctors)
         {
-            Console.WriteLine($"\nDoctor: {doc.email}");
-
             doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
 
         }
@@ -87,21 +86,24 @@ class Program
         Doctor CreateDoctor(string name, string surname, string email, string password, string phone, int id, Department dept, string country, params DayOfWeek[] days)
         {
             var doc = new Doctor(name, surname, email, password, phone, id, dept, country);
-            doc.receptionDays = FileHelper.ReadReceptionDaysFromFile(doc.email);
-            doc.receptionSchedule = new ReceptionScheduleManager { doctor = doc };
+
+            doc.receptionDays = new List<ReceptionDay>();
 
             foreach (var day in days)
             {
-                doc.receptionDays.Add(new ReceptionDay(day));
+                if (!doc.receptionDays.Any(d => d.dayOfWeek == day))
+                    doc.receptionDays.Add(new ReceptionDay(day));
             }
-            foreach (var doctor in doctors)
-            {
-                doctor.doctorsNotifications = FileHelper.ReadNotificationsFromFile(doctor.email);
-            }
+
+            // Fayla yaz
             FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
+
             return doc;
         }
-
+        foreach (var doctor in doctors)
+        {
+            doctor.doctorsNotifications = FileHelper.ReadNotificationsFromFile(doctor.email);
+        }
         var neurology = new Department("Neurology");
         var surgery = new Department("Surgery");
         var psychiatry = new Department("Psychiatry");
@@ -154,6 +156,8 @@ class Program
             FileHelper.WriteDoctorsToFile(doctors);
         }
 
+
+     
         User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
         Hosbital hosbital = new Hosbital(departments, doctors, users, candidates);
         Admin admin = new Admin();
@@ -208,7 +212,7 @@ class Program
                                 {
                                     users.Add(user);
                                     FileHelper.WriteUsersToFile(users);
-                                   UserPage.UserMainMenu(auth, departments, user, hosbital);
+                                    UserPage.UserMainMenu(auth, departments, user, hosbital);
                                 }
                             }
                         }
@@ -235,6 +239,19 @@ class Program
     static void Main(string[] args)
     {
         MainMenu();
+        //Department surgery = new Department("Neurology");
+        //var doc1 = new Doctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ");
+        //User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
+        //ReceptionDay receptionDay = new ReceptionDay(DayOfWeek.Monday);
+        //ReceptionHour receptionHour = new ReceptionHour("10:00","23:00");
+        //var appointment = new Appointment(user1, doc1, receptionDay, receptionHour);
+        //List<Appointment> appointments = new List<Appointment> { appointment };
+
+        //FileHelper.WriteAppointmentsToFile(appointments);
+
+        //var loadedAppointments = FileHelper.ReadAppointmentsFromFile();
+
+        //Console.WriteLine($"Loaded {loadedAppointments.Count} appointments.");
 
 
     }

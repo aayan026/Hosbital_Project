@@ -25,9 +25,11 @@ namespace Hosbital_Project.FileHelpers
 
 
         static string filePathReceptionHours = Path.Combine(projectRoot, "receptionHours.json");
-        static string receptionDays = Path.Combine(projectRoot, "receptionDays.json");
+        static string filePathReceptionDays = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "receptionDays.json");
+
         static string notificationsFolder = Path.Combine(projectRoot, "notifications.json");
 
+        static string filePathAppointments = Path.Combine(projectRoot, "appointments.json");
         static FileHelper()
         {
             if (!Directory.Exists(notificationsFolder))
@@ -139,33 +141,36 @@ namespace Hosbital_Project.FileHelpers
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // write reception daysto file
-        public static void WriteReceptionDaysToFile(List<ReceptionDay> receptionDays, string doctorEmail)
+        // write reception hours to file
+        static string dataFolder = Path.Combine(projectRoot, "ReceptionDays.json");
+        public static string SafeFileName(string email)
         {
+            return email.Replace("@", "_at_").Replace(".", "_dot_");
+        }
+        public static string GetReceptionDaysPath(string email) =>
+            Path.Combine(dataFolder, $"{SafeFileName(email)}_receptionDays.json");
 
-            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
+        public static void WriteReceptionDaysToFile(List<ReceptionDay> receptionDays, string email)
+        {
+            if (!Directory.Exists(dataFolder))
+                Directory.CreateDirectory(dataFolder);
 
-            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
+            string path = GetReceptionDaysPath(email);
 
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize(receptionDays, options);
-            File.WriteAllText(filePathReceptionDays, json);
+            File.WriteAllText(path, json);
         }
-
         // read reception days from file
-        public static List<ReceptionDay> ReadReceptionDaysFromFile(string doctorEmail)
+        public static List<ReceptionDay> ReadReceptionDaysFromFile(string email)
         {
-
-            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
-            string filePathReceptionDays = Path.Combine(projectRoot, $"receptionDays_{safeEmail}.json");
-
-            if (!File.Exists(filePathReceptionDays))
+            string path = GetReceptionDaysPath(email);
+            if (!File.Exists(path))
                 return new List<ReceptionDay>();
 
-            string json = File.ReadAllText(filePathReceptionDays);
+            string json = File.ReadAllText(path);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<ReceptionDay> receptionDays = JsonSerializer.Deserialize<List<ReceptionDay>>(json, options)!;
-            return receptionDays ?? new List<ReceptionDay>();
+            return JsonSerializer.Deserialize<List<ReceptionDay>>(json, options) ?? new List<ReceptionDay>();
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // write notification to file
@@ -194,8 +199,24 @@ namespace Hosbital_Project.FileHelpers
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       
-       
+
+        public static void WriteAppointmentsToFile(List<Appointment> appointments)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(appointments, options);
+            File.WriteAllText(filePathAppointments, json);
+        }
+
+        // read appointments from file
+        public static List<Appointment> ReadAppointmentsFromFile()
+        {
+            if (!File.Exists(filePathAppointments)) return new List<Appointment>();
+
+            string json = File.ReadAllText(filePathAppointments);
+            var appointments = JsonSerializer.Deserialize<List<Appointment>>(json);
+            return appointments ?? new List<Appointment>();
+        }
+
 
     }
 }

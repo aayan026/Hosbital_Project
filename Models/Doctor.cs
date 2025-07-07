@@ -26,8 +26,6 @@ namespace Hosbital_Project.Models
         public string _departmentNameFromJson;
         public List<ReceptionDay> receptionDays { get; set; }
 
-        public ReceptionScheduleManager receptionSchedule { get; set; }
-
         [JsonIgnore]
         public List<(User user, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
 
@@ -39,7 +37,6 @@ namespace Hosbital_Project.Models
             this.workExperienceYear = workExperienceYear;
             this.department = department;
             receptionDays = new List<ReceptionDay> { };
-            receptionSchedule = new ReceptionScheduleManager { doctor = this };
             doctorsNotifications = new List<Notification> { };
             department.doctors.Add(this);
         }

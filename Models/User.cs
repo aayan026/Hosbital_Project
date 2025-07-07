@@ -22,6 +22,7 @@ namespace Hosbital_Project.Models
             userNotifications = new List<Notification> { };
         }
 
+        public User() { }
         //methods
         public void ViewProfile(string title)
         {

@@ -1,14 +1,8 @@
 [
   {
     "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.Jack",
+    "message": "You have scheduled an appointment with Dr.Jack at Monday  -  09:00 - 11:00",
     "toEmail": "aliyevanar1986a@gmail.com",
     "LongMessage": "Dear, ayan\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.Jack\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
-  },
-  {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.Jack",
-    "toEmail": "aliyevanar1986a@gmail.com",
-    "LongMessage": "Dear, ayan\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.Jack\n- Date \u0026 Time: Tuesday  at 12:00 - 14:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
   }
 ]
