@@ -19,10 +19,10 @@ namespace Hosbital_Project.FileHelpers
         static string filePath = Path.Combine(projectRoot, "users.json");
 
         static string filePathDoctor = Path.Combine(projectRoot, "doctors.json");
+
         static string filePathCandidate = Path.Combine(projectRoot, "candidates.json");
 
         static string filePathDepartment = Path.Combine(projectRoot, "departments.json");
-
 
         static string filePathReceptionHours = Path.Combine(projectRoot, "receptionHours.json");
 
@@ -36,9 +36,9 @@ namespace Hosbital_Project.FileHelpers
         //write user to file
         public static void WriteUsersToFile(List<User> users)
         {
+
             var options = new JsonSerializerOptions
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
                 WriteIndented = true
             };
             string json = JsonSerializer.Serialize(users, options);
@@ -195,7 +195,6 @@ namespace Hosbital_Project.FileHelpers
 
         public static List<Notification> ReadNotificationsFromFile(string email)
         {
-
             if (!File.Exists(filePathNotifications))
                 return new List<Notification>();
 
@@ -209,24 +208,73 @@ namespace Hosbital_Project.FileHelpers
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public static void WriteAppointmentsToFile(List<Appointment> appointments)
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(appointments, options);
-            File.WriteAllText(filePathAppointments, json);
+            List<Appointment> allAppointments = new();
+
+            if (File.Exists(filePathAppointments))
+            {
+                string json = File.ReadAllText(filePathAppointments);
+                allAppointments = JsonSerializer.Deserialize<List<Appointment>>(json)
+                                   ?? new List<Appointment>();
+            }
+
+            foreach (var app in appointments)
+            {
+                allAppointments = allAppointments
+                    .Where(existing =>
+                        existing.UserEmail != app.UserEmail ||
+                        existing.DoctorEmail != app.DoctorEmail ||
+                        existing.Day != app.Day ||
+                        existing.Hour != app.Hour
+                    )
+                    .ToList();
+            }
+
+            allAppointments.AddRange(appointments);
+
+            string updatedJson = JsonSerializer.Serialize(allAppointments, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePathAppointments, updatedJson);
+        }
+        public static void RemoveAppointmentFromFile(Appointment appointmentToRemove)
+        {
+            List<Appointment> allAppointments = new();
+
+            if (File.Exists(filePathAppointments))
+            {
+                string json = File.ReadAllText(filePathAppointments);
+                allAppointments = JsonSerializer.Deserialize<List<Appointment>>(json)
+                                 ?? new List<Appointment>();
+            }
+
+            allAppointments = allAppointments
+                .Where(app => !(
+                    app.UserEmail == appointmentToRemove.UserEmail &&
+                    app.DoctorEmail == appointmentToRemove.DoctorEmail &&
+                    app.Day == appointmentToRemove.Day &&
+                    app.Hour == appointmentToRemove.Hour
+                ))
+                .ToList();
+
+            string updatedJson = JsonSerializer.Serialize(allAppointments, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePathAppointments, updatedJson);
         }
 
-        // read appointments from file
-        public static List<Appointment> ReadAppointmentsFromFile()
+        public static List<Appointment> ReadAppointmentsForUserOrDoctor(string email, string role)
         {
-            if (!File.Exists(filePathAppointments)) return new List<Appointment>();
+            if (!File.Exists(filePathAppointments))
+                return new List<Appointment>();
 
             string json = File.ReadAllText(filePathAppointments);
-            var appointments = JsonSerializer.Deserialize<List<Appointment>>(json);
-            return appointments ?? new List<Appointment>();
+            var allAppointments = JsonSerializer.Deserialize<List<Appointment>>(json)
+                                   ?? new List<Appointment>();
+
+            return role.ToLower() switch
+            {
+                "user" => allAppointments.Where(a => a.UserEmail == email).ToList(),
+                "doctor" => allAppointments.Where(a => a.DoctorEmail == email).ToList(),
+                _ => new List<Appointment>()
+            };
         }
-
-
     }
 }

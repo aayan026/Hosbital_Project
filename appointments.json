@@ -1,52 +1,11 @@
 [
   {
-    "user": {
-      "username": "aya_aliye283",
-      "Appointments": [],
-      "userNotifications": [],
-      "name": "ayan",
-      "surname": "aliyeva",
-      "password": "ayan1929",
-      "email": "aliyevanar1986a@gmail.com",
-      "regionCode": "AZ",
-      "phoneNumber": "\u002B994707897878"
-    },
-    "doctor": {
-      "workExperienceYear": 8,
-      "DepartmentName": "Neurology",
-      "receptionDays": [],
-      "doctorsNotifications": [],
-      "name": "Jack",
-      "surname": "Shephard",
-      "password": "1234",
-      "email": "jack@gmail.com",
-      "regionCode": "AZ",
-      "phoneNumber": "\u002B994501234567"
-    },
-    "receptionDay": {
-      "dayOfWeek": 1,
-      "TimeSlots": [
-        {
-          "start": "09:00",
-          "end": "11:00",
-          "isReserved": false
-        },
-        {
-          "start": "12:00",
-          "end": "14:00",
-          "isReserved": false
-        },
-        {
-          "start": "15:00",
-          "end": "17:00",
-          "isReserved": false
-        }
-      ]
-    },
-    "receptionHour": {
-      "start": "10:00",
-      "end": "23:00",
-      "isReserved": false
-    }
+    "UserName": "ayan aliyeva",
+    "DoctorName": "Dr.Jack Shephard",
+    "UserEmail": "aliyevanar1986a@gmail.com",
+    "DoctorEmail": "jack@gmail.com",
+    "Department": "Surgery",
+    "Day": "Monday ",
+    "Hour": "09:00 - 11:00"
   }
 ]

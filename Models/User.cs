@@ -14,7 +14,7 @@ namespace Hosbital_Project.Models
     internal class User : Person, IProfile, IViewAppointmets, INotification
     {
         public string username { get; set; }
-        public List<(Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
+        public List<Appointment> Appointments { get; set; } = new();
         public List<Notification> userNotifications { get; set; }
         public User(string username, string password, string name, string surname, string email, string phoneNumber, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)
         {
@@ -45,10 +45,10 @@ namespace Hosbital_Project.Models
             Console.WriteLine("\t\t\t\t\t~ Appointments ~\n");
             foreach (var appointment in Appointments)
             {
-                Console.WriteLine($"Doctor: {appointment.doctor.name} {appointment.doctor.surname}");
-                Console.WriteLine($"Department: {appointment.doctor.department.departmentName}");
-                Console.WriteLine($"Date: {appointment.receptionDay}");
-                Console.WriteLine($"Time: {appointment.receptionHour.ToString(true)}");
+                Console.WriteLine($"Doctor: {appointment.DoctorName}");
+                Console.WriteLine($"Department: {appointment.Department}");
+                Console.WriteLine($"Date: {appointment.Day}");
+                Console.WriteLine($"Time: {appointment.Hour}");
                 Console.WriteLine("---------------------------------------------------------------");
             }
         }
@@ -65,7 +65,7 @@ Phone number: {phoneNumber}";
             foreach (var notification in userNotifications)
             {
                 Console.WriteLine($"\n{notification}");
-                Console.WriteLine("_________________________________________________________________________");
+                Console.WriteLine("______________________________________________________________________________");
 
             }
         }

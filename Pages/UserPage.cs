@@ -78,6 +78,7 @@ namespace Hosbital_Project.Pages
         public static void UserMainMenu(Authentication auth, List<Department> departments, User user, Hosbital hosbital)
         {
             user.userNotifications = FileHelpers.FileHelper.ReadNotificationsFromFile(user.email);
+            user.Appointments = FileHelpers.FileHelper.ReadAppointmentsForUserOrDoctor(user.email, "user");
             while (true)
             {
                 Console.BackgroundColor = ConsoleColor.White;
@@ -115,11 +116,11 @@ namespace Hosbital_Project.Pages
                             int choiceindex = Program.NavigateMenu(new List<string> { "Delete Notification", "Back" }, "\n ~ Want to clear notifications?s");
                             if (choiceindex == 0)
                             {
-                                user.userNotifications.Clear();  
+                                user.userNotifications.Clear();
                                 FileHelper.WriteNotificationsToFile(new List<Notification>(), user.email);
 
                             }
-                            else if(choiceindex==1)
+                            else if (choiceindex == 1)
                             {
                             }
                             Console.ReadKey();
@@ -135,8 +136,8 @@ namespace Hosbital_Project.Pages
                         Console.WriteLine("\nPress any key to return to the main menu.");
                         Console.ReadKey();
                         break;
-
                     case 5:
+                        var doctors = FileHelpers.FileHelper.ReadDoctorsFromFile();
                         Console.Clear();
                         if (user.Appointments.Count == 0)
                         {
@@ -144,49 +145,73 @@ namespace Hosbital_Project.Pages
                             Console.ReadKey();
                             break;
                         }
-                        else
+
+                        int cancelIndex = Program.NavigateMenu(
+                            user.Appointments.Select(ds => $" {ds.DoctorName} - {ds.Day} - {ds.Hour} ").ToList(),
+                            "Select an appointment to cancel",
+                            true
+                        );
+
+                        if (cancelIndex == -1)
+                            break;
+
+                        var appointment = user.Appointments[cancelIndex];
+                        string doctorEmail = appointment.DoctorEmail;
+
+                        Doctor? doctor = doctors.FirstOrDefault(d => d.email == doctorEmail);
+                        if (doctor == null)
                         {
-                            int cancelIndex = Program.NavigateMenu(user.Appointments.Select(ds => $" Dr.{ds.doctor.name} - {ds.receptionDay} - {ds.receptionHour.start} - {ds.receptionHour.end} ").ToList(), "Select an appointment to cancel", true);
-                            if (cancelIndex == -1)
-                                break;
+                            Console.WriteLine("Doctor not found.");
+                            Console.ReadKey();
+                            break;
+                        }
 
-                            var doctor = user.Appointments[cancelIndex].doctor;
+                        Console.WriteLine("\n ~ Appointment cancelled successfully.");
+                        Console.WriteLine("\n ~ Please wait for the email to be sent...");
 
-                            string messageUser = $"You cancelled your meeting with Dr.{doctor.name}";
-                            Console.WriteLine("\n ~ Appointment cancelled successfully.");
-                            Console.WriteLine("\n ~ Please wait for the email to be sent...");
-                            string subject = "Appointment Cancellation Confirmation – Hope Medical Center";
-
-                            var day = user.Appointments[cancelIndex].receptionDay;
-                            var time = user.Appointments[cancelIndex].receptionHour.ToString(true);
-                            string body = $"Dear {user.name},\n\n" +
-                                          $"This is to confirm that your appointment with Dr.{doctor.name} on {day} at {time} has been successfully cancelled as per your request.\n\n" +
+                        string subjectUser = "Appointment Cancellation Confirmation – Hope Medical Center";
+                        string messageUser = $"You cancelled your meeting with Dr.{doctor.name}";
+                        string bodyUser = $"Dear {user.name},\n\n" +
+                                          $"This is to confirm that your appointment with Dr.{doctor.name} on {appointment.Day} at {appointment.Hour} has been successfully cancelled as per your request.\n\n" +
                                           "If you wish to reschedule, please use your patient panel or contact us directly.\n\n" +
                                           "Thank you for keeping us informed.\n\n" +
                                           "Best regards,\nHope Medical Center Team";
 
-                            Notification notification = new Notification(subject, messageUser, body, user.email);
-                            user.userNotifications.Add(notification);
-                            FileHelpers.FileHelper.WriteNotificationsToFile(user.userNotifications, user.email);
-                            string messageDoctor = $"Patient {user.name} has cancelled an appointment with you.";
+                        Notification notificationUser = new Notification(subjectUser, messageUser, bodyUser, user.email);
+                        user.userNotifications.Add(notificationUser);
+                        FileHelpers.FileHelper.WriteNotificationsToFile(user.userNotifications, user.email);
 
-                            string subjectdoctor = "Appointment Cancellation Notice – Hope Medical Center";
+                        string subjectDoctor = "Appointment Cancellation Notice – Hope Medical Center";
+                        string messageDoctor = $"Patient {user.name} has cancelled an appointment with you.";
+                        string bodyDoctor = $"Dear Dr.{doctor.name},\n\n" +
+                                            $"The appointment with patient {user.name}, scheduled on {appointment.Day} at {appointment.Hour} has been cancelled by the patient.\n\n" +
+                                            "Please update your schedule accordingly.\n\n" +
+                                            "Regards,\nHope Medical Center Team";
 
-                            string bodydoctor = $"Dear Dr.{doctor.name},\n\n" +
-                                          $"The appointment with patient {user.name}, scheduled on {day} at {time} has been cancelled by the patient.\n\n" +
-                                          "Please update your schedule accordingly.\n\n" +
-                                          "Regards,\nHope Medical Center Team";
+                        Notification notificationDoctor = new Notification(subjectDoctor, messageDoctor, bodyDoctor, doctor.email);
+                        doctor.doctorsNotifications.Add(notificationDoctor);
+                        FileHelpers.FileHelper.WriteNotificationsToFile(doctor.doctorsNotifications, doctor.email);
 
-                            Notification notification2 = new Notification(subjectdoctor, messageDoctor, bodydoctor, doctor.email);
-                            user.Appointments[cancelIndex].doctor.doctorsNotifications.Add(notification2);
-                            FileHelpers.FileHelper.WriteNotificationsToFile(user.Appointments[cancelIndex].doctor.doctorsNotifications, doctor.email);
+                        var doctorAppointment = doctor.Appointments.FirstOrDefault(a =>
+                            a.UserEmail == appointment.UserEmail &&
+                            a.DoctorEmail == appointment.DoctorEmail &&
+                            a.Day == appointment.Day &&
+                            a.Hour == appointment.Hour
+                        );
+                        if (doctorAppointment != null)
+                            doctor.Appointments.Remove(doctorAppointment);
 
-                            user.Appointments[cancelIndex].doctor.Appointments.RemoveAt(cancelIndex);
-                            user.Appointments.RemoveAt(cancelIndex);
-                            //fayla yaz
-                            Console.ReadKey();
-                            break;
-                        }
+                        user.Appointments.RemoveAt(cancelIndex);
+                        FileHelpers.FileHelper.RemoveAppointmentFromFile(appointment);
+
+                        DayOfWeek day= (DayOfWeek)Enum.Parse(typeof(DayOfWeek), appointment.Day);
+                        var receptionDay = doctor.receptionDays.Find(rd => rd.dayOfWeek == day);
+                        var hour = receptionDay.TimeSlots.FirstOrDefault(ts => ts.ToString(true) == appointment.Hour);
+                        hour.isReserved = false;
+                        FileHelper.WriteReceptionDaysToFile(doctor.receptionDays, doctorEmail);
+
+                        Console.ReadKey();
+                        break;
                     default:
                         break;
                 }

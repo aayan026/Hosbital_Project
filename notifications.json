@@ -1,62 +1,98 @@
 [
   {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.Jack at Monday  -  09:00 - 11:00",
-    "toEmail": "aliyevanar1986a@gmail.com",
-    "LongMessage": "Dear, ayan\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.Jack\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
+    "title": "New Appointment Scheduled \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Wednesday  at 09:00 - 11:00.",
+    "toEmail": "ethan@gmail.com",
+    "LongMessage": "Dear Dr.Ethan,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Wednesday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Patient ayan has cancelled an appointment with you.",
+    "toEmail": "michael@gmail.com",
+    "LongMessage": "Dear Dr.Michael,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Patient ayan has cancelled an appointment with you.",
+    "toEmail": "christian@gmail.com",
+    "LongMessage": "Dear Dr.Christian,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "New Appointment Scheduled \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Thursday  at 09:00 - 11:00.",
+    "toEmail": "emily@gmail.com",
+    "LongMessage": "Dear Dr.Emily,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Thursday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Patient ayan has cancelled an appointment with you.",
+    "toEmail": "david@gmail.com",
+    "LongMessage": "Dear Dr.David,\n\nThe appointment with patient ayan, scheduled on Friday  at 12:00 - 14:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Patient ayan has cancelled an appointment with you.",
+    "toEmail": "hurley@gmail.com",
+    "LongMessage": "Dear Dr.Hugo,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
   },
   {
     "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.Jack at Monday  -  09:00 - 11:00",
-    "toEmail": "aliyevanar1986a@gmail.com",
-    "LongMessage": "Dear, ayan\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.Jack\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
+    "message": "You have scheduled an appointment with Dr.Jack on Monday  at 12:00 - 14:00.",
+    "toEmail": "gfidcjnls534@gmail.com",
+    "LongMessage": "Dear rfvdhs,\n\nYour appointment has been successfully scheduled.\n\nDoctor: Dr.Jack\nDate \u0026 Time: Monday  at 12:00 - 14:00\nLocation: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early.\n\nStay healthy,\nHope Medical Center Team"
   },
   {
     "title": "Appointment Cancellation Confirmation \u2013 Hope Medical Center",
     "message": "You cancelled your meeting with Dr.Jack",
-    "toEmail": "aliyevanar1986a@gmail.com",
-    "LongMessage": "Dear ayan,\n\nThis is to confirm that your appointment with Dr.Jack on Monday  at 09:00 - 11:00 has been successfully cancelled as per your request.\n\nIf you wish to reschedule, please use your patient panel or contact us directly.\n\nThank you for keeping us informed.\n\nBest regards,\nHope Medical Center Team"
+    "toEmail": "gfidcjnls534@gmail.com",
+    "LongMessage": "Dear rfvdhs,\n\nThis is to confirm that your appointment with Dr.Jack on Monday  at 12:00 - 14:00 has been successfully cancelled as per your request.\n\nIf you wish to reschedule, please use your patient panel or contact us directly.\n\nThank you for keeping us informed.\n\nBest regards,\nHope Medical Center Team"
   },
   {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "Patient ayan has booked an appointment with you on Monday ",
-    "toEmail": "jack@gmail.com",
-    "LongMessage": "Dear Jack,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: ayan\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
-  },
-  {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "Patient ayan has booked an appointment with you on Monday ",
-    "toEmail": "jack@gmail.com",
-    "LongMessage": "Dear Jack,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: ayan\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Dr.Jack has cancelled an appointment with you.",
+    "toEmail": "aylin@gmail.com",
+    "LongMessage": "Dear aylin alizade,\n\nWe would like to inform you that your appointment with Dr.Jack scheduled on Tuesday  at 12:00 - 14:00 has been cancelled.\n\nIf this cancellation was not intended, please contact us or rebook through your patient panel.\n\nWe apologize for any inconvenience.\n\nStay safe,\nHope Medical Center Team"
   },
   {
     "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
     "message": "Patient ayan has cancelled an appointment with you.",
     "toEmail": "jack@gmail.com",
-    "LongMessage": "Dear Dr.Jack,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+    "LongMessage": "Dear Dr.Jack,\n\nThe appointment with patient ayan, scheduled on Monday  at 12:00 - 14:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
   },
   {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "Patient aylin has booked an appointment with you on Monday ",
+    "title": "New Appointment Scheduled \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Monday  at 09:00 - 11:00.",
     "toEmail": "jack@gmail.com",
-    "LongMessage": "Dear Jack,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: aylin\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+    "LongMessage": "Dear Dr.Jack,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Monday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "You cancelled your meeting with patient ayan aliyeva",
+    "toEmail": "jack@gmail.com",
+    "LongMessage": "Dear Dr.Jack,\n\nThe appointment with patient ayan aliyeva, scheduled on Monday  at 09:00 - 11:00 has been cancelled.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "New Appointment Scheduled \u2013 Hope Medical Center",
+    "message": "Patient ayan has booked an appointment with you on Monday  at 09:00 - 11:00.",
+    "toEmail": "jack@gmail.com",
+    "LongMessage": "Dear Dr.Jack,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Monday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "You cancelled your meeting with patient ayan aliyeva",
+    "toEmail": "jack@gmail.com",
+    "LongMessage": "Dear Dr.Jack,\n\nThe appointment with patient ayan aliyeva, scheduled on Monday  at 09:00 - 11:00 has been cancelled.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
+  },
+  {
+    "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
+    "message": "Dr.Jack has cancelled an appointment with you.",
+    "toEmail": "aliyevanar1986a@gmail.com",
+    "LongMessage": "Dear ayan aliyeva,\n\nWe would like to inform you that your appointment with Dr.Jack scheduled on Monday  at 09:00 - 11:00 has been cancelled.\n\nIf this cancellation was not intended, please contact us or rebook through your patient panel.\n\nWe apologize for any inconvenience.\n\nStay safe,\nHope Medical Center Team"
   },
   {
     "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.Jack at Monday  -  09:00 - 11:00",
-    "toEmail": "aylin@gmail.com",
-    "LongMessage": "Dear, aylin\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.Jack\n- Date \u0026 Time: Monday  at 09:00 - 11:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
-  },
-  {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "You have scheduled an appointment with Dr.David at Friday  -  09:00 - 11:00",
-    "toEmail": "aylin@gmail.com",
-    "LongMessage": "Dear, aylin\n\nYour appointment has been successfully scheduled.\n\nDetails:\n- Doctor: Dr.David\n- Date \u0026 Time: Friday  at 09:00 - 11:00\n- Location: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early. To reschedule, use your patient panel or contact us directly.\n\nStay healthy,\nHope Medical Center Team"
-  },
-  {
-    "title": "Appointment Confirmed \u2013 Hope Medical Center",
-    "message": "Patient aylin has booked an appointment with you on Friday ",
-    "toEmail": "david@gmail.com",
-    "LongMessage": "Dear David,\n\nA new appointment has been scheduled.\n\nDetails:\n- Patient: aylin\n- Date \u0026 Time: Friday  at 09:00 - 11:00\n- Location: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
+    "message": "You have scheduled an appointment with Dr.Jack on Monday  at 09:00 - 11:00.",
+    "toEmail": "aliyevanar1986a@gmail.com",
+    "LongMessage": "Dear ayan,\n\nYour appointment has been successfully scheduled.\n\nDoctor: Dr.Jack\nDate \u0026 Time: Monday  at 09:00 - 11:00\nLocation: Hope Medical Center, Room 305\n\nPlease arrive 10 minutes early.\n\nStay healthy,\nHope Medical Center Team"
   }
 ]

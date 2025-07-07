@@ -1,25 +1,36 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Hosbital_Project.Models
 {
     internal class Appointment
     {
-        public User user { get; set; }
-        public Doctor doctor { get; set; }
-        public ReceptionDay receptionDay { get; set; }
-        public ReceptionHour receptionHour { get; set; }
+        public string UserName { get; set; }
+        public string DoctorName { get; set; }
+        public string UserEmail { get; set; }
+        public string DoctorEmail { get; set; }
+        public string Department { get; set; }
+        public string Day { get; set; }
+        public string Hour { get; set; }
 
-        public Appointment(User user, Doctor doctor, ReceptionDay receptionDay, ReceptionHour receptionHour)
+        public Appointment(string userName, string doctorName, string userEmail, string doctorEmail, string department, string day, string hour)
         {
-            this.user = user;
-            this.doctor = doctor;
-            this.receptionDay = receptionDay;
-            this.receptionHour = receptionHour;
+            UserName = userName;
+            DoctorName = doctorName;
+            UserEmail = userEmail;
+            DoctorEmail = doctorEmail;
+            Department = department;
+            Day = day;
+            Hour = hour;
         }
+
+
+
     }
 }

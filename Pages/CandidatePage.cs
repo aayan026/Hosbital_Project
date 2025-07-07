@@ -41,7 +41,6 @@ namespace Hosbital_Project.Pages
                 Console.WriteLine(" why do you want to be a doctor?");
                 string? reason = Console.ReadLine();
                 auth.DoctorCandidateRegistration(hosbital, password, name, surname, email, phone, regionCode, experienceYearInt, candidatesDepartment, reason);
-                //cadidate faylina yaz
                 Console.ReadKey();
                 return;
             }

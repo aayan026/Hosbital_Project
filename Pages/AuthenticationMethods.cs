@@ -1,101 +1,203 @@
 ﻿using Hosbital_Project.Models;
+using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Hosbital_Project.Pages
 {
     internal static class AuthenticationMethods
     {
-
+        public static List<User> users = FileHelpers.FileHelper.ReadUsersFromFile();
         public static User RegistrUser(Authentication auth, List<Department> departments, Hosbital hosbital)
         {
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("\t\t\t\t\t~ Registration Page ~\n");
-                Console.Write(" Name: ");
-                string name = Console.ReadLine();
-                Console.Write(" Surname: ");
-                string surname = Console.ReadLine();
-                Console.Write(" Email: ");
-                string email = Console.ReadLine();
-                var find2 = hosbital.SearchEmail(email);
-                if (find2)
+                while (true)
                 {
-                    Console.WriteLine(" An account with this email already exists ");
-                    Console.ReadKey();
-                    continue;
-                }
-                else
-                {
-                    name = name.Trim().ToLower();
-                    surname = surname.Trim().ToLower();
-                    string namePart = new string(name.Take(3).ToArray());
-                    string surnamePart = new string(surname.Where(char.IsLetter).Take(5).ToArray());
-                    Random rnd = new Random();
-                    int number = rnd.Next(10, 99);
-                    string newUsername = $"{namePart}_{surnamePart}{number}";
-                    Console.WriteLine($"create your username: ");
-                    Console.WriteLine($"Suggested: {newUsername}");
-                    Console.Write("Do you want to use this username? (y/n): ");
-                    string answer = Console.ReadLine().ToLower();
-                    string final;
-                    if (answer == "y")
+                    Console.Write(" Name: ");
+                    string name = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(name))
                     {
-                        final = newUsername;
+                        Console.WriteLine(" ~ Name cannot be empty");
+                        continue;
                     }
                     else
                     {
-                        Console.Write("Enter your preferred username: ");
-                        final = Console.ReadLine();
-                        bool find3 = hosbital.SearchUser(final);
-
-                    }
-                    Console.Write(" Password: ");
-                    string password = Console.ReadLine();
-
-                    List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                    string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country."; ;
-                    int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
-                    {
-                        if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
+                        while (true)
                         {
-                            Console.Write("\n Phone Number: ");
-                            string phone = Console.ReadLine();
-                            bool find = hosbital.SearchPhone(phone);
-                            if (find == true)
+                            Console.Write(" Surname: ");
+                            string surname = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(surname))
                             {
-                                Console.WriteLine(" This phone number belongs to an existing user");
-                                continue;
-                            }
-
-                            List<string> errors = new List<string>();
-                            User? user = auth.Registration(final, password, name, surname, email, phone, regionCodes[choiceIndex], out errors);
-                            //user faylina yaz
-
-                            if (errors.Count > 0)
-                            {
-                                Console.WriteLine("Errors:");
-                                foreach (var error in errors)
-                                {
-                                    Console.WriteLine($"- {error}");
-                                }
-                                Console.ReadKey();
+                                Console.WriteLine(" ~ Surname cannot be empty");
                                 continue;
                             }
                             else
                             {
-                                Console.WriteLine("\n~ Registration completed successfully.");
-                                Console.ReadKey();
-                                return user;
+                                while (true)
+                                {
+                                    Console.Write(" Email: ");
+                                    string email = Console.ReadLine();
+                                    var find2 = hosbital.SearchEmail(email);
+
+                                    string first = email.Split('@').First();
+                                    string firstPartPattern = @"^[a-zA-Z0-9_-]+$";
+                                    if (string.IsNullOrWhiteSpace(email))
+                                    {
+                                        Console.WriteLine(" ~ email cannot be empty");
+                                        continue;
+                                    }
+                                    else if (!Regex.IsMatch(first, firstPartPattern))
+                                    {
+                                        Console.WriteLine(" Email cannot contain special characters in the first part.");
+                                        continue;
+                                    }
+                                    else if (find2)
+                                    {
+                                        Console.WriteLine(" An account with this email already exists ");
+                                        continue;
+                                    }
+                                    else if (!email.EndsWith("@gmail.com") && !email.EndsWith("@yahoo.com") && !email.EndsWith("@outlook.com") && !email.EndsWith("@hotmail.com") && !email.EndsWith("@mail.ru") && !email.EndsWith("@icloud.com"))
+                                    {
+                                        Console.WriteLine(" ! Wrong email..");
+                                        continue;
+                                    }
+
+                                    else
+                                    {
+                                        name = name.Trim().ToLower();
+                                        surname = surname.Trim().ToLower();
+                                        string namePart = new string(name.Take(3).ToArray());
+                                        string surnamePart = new string(surname.Where(char.IsLetter).Take(5).ToArray());
+                                        Random rnd = new Random();
+                                        int number = rnd.Next(10, 99);
+                                        string newUsername = $"{namePart}_{surnamePart}{number}";
+                                        Console.WriteLine($" create your username: ");
+                                        string final = "";
+                                        while (true)
+                                        {
+                                            Console.WriteLine($"Suggested username: {newUsername}");
+                                            Console.Write("Do you want to use this username? (y/n): ");
+                                            string answer = Console.ReadLine().ToLower();
+
+                                            if (answer == "y")
+                                            {
+                                                final = newUsername;
+                                                break;
+                                            }
+                                            else if (answer == "n")
+                                            {
+                                                while (true)
+                                                {
+                                                    Console.Write("Enter your preferred username: ");
+                                                    final = Console.ReadLine();
+                                                    bool find3 = hosbital.SearchUser(final);
+                                                    if (find3)
+                                                    {
+                                                        Console.WriteLine("This username is already taken.");
+                                                        continue;
+                                                    }
+                                                    break;
+                                                }
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Please type 'y' or 'n'.");
+                                            }
+                                        }
+                                        while (true)
+                                            {
+                                                Console.Write(" Password: ");
+                                                string password = Console.ReadLine();
+                                                if (string.IsNullOrWhiteSpace(password))
+                                                {
+                                                    Console.WriteLine("Password cannot be empty.");
+                                                    continue;
+                                                }
+                                                else if (password.Length < 6 || !password.Any(char.IsDigit))
+                                                {
+                                                    Console.WriteLine("Password must be at least 6 chars and contain digits.");
+                                                    continue;
+                                                }
+                                                else
+                                                {
+                                                    List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
+                                                    string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country.";
+                                                    int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
+
+                                                    if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
+                                                    {
+                                                        string regionCode = regionCodes[choiceIndex];
+                                                        while (true)
+                                                        {
+                                                            Console.Write("\n Phone Number: ");
+                                                            string phone = Console.ReadLine();
+
+                                                            if (string.IsNullOrWhiteSpace(phone))
+                                                            {
+                                                                Console.WriteLine(" ~ Phone cannot be empty");
+                                                                continue;
+                                                            }
+
+                                                            var phoneUtil = PhoneNumberUtil.GetInstance();
+                                                            try
+                                                            {
+                                                                var number2 = phoneUtil.Parse(phone, regionCode);
+                                                                if (!phoneUtil.IsValidNumber(number2))
+                                                                {
+                                                                    Console.WriteLine(" Invalid phone number.");
+                                                                    continue;
+                                                                }
+
+                                                                string formattedPhone = phoneUtil.Format(number2, PhoneNumberFormat.E164);
+
+                                                                bool exists = hosbital.SearchPhone(formattedPhone);
+                                                                if (exists)
+                                                                {
+                                                                    Console.WriteLine(" This phone number belongs to an existing user");
+                                                                    continue;
+                                                                }
+                                                                else
+                                                                {
+                                                                    var newUser = new User(final, password, name, surname, email, formattedPhone, regionCode);
+                                                                    users.Add(newUser);
+                                                                    FileHelpers.FileHelper.WriteUsersToFile(users);
+                                                                    Console.WriteLine("\n ~ You have successfully registered..");
+                                                                    Console.ReadKey();
+                                                                    return newUser;
+                                                                }
+                                                            }
+                                                            catch (NumberParseException)
+                                                            {
+                                                                Console.WriteLine(" Phone number format is invalid.");
+                                                                continue;
+                                                            }
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
+                                    break;
+                                }
                             }
+                            break;
                         }
+                        break;
                     }
                 }
+
             }
-        }
+
 
         public static Doctor DoctorSignIn(Hosbital hosbital, Authentication auth)
         {
@@ -123,7 +225,6 @@ namespace Hosbital_Project.Pages
         }
         public static User SignInUser(Authentication auth)
         {
-            //fayldan oxu
             Console.Clear();
             Console.WriteLine("\t\t\t\t~ Sign In Page ~\n");
             while (true)

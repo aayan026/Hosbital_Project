@@ -119,26 +119,7 @@ internal class Authentication
 
 
     }
-    public User? Registration(string username, string password, string name, string surname, string email, string phone, string regionCode, out List<string> errors)
-    {
-        username = username.Trim();
-        password = password.Trim();
-        name = name.Trim();
-        surname = surname.Trim();
-        email = email.Trim();
-        phone = phone.Replace(" ", "").Replace("-", "");
-
-        errors = new List<string>();
-        string formattedPhone;
-
-        if (!ValidateRegistration(username, password, name, surname, email, phone, regionCode, out errors, out formattedPhone))
-            return null;
-
-        var newUser = new User(username, password, name, surname, email, formattedPhone, regionCode);
-        users.Add(newUser);
-        return newUser;
-    }
-
+  
     public User? SignInUser(string username, string password)
     {
         //fayldan oxu

@@ -27,7 +27,7 @@ namespace Hosbital_Project.Models
         public List<ReceptionDay> receptionDays { get; set; }
 
         [JsonIgnore]
-        public List<(User user, ReceptionDay receptionDay, ReceptionHour receptionHour)> Appointments { get; set; } = new();
+        public List<Appointment> Appointments { get; set; } = new();
 
         public List<Notification> doctorsNotifications { get; set; } = new();
 
@@ -64,9 +64,9 @@ namespace Hosbital_Project.Models
             Console.WriteLine("\t\t\t\t\t~ Appointments ~\n");
             foreach (var appointment in Appointments)
             {
-                Console.WriteLine($" User: {appointment.user.name} {appointment.user.surname}");
-                Console.WriteLine($" Date: {appointment.receptionDay}");
-                Console.WriteLine($" Time: {appointment.receptionHour.ToString(true)}");
+                Console.WriteLine($" User: {appointment.UserName}");
+                Console.WriteLine($" Date: {appointment.Day}");
+                Console.WriteLine($" Time: {appointment.Hour}");
                 Console.WriteLine("---------------------------------------------------------------");
             }
         }
@@ -82,7 +82,7 @@ namespace Hosbital_Project.Models
             foreach (var notification in doctorsNotifications)
             {
                 Console.WriteLine($"\n{notification}");
-                Console.WriteLine("_____________________________________________________________________________________");
+                Console.WriteLine("________________________________________________________________________________________");
             }
         }
     }

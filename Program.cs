@@ -65,7 +65,7 @@ class Program
             else if (key == ConsoleKey.Enter)
             {
                 if (showBack && selectedIndex == options.Count)
-                    return -1; 
+                    return -1;
                 return selectedIndex;
             }
         }
@@ -92,7 +92,7 @@ class Program
             foreach (var day in days)
             {
                 if (!doc.receptionDays.Any(d => d.dayOfWeek == day))
-                    doc.receptionDays.Add(new ReceptionDay(day,doc.email));
+                    doc.receptionDays.Add(new ReceptionDay(day, doc.email));
             }
             FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
 
@@ -155,7 +155,7 @@ class Program
         }
 
 
-     
+
         User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
         Hosbital hosbital = new Hosbital(departments, doctors, users, candidates);
         Admin admin = new Admin();
@@ -206,12 +206,7 @@ class Program
                             {
                                 User? user = AuthenticationMethods.RegistrUser(auth, departments, hosbital);
 
-                                if (user != null)
-                                {
-                                    users.Add(user);
-                                    FileHelper.WriteUsersToFile(users);
-                                    UserPage.UserMainMenu(auth, departments, user, hosbital);
-                                }
+                                UserPage.UserMainMenu(auth, departments, user, hosbital);
                             }
                         }
                     }
@@ -219,6 +214,7 @@ class Program
                 else if (choiceIndex == 2)
                 {
                     Console.Clear();
+                    Console.WriteLine("\n\t\t\t\t\t--- Doctor Sign In ---\n");
                     var doctor = AuthenticationMethods.DoctorSignIn(hosbital, auth);
                     if (doctor != null)
                     {
@@ -231,30 +227,27 @@ class Program
                 }
             }
         }
-
-    }
-
-    static void Main(string[] args)
-    {
-        MainMenu();
-        //Department surgery = new Department("Neurology");
-        //var doc1 = new Doctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ");
-        //User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
-        //ReceptionDay receptionDay = new ReceptionDay(DayOfWeek.Monday);
-        //ReceptionHour receptionHour = new ReceptionHour("10:00","23:00");
-        //var appointment = new Appointment(user1, doc1, receptionDay, receptionHour);
-        //List<Appointment> appointments = new List<Appointment> { appointment };
-
-        //FileHelper.WriteAppointmentsToFile(appointments);
-
-        //var loadedAppointments = FileHelper.ReadAppointmentsFromFile();
-
-        //Console.WriteLine($"Loaded {loadedAppointments.Count} appointments.");
-
-
     }
 
 
+        static void Main(string[] args)
+        {
+            MainMenu();
+            //Department surgery = new Department("Neurology");
+            //var doc1 = new Doctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ");
+            //User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
+            //ReceptionDay receptionDay = new ReceptionDay(DayOfWeek.Monday);
+            //ReceptionHour receptionHour = new ReceptionHour("10:00","23:00");
+            //var appointment = new Appointment(user1, doc1, receptionDay, receptionHour);
+            //List<Appointment> appointments = new List<Appointment> { appointment };
+
+            //FileHelper.WriteAppointmentsToFile(appointments);
+
+            //var loadedAppointments = FileHelper.ReadAppointmentsFromFile();
+
+            //Console.WriteLine($"Loaded {loadedAppointments.Count} appointments.");
 
 
+        }
 }
+
