@@ -26,16 +26,10 @@ namespace Hosbital_Project.FileHelpers
 
         static string filePathReceptionHours = Path.Combine(projectRoot, "receptionHours.json");
 
-        static string notificationsFolder = Path.Combine(projectRoot, "notifications.json");
+        static string filePathNotifications = Path.Combine(projectRoot, $"notifications.json");
 
         static string filePathAppointments = Path.Combine(projectRoot, "appointments.json");
-        static FileHelper()
-        {
-            if (!Directory.Exists(notificationsFolder))
-            {
-                Directory.CreateDirectory(notificationsFolder);
-            }
-        }
+
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -180,28 +174,38 @@ namespace Hosbital_Project.FileHelpers
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // write notification to file
-        public static void WriteNotificationsToFile(List<Notification> notifications, string doctorEmail)
+        public static void WriteNotificationsToFile(List<Notification> notifications, string email)
         {
-            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
-            string filePathNotifications = Path.Combine(notificationsFolder, $"notifications_{safeEmail}.json");
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(notifications, options);
-            File.WriteAllText(filePathNotifications, json);
+
+            List<Notification> allNotifications = new();
+            if (File.Exists(filePathNotifications))
+            {
+                string json = File.ReadAllText(filePathNotifications);
+                allNotifications = JsonSerializer.Deserialize<List<Notification>>(json)
+                                   ?? new List<Notification>();
+            }
+
+            allNotifications = allNotifications.Where(n => n.toEmail != email).ToList();
+
+            allNotifications.AddRange(notifications);
+
+            string updatedJson = JsonSerializer.Serialize(allNotifications, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePathNotifications, updatedJson);
         }
 
-        // read notifications from file
-        public static List<Notification> ReadNotificationsFromFile(string doctorEmail)
+        public static List<Notification> ReadNotificationsFromFile(string email)
         {
-            string safeEmail = doctorEmail.Replace("@", "_at_").Replace(".", "_dot_");
-            string filePathNotifications = Path.Combine(notificationsFolder, $"notifications_{safeEmail}.json");
+
             if (!File.Exists(filePathNotifications))
-            {
                 return new List<Notification>();
-            }
+
             string json = File.ReadAllText(filePathNotifications);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<Notification> notifications = JsonSerializer.Deserialize<List<Notification>>(json, options)!;
-            return notifications ?? new List<Notification>();
+
+            var allNotifications = JsonSerializer.Deserialize<List<Notification>>(json, options)
+                                   ?? new List<Notification>();
+
+            return allNotifications.Where(n => n.toEmail == email).ToList();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
