@@ -1,0 +1,947 @@
+[
+  {
+    "doctorEmail": "jack@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "jack@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "jack@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "jack@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "juliet@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "juliet@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "juliet@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "juliet@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "hurley@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "hurley@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "libby@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "libby@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "lenny@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "lenny@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "emily@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "emily@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "emily@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ethan@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ethan@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ethan@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ethan@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "christian@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "david@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "david@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "david@gmail.com",
+    "dayOfWeek": 0,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "david@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ben@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ben@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ben@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ben@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "ben@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "carter@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "carter@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "carter@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "cam@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "cam@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "cam@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "cam@gmail.com",
+    "dayOfWeek": 0,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "michael@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "michael@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "michael@gmail.com",
+    "dayOfWeek": 3,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "michael@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "rachel@gmail.com",
+    "dayOfWeek": 5,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "rachel@gmail.com",
+    "dayOfWeek": 6,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "rachel@gmail.com",
+    "dayOfWeek": 0,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  }
+]

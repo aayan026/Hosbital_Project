@@ -4,6 +4,7 @@
     "DepartmentName": "Surgery",
     "receptionDays": [
       {
+        "doctorEmail": "jack@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -24,6 +25,7 @@
         ]
       },
       {
+        "doctorEmail": "jack@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -44,6 +46,7 @@
         ]
       },
       {
+        "doctorEmail": "jack@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -64,6 +67,7 @@
         ]
       },
       {
+        "doctorEmail": "jack@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -97,6 +101,7 @@
     "DepartmentName": "Obstetrics and Gynecology",
     "receptionDays": [
       {
+        "doctorEmail": "emily@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -117,6 +122,7 @@
         ]
       },
       {
+        "doctorEmail": "emily@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -137,6 +143,7 @@
         ]
       },
       {
+        "doctorEmail": "emily@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -170,6 +177,7 @@
     "DepartmentName": "Surgery",
     "receptionDays": [
       {
+        "doctorEmail": "ethan@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -190,6 +198,7 @@
         ]
       },
       {
+        "doctorEmail": "ethan@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -210,6 +219,7 @@
         ]
       },
       {
+        "doctorEmail": "ethan@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -230,6 +240,7 @@
         ]
       },
       {
+        "doctorEmail": "ethan@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -263,6 +274,7 @@
     "DepartmentName": "Surgery",
     "receptionDays": [
       {
+        "doctorEmail": "christian@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -296,6 +308,7 @@
     "DepartmentName": "Neurology",
     "receptionDays": [
       {
+        "doctorEmail": "david@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -316,6 +329,7 @@
         ]
       },
       {
+        "doctorEmail": "david@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -336,6 +350,7 @@
         ]
       },
       {
+        "doctorEmail": "david@gmail.com",
         "dayOfWeek": 0,
         "TimeSlots": [
           {
@@ -356,6 +371,7 @@
         ]
       },
       {
+        "doctorEmail": "david@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -389,6 +405,7 @@
     "DepartmentName": "Surgery",
     "receptionDays": [
       {
+        "doctorEmail": "ben@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -409,6 +426,7 @@
         ]
       },
       {
+        "doctorEmail": "ben@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -429,6 +447,7 @@
         ]
       },
       {
+        "doctorEmail": "ben@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -449,6 +468,7 @@
         ]
       },
       {
+        "doctorEmail": "ben@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -469,6 +489,7 @@
         ]
       },
       {
+        "doctorEmail": "ben@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -502,6 +523,7 @@
     "DepartmentName": "Surgery",
     "receptionDays": [
       {
+        "doctorEmail": "carter@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -522,6 +544,7 @@
         ]
       },
       {
+        "doctorEmail": "carter@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -542,6 +565,7 @@
         ]
       },
       {
+        "doctorEmail": "carter@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -575,6 +599,7 @@
     "DepartmentName": "Obstetrics and Gynecology",
     "receptionDays": [
       {
+        "doctorEmail": "cam@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -595,6 +620,7 @@
         ]
       },
       {
+        "doctorEmail": "cam@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -615,6 +641,7 @@
         ]
       },
       {
+        "doctorEmail": "cam@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -635,6 +662,7 @@
         ]
       },
       {
+        "doctorEmail": "cam@gmail.com",
         "dayOfWeek": 0,
         "TimeSlots": [
           {
@@ -668,6 +696,7 @@
     "DepartmentName": "Neurology",
     "receptionDays": [
       {
+        "doctorEmail": "michael@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -688,6 +717,7 @@
         ]
       },
       {
+        "doctorEmail": "michael@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -708,6 +738,7 @@
         ]
       },
       {
+        "doctorEmail": "michael@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -728,6 +759,7 @@
         ]
       },
       {
+        "doctorEmail": "michael@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -761,6 +793,7 @@
     "DepartmentName": "Neurology",
     "receptionDays": [
       {
+        "doctorEmail": "rachel@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -781,6 +814,7 @@
         ]
       },
       {
+        "doctorEmail": "rachel@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {
@@ -801,6 +835,7 @@
         ]
       },
       {
+        "doctorEmail": "rachel@gmail.com",
         "dayOfWeek": 0,
         "TimeSlots": [
           {
@@ -834,6 +869,7 @@
     "DepartmentName": "Obstetrics and Gynecology",
     "receptionDays": [
       {
+        "doctorEmail": "juliet@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -854,6 +890,7 @@
         ]
       },
       {
+        "doctorEmail": "juliet@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -874,6 +911,7 @@
         ]
       },
       {
+        "doctorEmail": "juliet@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -894,6 +932,7 @@
         ]
       },
       {
+        "doctorEmail": "juliet@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -927,6 +966,7 @@
     "DepartmentName": "Psychiatry",
     "receptionDays": [
       {
+        "doctorEmail": "hurley@gmail.com",
         "dayOfWeek": 1,
         "TimeSlots": [
           {
@@ -947,6 +987,7 @@
         ]
       },
       {
+        "doctorEmail": "hurley@gmail.com",
         "dayOfWeek": 4,
         "TimeSlots": [
           {
@@ -980,6 +1021,7 @@
     "DepartmentName": "Psychiatry",
     "receptionDays": [
       {
+        "doctorEmail": "libby@gmail.com",
         "dayOfWeek": 2,
         "TimeSlots": [
           {
@@ -1000,6 +1042,7 @@
         ]
       },
       {
+        "doctorEmail": "libby@gmail.com",
         "dayOfWeek": 5,
         "TimeSlots": [
           {
@@ -1033,6 +1076,7 @@
     "DepartmentName": "Psychiatry",
     "receptionDays": [
       {
+        "doctorEmail": "lenny@gmail.com",
         "dayOfWeek": 3,
         "TimeSlots": [
           {
@@ -1053,6 +1097,7 @@
         ]
       },
       {
+        "doctorEmail": "lenny@gmail.com",
         "dayOfWeek": 6,
         "TimeSlots": [
           {

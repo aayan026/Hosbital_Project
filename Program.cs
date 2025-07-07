@@ -92,10 +92,8 @@ class Program
             foreach (var day in days)
             {
                 if (!doc.receptionDays.Any(d => d.dayOfWeek == day))
-                    doc.receptionDays.Add(new ReceptionDay(day));
+                    doc.receptionDays.Add(new ReceptionDay(day,doc.email));
             }
-
-            // Fayla yaz
             FileHelper.WriteReceptionDaysToFile(doc.receptionDays, doc.email);
 
             return doc;

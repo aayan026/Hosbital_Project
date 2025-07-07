@@ -10,7 +10,7 @@ namespace Hosbital_Project.Models
     {
         public void AddReceptionDay(Doctor doctor,DayOfWeek day)
         {
-            doctor.receptionDays.Add(new ReceptionDay(day));
+            doctor.receptionDays.Add(new ReceptionDay(day,doctor.email));
         }
         public void ReserveHour(Doctor doctor,int Dayindex, int slotIndex)
         {

@@ -8,11 +8,12 @@ namespace Hosbital_Project.Models
 {
     internal class ReceptionDay
     {
+        public string doctorEmail { get; set; }
         public DayOfWeek dayOfWeek { get; set; }
         public List<ReceptionHour> TimeSlots { get; set; }
 
         public ReceptionDay() { }
-        public ReceptionDay(DayOfWeek day)
+        public ReceptionDay(DayOfWeek day, string doctorEmail)
         {
             dayOfWeek = day;
             TimeSlots = new List<ReceptionHour>
@@ -21,6 +22,7 @@ namespace Hosbital_Project.Models
         new ReceptionHour("12:00", "14:00"),
         new ReceptionHour("15:00", "17:00")
     };
+            this.doctorEmail = doctorEmail;
         }
 
         public void AddTimeSlot(string start, string end)
