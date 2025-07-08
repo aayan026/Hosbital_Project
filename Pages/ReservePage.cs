@@ -1,5 +1,6 @@
 ﻿using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,7 @@ namespace Hosbital_Project.Pages
 
                         user.Appointments.Add(appointment);
                         doctor.Appointments.Add(appointment);
+                        Log.Information("user booked an appointment with doctor {name}",doctor.name);
 
                         FileHelper.WriteAppointmentsToFile(user.Appointments);
                         FileHelper.WriteAppointmentsToFile(doctor.Appointments);

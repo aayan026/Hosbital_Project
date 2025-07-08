@@ -1,0 +1,13 @@
+[12:45:39 WRN]  doctor could not register: 
+[12:51:11 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:11:46 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:11:49 INF] user booked an appointment with doctor David
+[14:12:35 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:12:41 INF] user booked an appointment with doctor Jack
+[14:13:44 INF] The user canceled the appointment with doctor Jack.
+[14:14:15 INF] doctor deleted notifications
+[14:14:23 INF] doctor cancelled appointment with patient ayan aliyeva
+[14:14:37 INF] doctor viewed his/her appointments
+[14:14:39 INF]  Doctor registered: jack@gmail.com 
+[14:14:47 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:15:07 INF] user viewed his/her appointments

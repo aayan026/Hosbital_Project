@@ -1,4 +1,5 @@
-﻿using Hosbital_Project.Models;
+﻿
+using Hosbital_Project.Models;
 using PhoneNumbers;
 using System;
 using System.Collections.Generic;
@@ -113,90 +114,90 @@ namespace Hosbital_Project.Pages
                                             }
                                         }
                                         while (true)
+                                        {
+                                            Console.Write(" Password: ");
+                                            string password = Console.ReadLine();
+                                            if (string.IsNullOrWhiteSpace(password))
                                             {
-                                                Console.Write(" Password: ");
-                                                string password = Console.ReadLine();
-                                                if (string.IsNullOrWhiteSpace(password))
-                                                {
-                                                    Console.WriteLine("Password cannot be empty.");
-                                                    continue;
-                                                }
-                                                else if (password.Length < 6 || !password.Any(char.IsDigit))
-                                                {
-                                                    Console.WriteLine("Password must be at least 6 chars and contain digits.");
-                                                    continue;
-                                                }
-                                                else
-                                                {
-                                                    List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                                                    string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country.";
-                                                    int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
+                                                Console.WriteLine("Password cannot be empty.");
+                                                continue;
+                                            }
+                                            else if (password.Length < 6 || !password.Any(char.IsDigit))
+                                            {
+                                                Console.WriteLine("Password must be at least 6 chars and contain digits.");
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
+                                                string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country.";
+                                                int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
 
-                                                    if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
+                                                if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
+                                                {
+                                                    string regionCode = regionCodes[choiceIndex];
+                                                    while (true)
                                                     {
-                                                        string regionCode = regionCodes[choiceIndex];
-                                                        while (true)
+                                                        Console.Write("\n Phone Number: ");
+                                                        string phone = Console.ReadLine();
+
+                                                        if (string.IsNullOrWhiteSpace(phone))
                                                         {
-                                                            Console.Write("\n Phone Number: ");
-                                                            string phone = Console.ReadLine();
+                                                            Console.WriteLine(" ~ Phone cannot be empty");
+                                                            continue;
+                                                        }
 
-                                                            if (string.IsNullOrWhiteSpace(phone))
+                                                        var phoneUtil = PhoneNumberUtil.GetInstance();
+                                                        try
+                                                        {
+                                                            var number2 = phoneUtil.Parse(phone, regionCode);
+                                                            if (!phoneUtil.IsValidNumber(number2))
                                                             {
-                                                                Console.WriteLine(" ~ Phone cannot be empty");
+                                                                Console.WriteLine(" Invalid phone number.");
                                                                 continue;
                                                             }
 
-                                                            var phoneUtil = PhoneNumberUtil.GetInstance();
-                                                            try
-                                                            {
-                                                                var number2 = phoneUtil.Parse(phone, regionCode);
-                                                                if (!phoneUtil.IsValidNumber(number2))
-                                                                {
-                                                                    Console.WriteLine(" Invalid phone number.");
-                                                                    continue;
-                                                                }
+                                                            string formattedPhone = phoneUtil.Format(number2, PhoneNumberFormat.E164);
 
-                                                                string formattedPhone = phoneUtil.Format(number2, PhoneNumberFormat.E164);
-
-                                                                bool exists = hosbital.SearchPhone(formattedPhone);
-                                                                if (exists)
-                                                                {
-                                                                    Console.WriteLine(" This phone number belongs to an existing user");
-                                                                    continue;
-                                                                }
-                                                                else
-                                                                {
-                                                                    var newUser = new User(final, password, name, surname, email, formattedPhone, regionCode);
-                                                                    users.Add(newUser);
-                                                                    FileHelpers.FileHelper.WriteUsersToFile(users);
-                                                                    Console.WriteLine("\n ~ You have successfully registered..");
-                                                                    Console.ReadKey();
-                                                                    return newUser;
-                                                                }
-                                                            }
-                                                            catch (NumberParseException)
+                                                            bool exists = hosbital.SearchPhone(formattedPhone);
+                                                            if (exists)
                                                             {
-                                                                Console.WriteLine(" Phone number format is invalid.");
+                                                                Console.WriteLine(" This phone number belongs to an existing user");
                                                                 continue;
+                                                            }
+                                                            else
+                                                            {
+                                                                var newUser = new User(final, password, name, surname, email, formattedPhone, regionCode);
+                                                                users.Add(newUser);
+                                                                FileHelpers.FileHelper.WriteUsersToFile(users);
+                                                                Console.WriteLine("\n ~ You have successfully registered..");
+                                                                Console.ReadKey();
+                                                                return newUser;
                                                             }
                                                         }
+                                                        catch (NumberParseException)
+                                                        {
+                                                            Console.WriteLine(" Phone number format is invalid.");
+                                                            continue;
+                                                        }
                                                     }
-                                                    break;
                                                 }
+                                                break;
                                             }
                                         }
-                                        break;
                                     }
                                     break;
                                 }
+                                break;
                             }
-                            break;
                         }
                         break;
                     }
+                    break;
                 }
-
             }
+
+        }
 
 
         public static Doctor DoctorSignIn(Hosbital hosbital, Authentication auth)

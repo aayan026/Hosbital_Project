@@ -1,6 +1,7 @@
 ﻿
 using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace Hosbital_Project.Pages
                         if (doctor.doctorsNotifications.Count==0)
                         {
                             Console.WriteLine("\n You don't have any notifications.");
+                            Log.Information("doctor loooked at notifications");
                             Console.ReadKey();
                         }
                         else
@@ -49,7 +51,7 @@ namespace Hosbital_Project.Pages
                             {
                                 doctor.doctorsNotifications.Clear();
                                 FileHelper.WriteNotificationsToFile(new List<Notification>(), doctor.email);
-
+                                Log.Information("doctor deleted notifications");
                             }
                             else if (choiceindex == 1)
                             {
@@ -61,6 +63,7 @@ namespace Hosbital_Project.Pages
                     case 2:
                         Console.Clear();
                         hosbital.ProfileInfo("Doctor Profile", doctor);
+                        Log.Information("doctor viewed his/her profile");
                         Console.ReadKey();
                         break;
                     case 3:
@@ -69,6 +72,7 @@ namespace Hosbital_Project.Pages
                         if (doctor.Appointments.Count == 0)
                         {
                             Console.WriteLine("\n You don't have any appointments.");
+                            Log.Information("doctor viewed his/her appointments");
                             Console.ReadKey();
                             break;
                         }
@@ -85,7 +89,7 @@ namespace Hosbital_Project.Pages
                         var appointment = doctor.Appointments[cancelIndex];
 
                         Console.Write("\n ~ Appointment cancelled successfully");
-
+                        Log.Information("doctor cancelled appointment with patient {name}",appointment.UserName);
                         Console.ForegroundColor = ConsoleColor.DarkBlue;
                         string messageDoctor = $"You cancelled your meeting with patient {appointment.UserName}";
                         Console.WriteLine("\n ~ Please wait for the email to be sent...");

@@ -46,7 +46,6 @@ namespace Hosbital_Project.Pages
                         }
                         string formattedPhone = phoneUtil.Format(parsedNumber, PhoneNumbers.PhoneNumberFormat.E164);
                         person.phoneNumber = formattedPhone;
-                        //user faylina yaz
                         Console.WriteLine("Your phone number has been updated successfully.");
                         Console.ReadKey();
                         break;
@@ -97,7 +96,6 @@ namespace Hosbital_Project.Pages
                     continue;
                 }
                 var newEmail = person.email = email;
-                //user faylina yaz
                 Console.WriteLine(" ~ Your email has been updated successfully.");
                 Console.ReadKey();
                 break;

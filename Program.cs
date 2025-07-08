@@ -4,6 +4,7 @@ namespace Hosbital_Project.Models;
 
 using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Pages;
+using Serilog;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -193,20 +194,29 @@ class Program
                                 {
                                     Console.WriteLine(" ~ User not found. Please try again.");
                                     Console.ReadKey();
+                                    
                                     continue;
                                 }
                                 else
                                 {
                                     Console.WriteLine("Successfully signed in!");
                                     Console.ReadKey();
+                                    Log.Information("user succesfully signed in {email}",user.email);
                                     UserPage.UserMainMenu(auth, departments, user, hosbital);
                                 }
                             }
                             else if (ansIndex == 1)
                             {
-                                User? user = AuthenticationMethods.RegistrUser(auth, departments, hosbital);
-
-                                UserPage.UserMainMenu(auth, departments, user, hosbital);
+                                try
+                                {
+                                    User? user = AuthenticationMethods.RegistrUser(auth, departments, hosbital);
+                                    UserPage.UserMainMenu(auth, departments, user, hosbital);
+                                    Log.Information(" User registered succesfully: ", user.email);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Error(ex," User could not register ");
+                                }
                             }
                         }
                     }
@@ -216,9 +226,15 @@ class Program
                     Console.Clear();
                     Console.WriteLine("\n\t\t\t\t\t--- Doctor Sign In ---\n");
                     var doctor = AuthenticationMethods.DoctorSignIn(hosbital, auth);
+
                     if (doctor != null)
                     {
                         DoctorPage.DoctorPaGe(hosbital, auth, doctor);
+                        Log.Information(" Doctor registered: {email} ", doctor.email);
+                    }
+                    else
+                    {
+                        Log.Warning(" doctor could not register: ");
                     }
                 }
                 else if (choiceIndex == 3)
@@ -230,24 +246,22 @@ class Program
     }
 
 
-        static void Main(string[] args)
+    static void Main(string[] args)
+    {
+        Helpers.WriteLog.ConfigureLogger();
+
+        try
         {
             MainMenu();
-            //Department surgery = new Department("Neurology");
-            //var doc1 = new Doctor("Jack", "Shephard", "jack@gmail.com", "1234", "0501234567", 8, surgery, "AZ");
-            //User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
-            //ReceptionDay receptionDay = new ReceptionDay(DayOfWeek.Monday);
-            //ReceptionHour receptionHour = new ReceptionHour("10:00","23:00");
-            //var appointment = new Appointment(user1, doc1, receptionDay, receptionHour);
-            //List<Appointment> appointments = new List<Appointment> { appointment };
-
-            //FileHelper.WriteAppointmentsToFile(appointments);
-
-            //var loadedAppointments = FileHelper.ReadAppointmentsFromFile();
-
-            //Console.WriteLine($"Loaded {loadedAppointments.Count} appointments.");
-
-
         }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "An error occurred in the main method..");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
+    }
 }
 

@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4Br2nAm4qtQ=",
+  "dgSpecHash": "eLSIiHLvT5k=",
   "success": true,
   "projectFilePath": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\Hosbital_Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Acer\\.nuget\\packages\\libphonenumber-csharp\\9.0.7\\libphonenumber-csharp.9.0.7.nupkg.sha512"
+    "C:\\Users\\Acer\\.nuget\\packages\\libphonenumber-csharp\\9.0.7\\libphonenumber-csharp.9.0.7.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

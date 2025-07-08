@@ -1,5 +1,6 @@
 ﻿using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +58,8 @@ namespace Hosbital_Project.Pages
                         }
 
                         user.username = newUsername;
-                        //user faylina yaz
                         Console.WriteLine("Your username has been updated successfully.");
+                        Log.Information("user changed his/her username");
                         Console.ReadKey();
                         break;
 
@@ -98,6 +99,7 @@ namespace Hosbital_Project.Pages
                     case 1:
                         Console.Clear();
                         user.ViewProfile("Profile");
+                        Log.Information("user viewed his/her profile");
                         Console.WriteLine("\nPress any key to return to the main menu.");
                         Console.ReadKey();
                         break;
@@ -106,6 +108,8 @@ namespace Hosbital_Project.Pages
                         if (user.userNotifications.Count == 0)
                         {
                             Console.WriteLine("\n You don't have any notifications.");
+                            Log.Information("user viewed his/her notifications");
+
                             Console.ReadKey();
                             break;
                         }
@@ -113,11 +117,13 @@ namespace Hosbital_Project.Pages
                         {
                             user.ViewNotifications();
                             Console.ReadKey();
-                            int choiceindex = Program.NavigateMenu(new List<string> { "Delete Notification", "Back" }, "\n ~ Want to clear notifications?s");
+                            int choiceindex = Program.NavigateMenu(new List<string> { "Delete Notification", "Back" }, "\n ~ Want to clear notifications?");
                             if (choiceindex == 0)
                             {
                                 user.userNotifications.Clear();
                                 FileHelper.WriteNotificationsToFile(new List<Notification>(), user.email);
+                                Log.Information("user deleted notifications");
+
 
                             }
                             else if (choiceindex == 1)
@@ -133,6 +139,8 @@ namespace Hosbital_Project.Pages
                     case 4:
                         Console.Clear();
                         user.ViewAppointments();
+                        Log.Information("user viewed his/her appointments");
+
                         Console.WriteLine("\nPress any key to return to the main menu.");
                         Console.ReadKey();
                         break;
@@ -167,6 +175,8 @@ namespace Hosbital_Project.Pages
                         }
 
                         Console.WriteLine("\n ~ Appointment cancelled successfully.");
+                        Log.Information("The user canceled the appointment with doctor {name}.",doctor.name);
+
                         Console.WriteLine("\n ~ Please wait for the email to be sent...");
 
                         string subjectUser = "Appointment Cancellation Confirmation – Hope Medical Center";

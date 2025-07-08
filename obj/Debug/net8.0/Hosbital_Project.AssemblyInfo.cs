@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hosbital_Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99be0a68dbf0c4a5cb8edcc830744aa4c6a86627")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61bafd46a1a97dfc6ba56a19b99e6439dd70c608")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hosbital_Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hosbital_Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

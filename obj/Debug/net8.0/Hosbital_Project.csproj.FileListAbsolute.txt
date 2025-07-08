@@ -16,3 +16,5 @@ C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8
 C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.genruntimeconfig.cache
 C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\ref\Hosbital_Project.dll
 C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\obj\Debug\net8.0\Hosbital_Project.sourcelink.json
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Serilog.dll
+C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\bin\Debug\net8.0\Serilog.Sinks.File.dll

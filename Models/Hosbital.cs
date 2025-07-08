@@ -1,6 +1,7 @@
 ﻿
 using Hosbital_Project.FileHelpers;
 using PhoneNumbers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -131,6 +132,7 @@ namespace Hosbital_Project.Models
                 departments.Add(department);
                 FileHelper.WriteDepartmentsToFile(departments);
                 Console.WriteLine(" ~ Department added successfully.");
+                Log.Information("admin added a new department {name}", departmentName);
                 Console.ReadKey();
             }
         }
@@ -145,6 +147,7 @@ namespace Hosbital_Project.Models
                 departments.Remove(department);
                 FileHelper.WriteDepartmentsToFile(departments);
                 Console.WriteLine(" department deleted succesfully");
+                Log.Information("admin deleted department - {name}", departmentName);
             }
             else
             {
@@ -171,6 +174,7 @@ namespace Hosbital_Project.Models
             doctorCandidates.Remove(candidate);
             FileHelper.WriteCandidateToFile(doctorCandidates);
             Console.WriteLine(" The candidate has been successfully accepted");
+            Log.Information("admin accepted the doctor.");
             Console.ReadKey();
         }
 
@@ -179,6 +183,7 @@ namespace Hosbital_Project.Models
             doctorCandidates.Remove(candidate);
             FileHelper.WriteCandidateToFile(doctorCandidates);
             Console.WriteLine(" The candidate has been succesfully rejected");
+            Log.Information("admin rejected the doctor");
             Console.ReadKey();
         }
         public bool SearchDepartment(string departmentName)

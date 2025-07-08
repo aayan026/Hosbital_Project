@@ -1,4 +1,5 @@
 ﻿using Hosbital_Project.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Hosbital_Project.Pages
                 {
                     Console.WriteLine("Successfully signed in as admin!");
                     Console.ReadKey();
+                    Log.Information(" admin succesfully signed in");
                     AdminPaGe(auth, hosbital, admin);
                 }
                 else
@@ -53,11 +55,13 @@ namespace Hosbital_Project.Pages
                     case 0:
                         Console.Clear();
                       hosbital.ViewUsers();
+                        Log.Information("admin looked at users");
                         Console.ReadKey();
                         continue;
                     case 1:
                         Console.Clear();
                         hosbital.ViewDepartments();
+                        Log.Information("admin looked at departments");
                         Console.ReadKey();
                         break;
                     case 2:
@@ -80,6 +84,7 @@ namespace Hosbital_Project.Pages
                                 Console.Clear();
                                 hosbital.ProfileInfo("~ Doctor Information ~", hosbital.doctors[index]);
                                 Console.ReadKey();
+                                Log.Information("admin looked at the doctor {name}'s informations", hosbital.doctors[index].name);
                                 continue;
                             }
                         }
@@ -110,6 +115,7 @@ namespace Hosbital_Project.Pages
                     $" Phone number: {candidate.phoneNumber}\n" +
                     $" Reason: {candidate.reason}" +
                     $"\n______________________________________________________________________________\n";
+                                    Log.Information("admin looked at candidates");
                                     List<string> list = new List<string> { "Accept", "Reject" };
                                     int index2 = Program.NavigateMenu(list, title, true);
                                     if (index2 == 0)

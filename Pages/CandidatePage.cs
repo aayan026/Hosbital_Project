@@ -1,4 +1,5 @@
 ﻿using Hosbital_Project.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,7 @@ namespace Hosbital_Project.Pages
                             string title2 = $"\n\t\t\t\t\t=== Doctor Candidate Status ===\r\n\n{find} ~ Your application is being reviewed. Please wait patiently.\n";
                             List<string> choices = new List<string> { "Edit Application ", "Cancel Application " };
                             int choiceIndex = Program.NavigateMenu(choices, title2, true, " Exit");
+                            Log.Information("candidate viewed his/her profile");
                             while (true)
                             {
                                 if (choiceIndex == -1)
@@ -95,11 +97,13 @@ namespace Hosbital_Project.Pages
                                         int experienceYearInt = int.TryParse(experienceYear, out int year) ? year : 0;
                                         find.experienceYear = experienceYearInt;
                                         Console.WriteLine(" Experience year updated succefully");
+                                        Log.Information("candidate changed his/her experience year");
                                         Console.ReadKey();
                                     }
                                     else if (choiceInx == 3)
                                     {
                                         ChangeInformations.ChangePassword(find);
+
                                     }
                                     else if (choiceInx == 4)
                                     {

@@ -1,6 +1,7 @@
 ﻿using Hosbital_Project.FileHelpers;
 using Hosbital_Project.Models;
 using PhoneNumbers;
+using Serilog;
 using System.Text.RegularExpressions;
 
 internal class Authentication
@@ -104,6 +105,7 @@ internal class Authentication
         if (!ValidateDoctorCandidateRegistration(password, name, surname, email, phone, regionCode, reason, out errors, out formattedPhone))
         {
             Console.WriteLine("Registration failed with the following errors:");
+            Log.Information("candidate could not register");
             foreach (var error in errors)
             {
                 Console.WriteLine($"- {error}");
@@ -114,7 +116,7 @@ internal class Authentication
         var doctorCandidate = new DoctorCandidate(hosbital, name, surname, email, password, phone, experienceYear, department, reason, regionCode);
         hosbital.doctorCandidates.Add(doctorCandidate);
         FileHelper.WriteCandidateToFile(hosbital.doctorCandidates);
-
+        Log.Information("candidate register succesfully");
         Console.WriteLine($"\n ~ Thank you, Dr. {doctorCandidate.name}!\r\n\r\n Your application has been received and is currently under review.\r\n You will be contacted via email or phone after the review is complete.\r\n\r\n[Press any key to return to main menu...]\r\n");
 
 
@@ -122,7 +124,6 @@ internal class Authentication
   
     public User? SignInUser(string username, string password)
     {
-        //fayldan oxu
         foreach (var user in users)
         {
             if (user.username == username && user.password == password)
@@ -132,7 +133,6 @@ internal class Authentication
     }
     public Doctor DoctorSignIn(Hosbital hosbital, string email, string password)
     {
-        //fayldan oxu
         foreach (var doctor in hosbital.doctors)
         {
             if (doctor.email == email && doctor.password == password)
