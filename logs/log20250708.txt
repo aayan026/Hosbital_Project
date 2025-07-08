@@ -11,3 +11,19 @@
 [14:14:39 INF]  Doctor registered: jack@gmail.com 
 [14:14:47 INF] user succesfully signed in aliyevanar1986a@gmail.com
 [14:15:07 INF] user viewed his/her appointments
+[14:34:39 INF] candidate register succesfully
+[14:36:42 INF]  admin succesfully signed in
+[14:36:50 INF] admin looked at candidates
+[14:36:54 INF] admin accepted the doctor.
+[14:38:17 ERR] An error occurred in the main method..
+System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Any[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Hosbital_Project.Pages.DoctorPage.DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Pages\DoctorPage.cs:line 83
+   at Hosbital_Project.Models.Program.MainMenu() in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Program.cs:line 232
+   at Hosbital_Project.Models.Program.Main(String[] args) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Program.cs:line 255
+[14:43:45 INF]  doctor Hannibal added new reception day: "Tuesday" 
+[14:43:49 INF]  doctor Hannibal added new reception day: "Monday" 
+[14:43:52 INF]  doctor Hannibal added new reception day: "Thursday" 
+[14:44:01 INF]  Doctor registered: hannibal@gmail.com 
+[14:44:09 INF] user succesfully signed in aliyevanar1986a@gmail.com

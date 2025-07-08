@@ -943,5 +943,68 @@
         "isReserved": false
       }
     ]
+  },
+  {
+    "doctorEmail": "hannibal@gmail.com",
+    "dayOfWeek": 2,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "hannibal@gmail.com",
+    "dayOfWeek": 1,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
+  },
+  {
+    "doctorEmail": "hannibal@gmail.com",
+    "dayOfWeek": 4,
+    "TimeSlots": [
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "isReserved": false
+      },
+      {
+        "start": "12:00",
+        "end": "14:00",
+        "isReserved": false
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "isReserved": false
+      }
+    ]
   }
 ]

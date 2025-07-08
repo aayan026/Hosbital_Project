@@ -18,11 +18,11 @@ namespace Hosbital_Project.Pages
             doctor.doctorsNotifications = FileHelpers.FileHelper.ReadNotificationsFromFile(doctor.email);
             doctor.Appointments = FileHelpers.FileHelper.ReadAppointmentsForUserOrDoctor(doctor.email, "doctor");
 
-            var users= FileHelpers.FileHelper.ReadUsersFromFile();
+            var users = FileHelpers.FileHelper.ReadUsersFromFile();
             while (true)
             {
                 string title = $"\n\t\t\t\t\t --- W E L C O M E ---";
-                int choiceIndex = Program.NavigateMenu(new List<string> { "View Appointments", "Notifications", "View Profile", "Cancel Appointments", "Change Profile" }, title, true, "~ Logout");
+                int choiceIndex = Program.NavigateMenu(new List<string> { "View Appointments", "Notifications", "View Profile", "Add Reception day", "Cancel Appointments", "Change Profile" }, title, true, "~ Logout");
                 if (choiceIndex == -1)
                 {
                     return;
@@ -36,7 +36,7 @@ namespace Hosbital_Project.Pages
                         break;
                     case 1:
                         Console.Clear();
-                        if (doctor.doctorsNotifications.Count==0)
+                        if (doctor.doctorsNotifications.Count == 0)
                         {
                             Console.WriteLine("\n You don't have any notifications.");
                             Log.Information("doctor loooked at notifications");
@@ -67,6 +67,42 @@ namespace Hosbital_Project.Pages
                         Console.ReadKey();
                         break;
                     case 3:
+                        while (true)
+                        {
+                            List<DayOfWeek> weekDays = new()
+{
+    DayOfWeek.Monday,
+    DayOfWeek.Tuesday,
+    DayOfWeek.Wednesday,
+    DayOfWeek.Thursday,
+    DayOfWeek.Friday,
+    DayOfWeek.Saturday,
+    DayOfWeek.Sunday
+};
+                            int index = Program.NavigateMenu(weekDays, " ~ Choose your own admission days",true);
+                            if (index == -1)
+                            {
+                                break;
+                            }
+                            DayOfWeek selectedDay = weekDays[index];
+                            ReceptionDay newDay = new ReceptionDay(selectedDay, doctor.email);
+                            if (!doctor.receptionDays.Any(rd => rd.dayOfWeek == selectedDay))
+                            {
+                                doctor.receptionDays.Add(newDay);
+                                FileHelper.WriteReceptionDaysToFile(doctor.receptionDays, doctor.email);
+                                Log.Information(" doctor {name} added new reception day: {Day} ", doctor.name, selectedDay);
+                                Console.WriteLine($"\n ~ {selectedDay} added successfully!");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\n ~ {selectedDay} already exists!");
+                                Console.ReadKey();
+                                break;
+                            }
+                        }
+                        break;
+                    case 4:
                         Console.Clear();
 
                         if (doctor.Appointments.Count == 0)
@@ -89,7 +125,7 @@ namespace Hosbital_Project.Pages
                         var appointment = doctor.Appointments[cancelIndex];
 
                         Console.Write("\n ~ Appointment cancelled successfully");
-                        Log.Information("doctor cancelled appointment with patient {name}",appointment.UserName);
+                        Log.Information("doctor cancelled appointment with patient {name}", appointment.UserName);
                         Console.ForegroundColor = ConsoleColor.DarkBlue;
                         string messageDoctor = $"You cancelled your meeting with patient {appointment.UserName}";
                         Console.WriteLine("\n ~ Please wait for the email to be sent...");
@@ -146,7 +182,7 @@ namespace Hosbital_Project.Pages
 
                         Console.ReadKey();
                         break;
-                    case 4:
+                    case 5:
                         while (true)
                         {
                             Console.Clear();
