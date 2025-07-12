@@ -1,11 +1,11 @@
 [
   {
     "UserName": "ayan aliyeva",
-    "DoctorName": "Dr.David Wilson",
+    "DoctorName": "Dr.Jack Shephard",
     "UserEmail": "aliyevanar1986a@gmail.com",
-    "DoctorEmail": "david@gmail.com",
-    "Department": "Neurology",
-    "Day": "Friday ",
+    "DoctorEmail": "jack@gmail.com",
+    "Department": "Surgery",
+    "Day": "Monday ",
     "Hour": "09:00 - 11:00"
   }
 ]

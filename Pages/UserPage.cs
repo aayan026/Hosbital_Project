@@ -1,5 +1,5 @@
-﻿using Hosbital_Project.FileHelpers;
-using Hosbital_Project.Models;
+﻿using Hospital_Project.FileHelpers;
+using Hospital_Project.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     internal class UserPage
     {
 
-        public static void ChangeProfile(Hosbital hosbital, User user)
+        public static void ChangeProfile(Hospital hosbital, User user)
         {
 
             List<string> changeOptions = new List<string> { "Change Username", "Change Email", "ChangePassord", "Change Phone Number" };
@@ -76,7 +76,7 @@ namespace Hosbital_Project.Pages
                 break;
             }
         }
-        public static void UserMainMenu(Authentication auth, List<Department> departments, User user, Hosbital hosbital)
+        public static void UserMainMenu(Authentication auth, List<Department> departments, User user, Hospital hosbital)
         {
             user.userNotifications = FileHelpers.FileHelper.ReadNotificationsFromFile(user.email);
             user.Appointments = FileHelpers.FileHelper.ReadAppointmentsForUserOrDoctor(user.email, "user");

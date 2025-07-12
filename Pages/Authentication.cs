@@ -1,5 +1,5 @@
-﻿using Hosbital_Project.FileHelpers;
-using Hosbital_Project.Models;
+﻿using Hospital_Project.FileHelpers;
+using Hospital_Project.Models;
 using PhoneNumbers;
 using Serilog;
 using System.Text.RegularExpressions;
@@ -93,7 +93,7 @@ internal class Authentication
     }
 
 
-    public void DoctorCandidateRegistration(Hosbital hosbital, string password, string name, string surname, string email, string phone, string regionCode, int experienceYear, Department department, string reason)
+    public void DoctorCandidateRegistration(Hospital hosbital, string password, string name, string surname, string email, string phone, string regionCode, int experienceYear, Department department, string reason)
     {
         password = password.Trim();
         name = name.Trim();
@@ -131,7 +131,7 @@ internal class Authentication
         }
         return null;
     }
-    public Doctor DoctorSignIn(Hosbital hosbital, string email, string password)
+    public Doctor DoctorSignIn(Hospital hosbital, string email, string password)
     {
         foreach (var doctor in hosbital.doctors)
         {

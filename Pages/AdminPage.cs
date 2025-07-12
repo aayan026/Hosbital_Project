@@ -1,4 +1,4 @@
-﻿using Hosbital_Project.Models;
+﻿using Hospital_Project.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     internal class AdminPage
     {
-        public static void AdminSignIn(Admin admin, Hosbital hosbital, Authentication auth)
+        public static void AdminSignIn(Admin admin, Hospital hosbital, Authentication auth)
         {
             while (true)
             {
@@ -37,7 +37,7 @@ namespace Hosbital_Project.Pages
                 }
             }
         }
-        public static void AdminPaGe(Authentication auth, Hosbital hosbital, Admin admin)
+        public static void AdminPaGe(Authentication auth, Hospital hosbital, Admin admin)
         {
             while (true)
             {

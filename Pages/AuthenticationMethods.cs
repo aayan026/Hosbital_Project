@@ -1,5 +1,5 @@
 ﻿
-using Hosbital_Project.Models;
+using Hospital_Project.Models;
 using PhoneNumbers;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     internal static class AuthenticationMethods
     {
         public static List<User> users = FileHelpers.FileHelper.ReadUsersFromFile();
-        public static User RegistrUser(Authentication auth, List<Department> departments, Hosbital hosbital)
+        public static User RegistrUser(Authentication auth, List<Department> departments, Hospital hosbital)
         {
             while (true)
             {
@@ -130,7 +130,7 @@ namespace Hosbital_Project.Pages
                                             else
                                             {
                                                 List<string> regionCodes = new List<string> { "AZ", "US", "TR", "RU" };
-                                                string title = $"\t\t\t\t\t\tHosbital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country.";
+                                                string title = $"\t\t\t\t\t\tHospital\n Name: {name}\n Surname: {surname}\n Email: {email}\n Username: {final}\n Password: {password}\n Select your country.";
                                                 int choiceIndex = Program.NavigateMenu(regionCodes, title, false);
 
                                                 if (choiceIndex >= 0 && choiceIndex < regionCodes.Count)
@@ -200,7 +200,7 @@ namespace Hosbital_Project.Pages
         }
 
 
-        public static Doctor DoctorSignIn(Hosbital hosbital, Authentication auth)
+        public static Doctor DoctorSignIn(Hospital hosbital, Authentication auth)
         {
             while (true)
             {

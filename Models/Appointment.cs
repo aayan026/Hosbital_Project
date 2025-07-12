@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
     internal class Appointment
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Base
 {
     internal interface IProfile
     {

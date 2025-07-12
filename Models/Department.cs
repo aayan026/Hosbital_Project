@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
     internal class Department
     {

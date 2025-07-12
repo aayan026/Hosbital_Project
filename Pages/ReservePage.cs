@@ -1,5 +1,5 @@
-﻿using Hosbital_Project.FileHelpers;
-using Hosbital_Project.Models;
+﻿using Hospital_Project.FileHelpers;
+using Hospital_Project.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     internal class ReservePage
     {

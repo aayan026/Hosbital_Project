@@ -1,9 +1,9 @@
 ﻿
 
-namespace Hosbital_Project.Models;
+namespace Hospital_Project.Models;
 
-using Hosbital_Project.FileHelpers;
-using Hosbital_Project.Pages;
+using Hospital_Project.FileHelpers;
+using Hospital_Project.Pages;
 using Serilog;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -118,9 +118,9 @@ class Program
         }
 
         List<DoctorCandidate> candidates = FileHelper.ReadCandidatesFromFile();
-        Hosbital.LinkDepartmentsToDoctors(doctors, departments);
-        Hosbital.LinkDoctorsToDepartments(doctors, departments);
-        Hosbital.LinkDepartmentsToCandidates(candidates, departments);
+        Hospital.LinkDepartmentsToDoctors(doctors, departments);
+        Hospital.LinkDoctorsToDepartments(doctors, departments);
+        Hospital.LinkDepartmentsToCandidates(candidates, departments);
 
         if (doctors.Count == 0)
         {
@@ -158,7 +158,7 @@ class Program
 
 
         User? user1 = new User("aya_aliye283", "ayan1929", "ayan", "aliyeva", "aliyevanar1986a@gmail.com", "0707897878", "AZ");
-        Hosbital hosbital = new Hosbital(departments, doctors, users, candidates);
+        Hospital hosbital = new Hospital(departments, doctors, users, candidates);
         Admin admin = new Admin();
 
         while (true)

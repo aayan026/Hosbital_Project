@@ -7,7 +7,7 @@ using Serilog;
 using Serilog.Sinks.File;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Helpers
+namespace Hospital_Project.Helpers
 {
     static class WriteLog
     {

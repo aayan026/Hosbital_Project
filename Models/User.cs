@@ -1,5 +1,5 @@
 ﻿
-using Hosbital_Project.Models;
+using Hospital_Project.Base;
 using PhoneNumbers;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
     internal class User : Person, IProfile, IViewAppointmets, INotification
     {

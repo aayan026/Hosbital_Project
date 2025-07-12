@@ -1,13 +1,14 @@
 ﻿
-using Hosbital_Project.FileHelpers;
+using Hospital_Project.Base;
+using Hospital_Project.FileHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hosbital_Project.Models.DoctorCandidate;
+using static Hospital_Project.Models.DoctorCandidate;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
     internal class Admin : Person
     {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
-    internal class ReceptionHour
+    public class ReceptionHour
     {
         public string start { get; set; }
         public string end { get; set; }

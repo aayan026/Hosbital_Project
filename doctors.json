@@ -10,7 +10,7 @@
           {
             "start": "09:00",
             "end": "11:00",
-            "isReserved": true
+            "isReserved": false
           },
           {
             "start": "12:00",
@@ -88,14 +88,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
-        "message": "You cancelled your meeting with patient ayan aliyeva",
-        "toEmail": "jack@gmail.com",
-        "LongMessage": "Dear Dr.Jack,\n\nThe appointment with patient ayan aliyeva, scheduled on Monday  at 12:00 - 14:00 has been cancelled.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Jack",
     "surname": "Shephard",
     "password": "1234",
@@ -171,14 +164,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "New Appointment Scheduled \u2013 Hope Medical Center",
-        "message": "Patient ayan has booked an appointment with you on Thursday  at 09:00 - 11:00.",
-        "toEmail": "emily@gmail.com",
-        "LongMessage": "Dear Dr.Emily,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Thursday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Emily",
     "surname": "Johnson",
     "password": "1234",
@@ -275,14 +261,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "New Appointment Scheduled \u2013 Hope Medical Center",
-        "message": "Patient ayan has booked an appointment with you on Wednesday  at 09:00 - 11:00.",
-        "toEmail": "ethan@gmail.com",
-        "LongMessage": "Dear Dr.Ethan,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Wednesday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Ethan",
     "surname": "Rom",
     "password": "1234",
@@ -316,14 +295,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
-        "message": "Patient ayan has cancelled an appointment with you.",
-        "toEmail": "christian@gmail.com",
-        "LongMessage": "Dear Dr.Christian,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Christian",
     "surname": "Shephard",
     "password": "1234",
@@ -342,7 +314,7 @@
           {
             "start": "09:00",
             "end": "11:00",
-            "isReserved": true
+            "isReserved": false
           },
           {
             "start": "12:00",
@@ -420,20 +392,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
-        "message": "Patient ayan has cancelled an appointment with you.",
-        "toEmail": "david@gmail.com",
-        "LongMessage": "Dear Dr.David,\n\nThe appointment with patient ayan, scheduled on Friday  at 12:00 - 14:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
-      },
-      {
-        "title": "New Appointment Scheduled \u2013 Hope Medical Center",
-        "message": "Patient ayan has booked an appointment with you on Friday  at 09:00 - 11:00.",
-        "toEmail": "david@gmail.com",
-        "LongMessage": "Dear Dr.David,\n\nA new appointment has been scheduled.\n\nPatient: ayan aliyeva\nDate \u0026 Time: Friday  at 09:00 - 11:00\nLocation: Room 305\n\nPlease be ready 10 minutes in advance.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "David",
     "surname": "Wilson",
     "password": "1234",
@@ -821,14 +780,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
-        "message": "Patient ayan has cancelled an appointment with you.",
-        "toEmail": "michael@gmail.com",
-        "LongMessage": "Dear Dr.Michael,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Michael",
     "surname": "Brown",
     "password": "1234",
@@ -1056,14 +1008,7 @@
         ]
       }
     ],
-    "doctorsNotifications": [
-      {
-        "title": "Appointment Cancellation Notice \u2013 Hope Medical Center",
-        "message": "Patient ayan has cancelled an appointment with you.",
-        "toEmail": "hurley@gmail.com",
-        "LongMessage": "Dear Dr.Hugo,\n\nThe appointment with patient ayan, scheduled on Monday  at 09:00 - 11:00 has been cancelled by the patient.\n\nPlease update your schedule accordingly.\n\nRegards,\nHope Medical Center Team"
-      }
-    ],
+    "doctorsNotifications": [],
     "name": "Hugo",
     "surname": "Reyes",
     "password": "1234",
@@ -1180,17 +1125,5 @@
     "email": "lenny@gmail.com",
     "regionCode": "US",
     "phoneNumber": null
-  },
-  {
-    "workExperienceYear": 8,
-    "DepartmentName": "Psychiatry",
-    "receptionDays": null,
-    "doctorsNotifications": [],
-    "name": "Hannibal",
-    "surname": "Lecter",
-    "password": "lecter123",
-    "email": "hannibal@gmail.com",
-    "regionCode": null,
-    "phoneNumber": "\u002B994554323434"
   }
 ]

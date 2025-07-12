@@ -1,5 +1,5 @@
 ﻿
-using Hosbital_Project.FileHelpers;
+using Hospital_Project.FileHelpers;
 using PhoneNumbers;
 using Serilog;
 using System;
@@ -9,17 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static Hosbital_Project.Models.DoctorCandidate;
+using static Hospital_Project.Models.DoctorCandidate;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
-    internal class Hosbital
+    internal class Hospital
     {
         public List<Department> departments { get; set; }
         public List<Doctor> doctors { get; set; }
         public List<User> Users { get; set; }
         public List<DoctorCandidate> doctorCandidates { get; set; }
-        public Hosbital(List<Department> departments, List<Doctor> doctors, List<User> users, List<DoctorCandidate> doctorCandidates)
+        public Hospital(List<Department> departments, List<Doctor> doctors, List<User> users, List<DoctorCandidate> doctorCandidates)
         {
             this.departments = departments;
             this.doctors = doctors;
@@ -27,7 +27,7 @@ namespace Hosbital_Project.Models
             this.doctorCandidates = doctorCandidates;
 
         }
-        public Hosbital()
+        public Hospital()
         {
         }
         static public void LinkDepartmentsToCandidates(List<DoctorCandidate> candidates, List<Department> departments)

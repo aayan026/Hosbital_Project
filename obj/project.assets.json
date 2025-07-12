@@ -135,9 +135,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\Hosbital_Project.csproj",
-      "projectName": "Hosbital_Project",
-      "projectPath": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\Hosbital_Project.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\Hospital_Project.csproj",
+      "projectName": "Hospital_Project",
+      "projectPath": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\Hospital_Project.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Acer\\source\\New Folder\\Hosbital_Project\\Hosbital_Project\\obj\\",
       "projectStyle": "PackageReference",

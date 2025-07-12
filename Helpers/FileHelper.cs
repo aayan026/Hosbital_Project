@@ -1,5 +1,5 @@
 ﻿
-using Hosbital_Project.Models;
+using Hospital_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 
-namespace Hosbital_Project.FileHelpers
+namespace Hospital_Project.FileHelpers
 {
     internal static class FileHelper
     {

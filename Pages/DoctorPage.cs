@@ -1,6 +1,6 @@
 ﻿
-using Hosbital_Project.FileHelpers;
-using Hosbital_Project.Models;
+using Hospital_Project.FileHelpers;
+using Hospital_Project.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     public class DoctorPage
     {
-        internal static void DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor)
+        internal static void DoctorPaGe(Hospital hosbital, Authentication auth, Doctor doctor)
         {
             doctor.doctorsNotifications = FileHelpers.FileHelper.ReadNotificationsFromFile(doctor.email);
             doctor.Appointments = FileHelpers.FileHelper.ReadAppointmentsForUserOrDoctor(doctor.email, "doctor");

@@ -1,4 +1,4 @@
-﻿using Hosbital_Project.Models;
+﻿using Hospital_Project.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Pages
+namespace Hospital_Project.Pages
 {
     internal class CandidatePage
     {
-        public static void DoctorCandidate(string email, List<Department> departments, Hosbital hosbital, Authentication auth)
+        public static void DoctorCandidate(string email, List<Department> departments, Hospital hosbital, Authentication auth)
         {
             while (true)
             {
@@ -46,7 +46,7 @@ namespace Hosbital_Project.Pages
                 return;
             }
         }
-        public static void CandidatePaGe(Hosbital hosbital, Authentication auth, List<Department> departments)
+        public static void CandidatePaGe(Hospital hosbital, Authentication auth, List<Department> departments)
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;

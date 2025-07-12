@@ -1,4 +1,5 @@
 ﻿
+using Hospital_Project.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Hosbital_Project.Models
+namespace Hospital_Project.Models
 {
     internal class DoctorCandidate : Person
     {
@@ -39,7 +40,7 @@ namespace Hosbital_Project.Models
         public DoctorCandidate()
         {
         }
-        public DoctorCandidate(Hosbital hosbital, string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department, string reason, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)
+        public DoctorCandidate(Hospital hosbital, string name, string surname, string email, string password, string phoneNumber, int experienceYear, Department department, string reason, string regionCode) : base(name, surname, password, email, phoneNumber, regionCode)
         {
             this.experienceYear = experienceYear;
             this.department = department;

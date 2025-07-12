@@ -1,0 +1,80 @@
+[14:26:12 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:26:16 INF] user booked an appointment with doctor David
+[14:26:29 INF] user viewed his/her appointments
+[14:26:34 INF] The user canceled the appointment with doctor David.
+[14:26:44 INF] The user canceled the appointment with doctor David.
+[14:27:04 INF] user viewed his/her appointments
+[14:27:24 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:29:19 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:29:44 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:32:00 INF] doctor viewed his/her profile
+[14:32:05 INF] doctor viewed his/her appointments
+[14:35:05 WRN]  doctor could not register: 
+[14:35:13 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:35:31 INF] user booked an appointment with doctor David
+[14:35:56 INF] user viewed his/her appointments
+[14:36:33 INF]  Doctor registered: david@gmail.com 
+[14:40:32 INF] doctor cancelled appointment with patient ayan aliyeva
+[14:40:33 ERR] An error occurred in the main method..
+System.ArgumentException: The value cannot be an empty string. (Parameter 'addresses')
+   at System.ArgumentException.ThrowNullOrEmptyException(String argument, String paramName)
+   at System.ArgumentException.ThrowIfNullOrEmpty(String argument, String paramName)
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at Hosbital_Project.Models.NotificationService.SendEmail(String title, String message, String toEmail) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Models\NotificationService.cs:line 21
+   at Hosbital_Project.Models.Notification..ctor(String title, String message, String Longmessage, String toEmail) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Models\Notification.cs:line 22
+   at Hosbital_Project.Pages.DoctorPage.DoctorPaGe(Hosbital hosbital, Authentication auth, Doctor doctor) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Pages\DoctorPage.cs:line 141
+   at Hosbital_Project.Models.Program.MainMenu() in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Program.cs:line 232
+   at Hosbital_Project.Models.Program.Main(String[] args) in C:\Users\Acer\source\New Folder\Hosbital_Project\Hosbital_Project\Program.cs:line 255
+[14:42:22 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:42:26 INF] user booked an appointment with doctor David
+[14:47:07 INF] doctor cancelled appointment with patient ayan aliyeva
+[14:47:40 INF]  Doctor registered: david@gmail.com 
+[14:47:49 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:48:04 INF] user booked an appointment with doctor David
+[14:48:18 INF] user viewed his/her profile
+[14:48:40 INF] user booked an appointment with doctor David
+[14:48:52 INF] user booked an appointment with doctor David
+[14:49:22 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:49:25 INF] user booked an appointment with doctor David
+[14:49:57 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:50:01 INF] The user canceled the appointment with doctor David.
+[14:50:14 INF] The user canceled the appointment with doctor David.
+[14:50:23 INF] The user canceled the appointment with doctor David.
+[14:51:14 INF] doctor viewed his/her appointments
+[14:51:16 INF]  Doctor registered: david@gmail.com 
+[14:51:24 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:51:33 INF] user booked an appointment with doctor David
+[14:52:15 INF]  Doctor registered: david@gmail.com 
+[14:52:44 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:53:09 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:53:14 INF] user booked an appointment with doctor David
+[14:53:48 INF] user viewed his/her appointments
+[14:53:59 INF] The user canceled the appointment with doctor David.
+[14:54:36 INF] doctor cancelled appointment with patient ayan aliyeva
+[14:54:44 INF] doctor viewed his/her appointments
+[14:54:45 INF]  Doctor registered: david@gmail.com 
+[14:54:52 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:55:04 INF] user viewed his/her appointments
+[14:55:38 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:55:43 INF] user booked an appointment with doctor Jack
+[14:55:55 INF] user viewed his/her appointments
+[14:55:58 INF] The user canceled the appointment with doctor Jack.
+[14:57:49 INF] user viewed his/her profile
+[14:57:52 INF] user viewed his/her appointments
+[14:57:56 INF] user booked an appointment with doctor Jack
+[14:58:07 INF] user viewed his/her appointments
+[14:58:10 INF] The user canceled the appointment with doctor Jack.
+[14:59:04 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[14:59:07 INF] user booked an appointment with doctor Jack
+[14:59:38 INF] The user canceled the appointment with doctor Jack.
+[15:00:02 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[15:00:07 INF] user booked an appointment with doctor Jack
+[15:00:48 WRN]  doctor could not register: 
+[15:01:12 INF] doctor cancelled appointment with patient ayan aliyeva
+[15:01:25 INF]  Doctor registered: jack@gmail.com 
+[15:01:32 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[15:02:18 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[15:02:22 INF] user viewed his/her profile
+[15:02:25 INF] user deleted notifications
+[15:32:30 INF] user succesfully signed in aliyevanar1986a@gmail.com
+[15:32:33 INF] user booked an appointment with doctor Jack
